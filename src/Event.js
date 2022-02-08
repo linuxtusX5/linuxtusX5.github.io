@@ -50,6 +50,11 @@ function Event() {
     window.location.reload(false);
   };
 
+  const done = async (users) => {
+    alert("the Page is automatically refresh...")
+    await done(doc(db, "users", users.name))
+    window.location.reload(false);
+  };
 
   return (
     <>
@@ -57,6 +62,7 @@ function Event() {
         <input className='input1' type="file" onChange={onFileChange} />
         <input className='input2' type="text" name="username" placeholder="NAME" />
         <button className='b2E'>Upload</button>
+        <button className='b2E' onClick={() => done(users)}>Done</button>
       </form>
       <ul className='con2'>
         {users.map((user, name) => {
