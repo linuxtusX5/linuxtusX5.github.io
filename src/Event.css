@@ -35,11 +35,24 @@
 }
 
 .b2E {
+    margin-bottom: 10px;
+    background-color: #800;
+    border-radius: 10px;
+    margin-top: 20px;
+    color: #ff0;
+    width: 300px;
+    margin-right: 180px;
+    margin-left: 20px;
+}
+
+.b2E1 {
     margin-bottom: 50px;
     background-color: #800;
     border-radius: 10px;
     margin-top: 20px;
     color: #ff0;
+    width: 300px;
+    margin-left: -30px;
 }
 
 .b3D {
@@ -98,6 +111,16 @@
         margin-left: 10px;
         height: 50px;
         padding: 10px;
+    }
+
+    .b2E1 {
+        border-radius: 10px;
+        width: 90%;
+        margin-left: 10px;
+        height: 50px;
+        margin-top: -5px;
+        padding: 10px;
+        margin-bottom: 100px;
     }
 
     .im2 {
