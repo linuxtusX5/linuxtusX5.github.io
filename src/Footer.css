@@ -1,0 +1,39 @@
+.footer {
+  height: 100px;
+  width: 100%;
+  color: #fff;
+  position: absolute;
+  margin-top: 1615px;
+  background-color: rgb(11, 11, 58);
+  padding: 10px;
+}
+
+.footer h4 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.footer-box .footer-links a {
+  font-size: 1.2rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-contact p {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+@media screen and (max-width: 600px) {
+  .footer{
+    margin-top: 2260px;
+    height: 150px;
+  }
+}

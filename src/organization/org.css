@@ -1,0 +1,59 @@
+    #wtf {background-color: #800; margin-top: -17px;}
+	
+	.id {display: flex; justify-content: center; align-items: center;}
+    .id2 {display: flex; justify-content: center; align-items: center;}
+    .id3 {display: flex; justify-content: center; align-items: center;}
+	.nn1{width: 365px; height: 40px; text-align: center;}
+    .n2{width: 365px; height: 40px; text-align: center;}
+    .n3{width: 365px; height: 40px; text-align: center;}
+    .n4{width: 365px; height: 40px; text-align: center;}
+@media screen and (max-width: 600px)  {
+    .id {width: 230px;margin-left: -60px;}
+    .id2 {width: 230px;margin-left: -60px;}
+    .id3 {width: 230px;margin-left: -60px;}
+    .nn1{width: 230px; height: 35px; margin-left: -60px;}
+    .n2{width: 230px; height: 35px; margin-left: -60px;}
+    .n3{width: 230px; height: 35px; margin-bottom: 5px; margin-left: -60px;}
+    .n4{width: 230px; height: 35px; margin-left: -60px;}
+	/* Force table to not be like t ables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	Table{
+        margin-top: 90px;
+    }
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+
+	}
+	
+	tr { border: 1px solid #ccc; }
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+	}
+	
+	td:before { 
+		/* Now like a table header */
+        position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		white-space: nowrap;
+	}
+	
+	/*
+	Label the data
+	*/
+	td:nth-of-type(1):before { content: "STUDENT ID"; }
+	td:nth-of-type(2):before { content: "STUDENT NAME"; }
+	td:nth-of-type(3):before { content: "GMAIL ACCOUNT"; }
+	td:nth-of-type(4):before { content: "DATE"; }
+	td:nth-of-type(5):before { content: "OPTION"; }
+}

@@ -1,0 +1,13 @@
+.navbar-custom {
+  background-color: #800;
+}
+.quote {
+  color: #000;
+}
+Navbar.Brand{
+  margin-right: 100px;
+}
+.con {
+  position: relative;
+  margin-right: 0px;
+}
