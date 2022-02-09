@@ -4,6 +4,7 @@
   padding-top: 75px;
   height: 100%;
   padding-bottom: 20px;
+  width: 100%;
 }
 .header {
   display: flex;
@@ -117,7 +118,6 @@ h1 span:nth-child(3) {
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin: 0 auto;
   }
 
   .header-left {

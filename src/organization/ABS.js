@@ -108,7 +108,7 @@ export default class ABS extends React.Component{
             } = this.state;
     return (
         <div id='wtf'>
-        <h1 className='d-flex justify-content-center mt-3' style={{color:'#ff0', padding: '10px'}}>AGRIBUSINESS SOCIETY (abs)</h1>
+        <h1 className='d-flex justify-content-center mt-3' style={{color:'#ff0', padding: '10px'}}>AGRIBUSINESS SOCIETY (ABS)</h1>
             <button type='button' className='btn btn-primary m-2 float-end' 
             data-bs-toggle="modal" data-bs-target="#sampleModal" onClick={() => this.addClick()}>
                 Add STUDENT

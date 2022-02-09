@@ -108,7 +108,7 @@ export default class HMS extends React.Component{
             } = this.state;
     return (
         <div id='wtf'>
-        <h2 className='d-flex justify-content-center mt-3' style={{color:'#ff0', padding: '10px'}}>HOSPITALITY MANAGEMENT SOCIETY (hms)</h2>
+        <h2 className='d-flex justify-content-center mt-3' style={{color:'#ff0', padding: '10px'}}>HOSPITALITY MANAGEMENT SOCIETY (HMS)</h2>
             <button type='button' className='btn btn-primary m-2 float-end' 
             data-bs-toggle="modal" data-bs-target="#sampleModal" onClick={() => this.addClick()}>
                 Add STUDENT

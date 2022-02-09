@@ -57,14 +57,16 @@
 
 .b3D {
     margin-top: 510px;
-    width: 1050px;
+    width: 60%;
     height: 50px;
     background-color: #800;
     font-weight: bold;
     color: #ff0;
-    margin-left: -120px;
     border-radius: 20px;
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .im2 {
