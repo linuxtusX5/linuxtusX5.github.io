@@ -34,7 +34,7 @@ const App = () => {
   return (
   <>     
   
-  <Router >
+  <Router basename='/council'>
   <div className='con'>
   <Navbar collapseOnSelect expand="lg" className='navbar-custom sticky-top' variant='dark'>
   <Container>
