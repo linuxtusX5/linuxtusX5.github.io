@@ -34,7 +34,7 @@ const App = () => {
   return (
   <>     
   
-  <Router basename='/council'>
+  <Router basename='/linuxtusX5.github.io'>
   <div className='con'>
   <Navbar collapseOnSelect expand="lg" className='navbar-custom sticky-top' variant='dark'>
   <Container>
