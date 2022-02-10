@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.de348f8a.css",
-    "main.js": "/static/js/main.8989ff9a.js",
-    "static/js/787.c74790c8.chunk.js": "/static/js/787.c74790c8.chunk.js",
-    "static/media/Front_view.jpg": "/static/media/Front_view.c4574e8e9c9a28869a6e.jpg",
-    "static/media/PUPLogo.png": "/static/media/PUPLogo.885897c3770d7ec16c4c.png",
-    "static/media/PUP.jpg": "/static/media/PUP.6af73b9a1e5c06bc64b3.jpg",
-    "index.html": "/index.html",
-    "main.de348f8a.css.map": "/static/css/main.de348f8a.css.map",
-    "main.8989ff9a.js.map": "/static/js/main.8989ff9a.js.map",
-    "787.c74790c8.chunk.js.map": "/static/js/787.c74790c8.chunk.js.map"
+    "main.css": "/linuxtusX5.github.io/static/css/main.901b6049.css",
+    "main.js": "/linuxtusX5.github.io/static/js/main.02eac756.js",
+    "static/js/787.c74790c8.chunk.js": "/linuxtusX5.github.io/static/js/787.c74790c8.chunk.js",
+    "static/media/Front_view.jpg": "/linuxtusX5.github.io/static/media/Front_view.c4574e8e9c9a28869a6e.jpg",
+    "static/media/PUPLogo.png": "/linuxtusX5.github.io/static/media/PUPLogo.885897c3770d7ec16c4c.png",
+    "static/media/PUP.jpg": "/linuxtusX5.github.io/static/media/PUP.6af73b9a1e5c06bc64b3.jpg",
+    "index.html": "/linuxtusX5.github.io/index.html",
+    "main.901b6049.css.map": "/linuxtusX5.github.io/static/css/main.901b6049.css.map",
+    "main.02eac756.js.map": "/linuxtusX5.github.io/static/js/main.02eac756.js.map",
+    "787.c74790c8.chunk.js.map": "/linuxtusX5.github.io/static/js/787.c74790c8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.de348f8a.css",
-    "static/js/main.8989ff9a.js"
+    "static/css/main.901b6049.css",
+    "static/js/main.02eac756.js"
   ]
 }
