@@ -44,8 +44,8 @@ const App = () => {
   <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
   <Navbar.Collapse className="justify-content-end">
     <Nav>  
-      <Nav.Link eventKey='Login' as={Link} to={"/Navs"}><i className="fas fa-home"> Home</i></Nav.Link>
-      <Nav.Link eventKey='Login' as={Link} to={"/Event"}><i className="fas fa-calendar-week"> Event</i></Nav.Link>
+      <Nav.Link eventKey='Navs' as={Link} to={"/Navs"}><i className="fas fa-home"> Home</i></Nav.Link>
+      <Nav.Link eventKey='Event' as={Link} to={"/Event"}><i className="fas fa-calendar-week"> Event</i></Nav.Link>
       <Dropdown>
         <Dropdown.Toggle variant="warning" id="dropdown-basic">
           <i className="fas fa-sitemap"> Organization</i>
