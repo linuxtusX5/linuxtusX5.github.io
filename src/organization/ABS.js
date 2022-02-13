@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table';
 import './org.css';
 
 export default class ABS extends React.Component{
+
     constructor(props){
         super(props);
 
@@ -106,6 +107,7 @@ export default class ABS extends React.Component{
             Gmail, 
             DateOfJoining
             } = this.state;
+            
     return (
         <div id='wtf'>
         <h1 className='d-flex justify-content-center mt-3' style={{color:'#ff0', padding: '10px'}}>AGRIBUSINESS SOCIETY (ABS)</h1>
