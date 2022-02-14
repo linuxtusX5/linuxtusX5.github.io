@@ -57,6 +57,9 @@ h1 span:nth-child(3) {
   height: 500px;
   margin-right: -80px;
   border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .floating-icon {
