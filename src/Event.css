@@ -2,6 +2,8 @@
    padding-left: 250px;
    margin-bottom: 0%;
    padding-bottom: 20%;
+    background-color: #800;
+   
 }
 
 .con22{
@@ -17,7 +19,6 @@
 }
 
 .con3 {
-   
     margin-top: -100px;
 }
 
@@ -36,10 +37,10 @@
 
 .b2E {
     margin-bottom: 10px;
-    background-color: #800;
+    background-color: #ff0;
     border-radius: 10px;
     margin-top: 20px;
-    color: #ff0;
+    color: #800;
     width: 300px;
     margin-right: 180px;
     margin-left: 20px;
@@ -47,10 +48,10 @@
 
 .b2E1 {
     margin-bottom: 50px;
-    background-color: #800;
+    background-color: #ff0;
     border-radius: 10px;
     margin-top: 20px;
-    color: #ff0;
+    color: #800;
     width: 300px;
     margin-left: -30px;
 }
@@ -59,9 +60,9 @@
     margin-top: 510px;
     width: 60%;
     height: 50px;
-    background-color: #800;
+    background-color: #ff0;
     font-weight: bold;
-    color: #ff0;
+    color: #800;
     border-radius: 20px;
     position: absolute;
     display: flex;
@@ -79,7 +80,7 @@
 }
 
 .sp {
-    color: #000;
+    color: #fff;
     font-size: 30px;
     margin-left: -100px;
     
@@ -130,7 +131,6 @@
         height: 350px;
         margin-left: 10px;
         border-radius: 20px;
-        border: 2px solid #ff0;
     }  
     
     .b3D {
@@ -141,7 +141,6 @@
     }
 
     .sp {
-        color: #000;
         font-size: 20px;
         margin-left: 20px;
         

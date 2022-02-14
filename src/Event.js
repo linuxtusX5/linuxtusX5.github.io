@@ -59,7 +59,7 @@ function Event() {
     <>
       <form onSubmit={onSubmit} className='con2'>
         <input className='input1' type="file" onChange={onFileChange} />
-        <input className='input2' type="text" name="username" placeholder="NAME  ex( PUP-event sept-16-2033 )" />
+        <input className='input2' type="text" name="username" placeholder="NAME  ex( PUP-event)" />
         <button className='b2E'>Upload</button>
         <button className='b2E1' onClick={() => done(users)}>Done</button>
       </form>

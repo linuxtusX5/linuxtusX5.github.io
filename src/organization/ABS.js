@@ -128,7 +128,7 @@ export default class ABS extends React.Component{
                                 GMAIL ACCOUNT
                             </th>
                             <th>
-                                DATE
+                                BIRTHDAY
                             </th>
                             <th>
                                 OPTIONS
@@ -187,7 +187,7 @@ export default class ABS extends React.Component{
                                 </div>
 
                                 <div className='mb-3'>
-                                    <span className='id input-group-text'>DATE</span>
+                                    <span className='id input-group-text'>BIRTHDAY</span>
                                     <input type='date' className='n4' value={DateOfJoining} onChange={this.changeDateOfJoining} />
                                 </div>
 

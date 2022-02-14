@@ -88,7 +88,7 @@ const App = () => {
 
                 
               <Route path="ADMIN" element={<ADMIN />} />
-          <Route exact path="ABS" element={<ProtectedRoute><ABS /></ProtectedRoute>}/>
+          <Route path="ABS" element={<ProtectedRoute><ABS /></ProtectedRoute>}/>
           <Route path="HMS" element={<ProtectedRoute><HMS /></ProtectedRoute>}/>
           <Route path="IIEE" element={<ProtectedRoute><IIEE /></ProtectedRoute>}/>
           <Route path="IBITS" element={<ProtectedRoute><IBITS /></ProtectedRoute>}/>
