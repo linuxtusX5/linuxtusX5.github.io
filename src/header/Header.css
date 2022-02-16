@@ -133,9 +133,8 @@ h1 span:nth-child(1) {
     transform: translateX(-50%);
   }
   .header-right img {
-    width: 300px;
+    width: 380px;
     height: 250px;
-    margin-right: -50px;
     border-radius: 15px;
   } 
   .header h1 {
