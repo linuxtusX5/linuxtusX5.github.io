@@ -1,4 +1,27 @@
+form > * {
+  width: 100%;
+  max-width: 40rem;
+  margin: 3rem auto;
+  border: 1px solid #800;
+  border-radius: 5px;
+}
 
+form input {
+  padding: 1rem;
+  color: #000;
+  font-weight: 200;
+  font-size: 1.6rem;
+}
+
+form button {
+  padding: 1rem;
+  background: var(--form-button);
+  border: 1px solid var(--form-button);
+  border-radius: 0 5px 5px 0;
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
 .account-block {
     padding: 0;
     background-image: url(https://bootdey.com/img/Content/bg1.jpg);

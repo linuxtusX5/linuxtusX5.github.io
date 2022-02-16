@@ -3,6 +3,9 @@ import apps from './firebase/index';
 import 'firebase/compat/firestore';
 import './Event.css';
 import {doc, deleteDoc} from 'firebase/firestore';
+import "./header/Header.css";
+import "aos/dist/aos.css";
+import AOS from "aos";
 
 
 const db = apps.firestore();
@@ -10,6 +13,12 @@ const db = apps.firestore();
 function Event() {
   const [fileUrl, setFileUrl] = React.useState(null);
   const [users, setUsers] = React.useState([]);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
 
 
   const onFileChange = async (e) => {
@@ -57,12 +66,27 @@ function Event() {
 
   return (
     <>
-      <form onSubmit={onSubmit} className='con2'>
+    
+    <section id="header">
+      <div className="container header">
+        <div className="header-left" data-aos="fade-right">
+          <h1><span className="design">Polytechnic University of the Philippines</span></h1>
+            <h2 style={{color: "#fff"}}>
+            <span>should be the every day thing for those</span>
+            <span> who are the members of this council</span>
+            </h2>
+          <p className="u-text-small" style={{color: "#fff"}}><b>There are some people who live in a dream world, and there are some who face reality; 
+          and then there are those who turn one into the other.</b>
+          </p>
+        </div>
+         <form onSubmit={onSubmit} className='con2'>
         <input className='input1' type="file" onChange={onFileChange} />
         <input className='input2' type="text" name="username" placeholder="NAME  ex( PUP-event)" />
         <button className='b2E'>Upload</button>
         <button className='b2E1' onClick={() => done(users)}>Done</button>
+            <h1><span className="design">PUP Lopez Branch</span></h1>
       </form>
+      </div>
       <ul className='con2'>
         {users.map((user, name) => {
           return (
@@ -80,6 +104,7 @@ function Event() {
           <p className="u-text-small">&copy; Copyright 2021.</p>
         </div>
       </div>
+      </section>
     </>
   );
 }

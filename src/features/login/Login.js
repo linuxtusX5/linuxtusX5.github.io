@@ -40,7 +40,7 @@ const Login = () => {
       <div className="p-2 box">
         <h1 className="mb-3 but">STUDENT COUNCILS </h1>
         <h6 className="but">should be the every day thing for those who are the members of this council</h6>
-        <h1 className="mt-3 but">LogIn</h1>
+        <h1 className="mt-3 but">Login</h1>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -61,7 +61,7 @@ const Login = () => {
 
           <div className="d-grid gap-2">
             <Button variant="primary" type="Submit">
-              Log In
+              Login
             </Button>
           </div>
         </Form>

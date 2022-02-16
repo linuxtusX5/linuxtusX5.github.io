@@ -3,7 +3,7 @@
   width: 100%;
   color: #fff;
   position: absolute;
-  margin-top: 1615px;
+  margin-top: 1850px;
   background-color: rgb(11, 11, 58);
   padding: 10px;
 }
@@ -33,7 +33,7 @@
 
 @media screen and (max-width: 600px) {
   .footer{
-    margin-top: 2260px;
+    margin-top: 2540px;
     height: 150px;
   }
 }

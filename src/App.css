@@ -1,13 +1,37 @@
 .navbar-custom {
   background-color: #800;
+  height: 60px;
 }
 .quote {
   color: #000;
 }
 Navbar.Brand{
   margin-right: 100px;
+  margin-top: 30px;
 }
 .con {
   position: relative;
-  
+}
+
+.IMG{
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 600px){
+.justify-content-end{
+  background-color: #800;
+  margin-top: -29px;
+  padding: 5px;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.navbar-dark .navbar-toggler{
+  margin-top: -40px;
+}
+.navbar-custom {
+  height: 60px;
+}
+.IMG{
+  margin-top: 0px;
+}
 }

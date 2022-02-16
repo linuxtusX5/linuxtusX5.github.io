@@ -38,7 +38,7 @@ const App = () => {
   <div className='con'>
   <Navbar collapseOnSelect expand="lg" className='navbar-custom sticky-top' variant='dark'>
   <Container>
-  <h1>
+  <h1 class="IMG">
   <Navbar.Brand href="#home"><img width='35px' height='35px' src={logo} alt='Logo'/> <b>PUP</b></Navbar.Brand>
   </h1>
   <Navbar.Toggle aria-controls="responsive-navbar-nav"/>

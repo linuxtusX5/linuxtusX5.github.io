@@ -93,6 +93,10 @@ h1 span:nth-child(3) {
   animation: bounce 0.8s ease infinite alternate;
 }
 
+h1 span:nth-child(1) {
+    font-weight: 600;
+    margin-left: -10px;
+}
 @keyframes bounce {
   0% {
     transform: translateY(-25%);
@@ -129,9 +133,9 @@ h1 span:nth-child(3) {
     transform: translateX(-50%);
   }
   .header-right img {
-    width: 400px;
-    height: 300px;
-    margin-right: -300px;
+    width: 300px;
+    height: 250px;
+    margin-right: -50px;
     border-radius: 15px;
   } 
   .header h1 {

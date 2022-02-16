@@ -2,8 +2,15 @@
    padding-left: 250px;
    margin-bottom: 0%;
    padding-bottom: 20%;
-    background-color: #800;
+   background-color: #800;
    
+}
+h1 {
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--color-white);
+  position: relative;
+  padding-bottom: 2rem;
 }
 
 .con22{
@@ -19,7 +26,7 @@
 }
 
 .con3 {
-    margin-top: -100px;
+    margin-top: 50px;
 }
 
 
@@ -145,4 +152,12 @@
         margin-left: 20px;
         
     }
+    
+    .con3 {
+        margin-top: -50px;
+    }
+
+    .footer2{
+        margin-top: -150px;
+}
 }

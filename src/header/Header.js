@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import "./Header.css";
-import Buttons from "../Button/Button";
-import "../Button/Button.css";
 import design from "../Photos/PUP.jpg";
+import logo from "../Photos/PUPLogo.png"
 import { BsMouse } from "react-icons/bs";
-import {Form, Button} from 'react-bootstrap';
-import { TiSocialGooglePlus } from "react-icons/ti";
-import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import {Button} from 'react-bootstrap';
+import "../Button/Button.css";
 
 //Features
 import "../features/Features.css";
@@ -22,39 +20,24 @@ import '../Footer.css';
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-//firebase
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-} from "firebase/auth";
-
-import { auth } from "../firebase";
-
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../context/UserAuthContext";
 
-
+//emailjs
+import emailjs from '@emailjs/browser';
 
 const Header = () => {
 
-
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  
-  const register = async () => {
-    try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPassword
-      );
-      console.log(user);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  function sendEmail(e) {
+      e.preventDefault();
+  emailjs.sendForm('service_t9564z3', 'template_miyd8br', e.target, 'user_zGZ7M9G7Yd20lIrSMAwL9')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+      e.target.reset()
+  }
 
 
   useEffect(() => {
@@ -81,8 +64,7 @@ const Header = () => {
     <section id="header">
       <div className="container header">
         <div className="header-left" data-aos="fade-right">
-          <h1>
-            <span className="design">Student councils</span></h1>
+          <h1><span className="design">Student councils</span></h1>
             <h2 style={{color: "#fff"}}>
             <span>should be the every day thing for those</span>
             <span> who are the members of this council</span>
@@ -140,40 +122,27 @@ const Header = () => {
       </div>
 
        <div className="subscribe">
-        <h2>Register now!</h2>
-        <form>
-          <div className="form-control">
-            <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <div className="mail"><Form.Label ><b>Email address</b></Form.Label></div>
-              <Form.Control type="email" placeholder="Enter email" onChange={(event) => {
-              setRegisterEmail(event.target.value);
-          }} />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <div className="pass"><Form.Label><b>Password</b></Form.Label></div>
-              <Form.Control type="password" placeholder="Password" onChange={(event) => {
-              setRegisterPassword(event.target.value);
-          }}/>
-            </Form.Group>
-            <Button className="but" variant="primary" type="submit" onClick={register}>
-              Register
-            </Button>
-          </Form>
-          </div>
-        </form>
-        <div className="social-icons">
-          <div className="social-icon">
-            <TiSocialGooglePlus />
-          </div>
-          <div className="social-icon">
-            <FaFacebookF />
-          </div>
-          <div className="social-icon">
-            <FaInstagram />
-          </div>
-        </div>
+          <img class="logoz" data-aos="fade-right" src={logo} alt="photos" />
+          <h3><b class="p" data-aos="fade-right">Polytechnic University of the Philippines</b></h3>
+        <form onSubmit={sendEmail} data-aos="fade-right">
+                    <div className="row pt-5 mx-auto pt">
+                        <div className="col-8 form-group mx-auto">
+                            <input type="text" className="form-control" placeholder="Name" name="name"/>
+                        </div>
+                        <div className="col-8 form-group pt-2 mx-auto">
+                            <input type="text" className="form-control" placeholder="Course" name="course"/>
+                        </div>
+                        <div className="col-8 form-group pt-2 mx-auto">
+                            <input type="email" className="form-control" placeholder="Email Address" name="email"/>
+                        </div>
+                        <div className="col-8 form-group pt-2 mx-auto">
+                            <textarea className="form-control" id="" cols="30" rows="8" placeholder="Your message (Suggestion)" name="message"></textarea>
+                        </div>
+                        <div className="col-8 pt-3 mx-auto">
+                            <input class="in" type="submit" className="btn btn-info" value="Send Message"></input>
+                        </div>
+                    </div>
+                </form>
       </div>
 
       <div className="footer">

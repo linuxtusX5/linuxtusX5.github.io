@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "../../context/UserAuthContext";
-import "../../Event.css";
+import './login.css';
 
 const Admin = () => {
   const [email, setEmail] = useState("");
