@@ -4,6 +4,7 @@ import {doc, collection, onSnapshot, addDoc, query, orderBy, deleteDoc} from "fi
 import apps from '../src/firebase/index';
 import 'firebase/compat/firestore';
 import 'firebase/compat/firestore';
+import './Announce.css';
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -54,63 +55,31 @@ const [input, setInput] = useState("")
 
 
   return (
-    <div style={{
-      backgroundColor: '#800',
-         paddingTop: '30px',
-         paddingBottom: '20px'
-    }}>
-          <div className="header-left" data-aos="fade-right" style={{marginLeft: '120px'}}>
-          <h1><span className="design" style={{fontSize: '6rem'}} >Student councils</span></h1>
+    <section id="header2">
+    <div className="container header2">
+        <div className="header-left" data-aos="fade-right">
+          <h1><span className="design2">Polytechnic University of the Philippines</span></h1>
             <h2 style={{color: "#fff"}}>
             <span>should be the every day thing for those</span>
             <span> who are the members of this council</span>
             </h2>
-          <p className="u-text-small" style={{color: "#fff"}}><b>
-            Student council speaks a lot more about itself rather than just being a group of people, 
-            it show cases its unity, cooperation, coordination and strengths to the world</b>
+          <p className="u-text-small" style={{color: "#fff"}}><b>There are some people who live in a dream world, and there are some who face reality; 
+          and then there are those who turn one into the other.</b>
           </p>
         </div>
-         <h1 style={{color: '#ff0', marginLeft: '120px', fontWeight: 'bold'}}>Announcement</h1>
+         <h1 style={{color: '#ff0', marginLeft: '40px', fontWeight: 'bold',fontSize: 'revert', marginBottom: '-50px'}}>Announcement</h1>
 
-       <input style={{
-        width: '500px',
-        height: '10px',
-        marginLeft: '20px',
-       }}
+       <input className='announce'
               type="text" name="Announce" 
               placeholder="Announcement"
-              className="w-2/3 h-10 p-3 outline-none border border-gray-500"
               value={input}
               onChange={e => setInput(e.target.value)}
               />
-      <Button style={{
-         marginLeft:'20px',
-        height: '35px',
-        }} variant="primary" onClick={handleClick}>Done</Button>
-      <div className="features-left" data-aos="fade-left" style={{
-        marginLeft: '650px',
-        backgroundColor: '#800',
-        marginTop: '-100px',
-        padding: '5px',
-      }}>
+      <Button className='announce' variant="primary" onClick={handleClick}>Done</Button>
+      <div className="featuresPic" data-aos="fade-left">
             <img src={Pup} alt="Pup" />
           </div>
-      <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: '600px',
-          padding: '50px',
-          border: '2px solid #800',
-          overflow: 'scroll',
-          maxHeight: '300px',
-          marginTop: '-300px',
-          scrollBehavior: 'smooth',
-          backgroundColor: '#fff',
-          borderRadius: '20px',
-          marginLeft: '20px',
-          marginBottom: '30px'
-        }}>
+      <div className='box5'>
           <div className="w-full ">  
               {lists.map(list => (
                 <div className="border-b mt-4 w-full h-16 flex items-center justify-between" key={list.id}>
@@ -122,6 +91,7 @@ const [input, setInput] = useState("")
           </div>
       </div>
     </div>
+    </section>
   );
 }
 
