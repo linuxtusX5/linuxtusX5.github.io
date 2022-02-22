@@ -69,7 +69,7 @@ const [modalShow, setModalShow] = React.useState(false);
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          <b style={{color: '#800'}}>Announcement</b> <Badge bg="danger">New</Badge>
+          <b style={{color: '#800'}}>Announcement</b>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body style={{
@@ -130,11 +130,8 @@ const [modalShow, setModalShow] = React.useState(false);
           <Dropdown.Item as={Link} to={"/ADMIN"}><b>YES</b></Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-    </Nav>
-  </Navbar.Collapse>
-
       <Dropdown>
-        <Dropdown.Toggle variant="warning" id="dropdown-basic">
+        <Dropdown.Toggle variant="warning" id="dropdown2">
         <i className="fa fa-wrench"></i>
         </Dropdown.Toggle>
         <Dropdown.Menu >
@@ -142,10 +139,14 @@ const [modalShow, setModalShow] = React.useState(false);
           <Dropdown.Item as={Link} to={"/NoticeAdmin"}><b>Announcement</b></Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-  </Container>
-      <Button variant="warning" style={{marginLeft:'40px'}} onClick={() => setModalShow(true)}>
+      
+      <Button variant="warning" className='bullhorn' onClick={() => setModalShow(true)}>
       <i className="fas fa-bullhorn"/>
-      </Button><Badge bg="danger">{lists.length} New</Badge>
+      </Button><Badge bg="danger" class='ba'>{lists.length} New</Badge>
+    </Nav>
+  </Navbar.Collapse>
+
+  </Container>
 </Navbar>
 <div>
     <UserAuthContextProvider>

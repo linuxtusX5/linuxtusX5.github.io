@@ -19,22 +19,44 @@ Navbar.Brand{
   
   margin-right: 20px;
 }
-
+#dropdown2{
+  margin-right: 50px;
+}
+.badge{
+  width: 50px;
+  height: 20px;
+}
 @media screen and (max-width: 600px){
 .justify-content-end{
   background-color: #800;
-  margin-top: -29px;
   padding: 5px;
   margin-left: -15px;
   margin-right: -15px;
+  height: 100%;
+  padding-bottom: 20px;
 }
 .navbar-dark .navbar-toggler{
-  margin-top: -40px;
+  margin-top: -10px;
 }
 .navbar-custom {
   height: 60px;
 }
 .IMG{
   margin-top: 0px;
+}
+.bullhorn{
+  width: 50px;
+  margin-left: 5px;
+  margin-top: 10px;
+}
+#dropdown2{
+  width: 50px;
+  margin-left: 5px;
+  margin-top: 10px;
+}
+.badge{
+  width: 50px;
+  margin-top: -35px;
+  margin-left: 55px;
 }
 }
