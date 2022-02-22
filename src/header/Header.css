@@ -13,7 +13,7 @@
 }
 
 .header h1 {
-  font-size: 4rem;
+  font-size: 6rem;
   line-height: 1.4;
   text-transform: uppercase;
   color: var(--color-white);
@@ -26,9 +26,6 @@
 }
 .design{
   color: #ff0;
-}
-h1 span:nth-child(1) {
-  font-weight: 800;
 }
 
 h1 span:nth-child(2),
@@ -94,7 +91,7 @@ h1 span:nth-child(3) {
 }
 
 h1 span:nth-child(1) {
-    font-weight: 600;
+    font-weight: 900;
     margin-left: -10px;
 }
 @keyframes bounce {

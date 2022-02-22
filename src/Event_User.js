@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react';
-import apps from '../src/firebase/index';
+import React, {useEffect} from 'react';
 import 'firebase/compat/firestore';
 import './Event.css';
-import {doc, deleteDoc} from 'firebase/firestore';
 import "aos/dist/aos.css";
 import AOS from "aos";
+import apps from './firebase/index';
 
 
 const db = apps.firestore();
 
-function Event() {
-  const [fileUrl, setFileUrl] = React.useState(null);
+function Event_User() {
+  
   const [users, setUsers] = React.useState([]);
 
   useEffect(() => {
@@ -19,27 +18,7 @@ function Event() {
     });
   }, []);
 
-
-  const onFileChange = async (e) => {
-    const file = e.target.files[0];
-    const storageRef = apps.storage().ref();
-    const fileRef = storageRef.child(file.name);
-    await fileRef.put(file);
-    setFileUrl(await fileRef.getDownloadURL());
-  };
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    const username = e.target.username.value;
-    if (!username || !fileUrl) {
-      return;
-    }
-    await db.collection("users").doc(username).set({
-      name: username,
-      EventPic: fileUrl,
-    });
-  };
-
+  
   useEffect(() => {
     const fetchUsers = async () => {
       const usersCollection = await db.collection("users").get();
@@ -52,16 +31,6 @@ function Event() {
     fetchUsers();
   }, []);
 
-  const deletedocs = async (user) => {
-    alert("the Page is automatically refresh...")
-    await deleteDoc(doc(db, "users", user.name))
-    window.location.reload(false);
-  };
-
-  const done = async (users) => {
-    alert("the Page is automatically refresh...")
-    window.location.reload(true);
-  };
 
   return (
     <>
@@ -78,13 +47,7 @@ function Event() {
           and then there are those who turn one into the other.</b>
           </p>
         </div>
-         <form onSubmit={onSubmit} className='con2'>
-        <input className='input1' type="file" onChange={onFileChange} />
-        <input className='input2' type="text" name="username" placeholder="NAME  ex( PUP-event)" />
-        <button className='b2E'>Upload</button>
-        <button className='b2E1' onClick={() => done(users)}>Done</button>
-            <h1><span className="design">PUP Lopez Branch</span></h1>
-      </form>
+        
       </div>
       <ul className='con2'>
         {users.map((user, name) => {
@@ -92,7 +55,6 @@ function Event() {
             <div key={name} className='con3'>
               <span className='sp'>{user.name}</span><br/>
               <img className='im2' src={user.EventPic} alt={user.name} />   
-              <i className="fa fa-trash"  onClick={() => deletedocs(user)}> Delete</i>
             </div>
           );
         })}
@@ -108,7 +70,7 @@ function Event() {
   );
 }
 
-export default Event;
+export default Event_User;
 
 
 

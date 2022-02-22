@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "../../context/UserAuthContext";
 import "../../Event.css";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -18,8 +19,7 @@ const Login = () => {
     setError("");
     try {
       await logIn(email, password);
-      
-        navigate("/Navs");
+      navigate("/Navs");
     } catch (err) {
       setError(err.message);
     }
@@ -33,6 +33,19 @@ const Login = () => {
     } catch (error) {
       console.log(error.message);
     }
+  };
+
+  const forgot = () => {
+
+const auth = getAuth();
+sendPasswordResetEmail(auth, email)
+  .then(() => {
+    alert("The Link is send to your email.")
+  })
+  .catch((error) => {
+    
+      console.log(error.message);
+  });
   };
 
   return (
@@ -65,6 +78,7 @@ const Login = () => {
             </Button>
           </div>
         </Form>
+        <a href="#" onClick={forgot}>Forgot your password?</a>
         <hr />
         <div className="but">
           <GoogleButton

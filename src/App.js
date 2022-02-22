@@ -1,5 +1,6 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import './App.css';
+import User from './Event_User';
 import Event from './Event';
 import Navs from './header/Header';
 import ABS from './organization/ABS';
@@ -15,8 +16,9 @@ import SYNERTECH from './organization/SYNERTECH';
 import UAPSA from './organization/UAPSA';
 import YES from './organization/YES';
 import ADMIN from './features/login/Admin';
+import Notice from './Announcement';
 
-import { Navbar, Container, Nav, Badge, Dropdown} from 'react-bootstrap';
+import { Navbar, Container, Nav, Badge, Dropdown, Button, Modal, NavDropdown} from 'react-bootstrap';
 import {
   BrowserRouter as Router,
   Routes,
@@ -28,8 +30,70 @@ import ProtectedRoute from "./ProtectedRoute";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
 import Login from './features/login/Login';
 import Signup from './features/login/Signup';
+import LogUser from './features/login/LoginUser';
+import NoticeAdmin from './features/login/Announce_admin';
+
+import {doc, collection, onSnapshot, addDoc, query, orderBy, deleteDoc} from "firebase/firestore";
+import apps from '../src/firebase/index';
+import 'firebase/compat/firestore';
+import 'firebase/compat/firestore';
+
+const db = apps.firestore();
+
 
 const App = () => {
+
+const [input, setInput] = useState("")
+const [modalShow, setModalShow] = React.useState(false);
+  
+    const [lists, setLists] = useState([])
+    useEffect(()=> {
+    const q = query(collection(db, "Announcement"),  orderBy("timestamp", "desc"));
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setLists(snapshot.docs.map(doc => ({...doc.data(), id: doc.id})))
+      setInput("")
+    });
+      return () => unsubscribe()
+ }, []) 
+  
+
+ function MyVerticallyCenteredModal(props) {
+  return (
+          
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          <b style={{color: '#800'}}>Announcement</b> <Badge bg="danger">New</Badge>
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body style={{
+          borderTop: '1px solid #800',
+          borderBottom: '1px solid #800',
+          overflow: 'scroll',
+          maxHeight: '400px',
+          
+        }}>
+        <div className="w-full ">  
+            {lists.map(list => (
+              <div className="border-b mt-4 w-full h-16 flex items-center justify-between" key={list.id}>
+                <Badge bg="success"><i className="fas fa-bullhorn"/></Badge> <b  style={{marginLeft: '25px'}}>{list.name}</b>
+          </div>
+            ))}
+
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal> 
+  );
+}
 
   return (
   <>     
@@ -39,17 +103,17 @@ const App = () => {
   <Navbar collapseOnSelect expand="lg" className='navbar-custom sticky-top' variant='dark'>
   <Container>
   <h1 class="IMG">
-  <Navbar.Brand href="#home"><img width='35px' height='35px' src={logo} alt='Logo'/> <b>PUP</b></Navbar.Brand>
+  <Navbar.Brand href="#home"><img width='35px' height='35px' src={logo} alt='Logo'/><b style={{color:'#ff0', marginLeft:'10px', fontWeight:'bold'}}> PUP</b></Navbar.Brand>
   </h1>
   <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
   <Navbar.Collapse className="justify-content-end">
     <Nav>  
       <Nav.Link eventKey='Navs' as={Link} to={"/Navs"}><i className="fas fa-home"> Home</i></Nav.Link>
-      <Nav.Link eventKey='Event' as={Link} to={"/Event"}><i className="fas fa-calendar-week"> Event</i></Nav.Link>
+      <Nav.Link eventKey='User' as={Link} to={"/User"}><i className="fas fa-calendar-week"> Event</i></Nav.Link>
       <Dropdown>
         <Dropdown.Toggle variant="warning" id="dropdown-basic">
           <i className="fas fa-sitemap"> Organization</i>
-        </Dropdown.Toggle><Badge bg="danger">Lima</Badge>
+        </Dropdown.Toggle>
 
         <Dropdown.Menu>
           <Dropdown.Item as={Link} to={"/ADMIN"}><b>ABS</b></Dropdown.Item>
@@ -68,26 +132,36 @@ const App = () => {
       </Dropdown>
     </Nav>
   </Navbar.Collapse>
+
+      <Dropdown>
+        <Dropdown.Toggle variant="warning" id="dropdown-basic">
+        <i className="fa fa-wrench"></i>
+        </Dropdown.Toggle>
+        <Dropdown.Menu >
+          <Dropdown.Item as={Link} to={"/LogUser"}><b>Event</b></Dropdown.Item>
+          <Dropdown.Item as={Link} to={"/NoticeAdmin"}><b>Announcement</b></Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
   </Container>
+      <Button variant="warning" style={{marginLeft:'40px'}} onClick={() => setModalShow(true)}>
+      <i className="fas fa-bullhorn"/>
+      </Button><Badge bg="danger">{lists.length} New</Badge>
 </Navbar>
 <div>
     <UserAuthContextProvider>
   <Routes>
-              <Route
-                path="Event"
-                element={
-                  <ProtectedRoute>
-                    <Event />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="/" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
+          <Route path="User" element={ <ProtectedRoute> <User /> </ProtectedRoute> } />
+          <Route path="Event" element={  <ProtectedRoute><Event /></ProtectedRoute> } />
+          <Route path="/LogUser" element={<ProtectedRoute><LogUser /></ProtectedRoute>} />
+          <Route path="/Notice" element={<ProtectedRoute><Notice /></ProtectedRoute>} />
+
+          <Route path="/NoticeAdmin" element={<ProtectedRoute><NoticeAdmin /></ProtectedRoute>} />
 
           <Route exact path="Navs" element={<ProtectedRoute> <Navs /> </ProtectedRoute>}/>
-
-                
-              <Route path="ADMIN" element={<ADMIN />} />
+  
+          <Route path="/" element={<Login />} />
+          <Route path="ADMIN" element={<ProtectedRoute><ADMIN /></ProtectedRoute>} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="ABS" element={<ProtectedRoute><ABS /></ProtectedRoute>}/>
           <Route path="HMS" element={<ProtectedRoute><HMS /></ProtectedRoute>}/>
           <Route path="IIEE" element={<ProtectedRoute><IIEE /></ProtectedRoute>}/>
@@ -105,6 +179,13 @@ const App = () => {
 </div>
 </div>
 </Router>
+  <>
+      
+      <MyVerticallyCenteredModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+    </>
 </> 
   );
 }

@@ -6,7 +6,7 @@ import { useUserAuth } from "../../context/UserAuthContext";
 import './login.css';
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
-const Admin = () => {
+const Announce_admin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -17,19 +17,11 @@ const Admin = () => {
     setError("");
     try {
       logIn(email, password);
-      if(email==='ABSadmin@gmail.com' && password==='ABSadmin10'){navigate("/ABS");}
-      if(email==='HMSadmin@gmail.com' && password==='HMSadmin11'){navigate("/HMS");}
-      if(email==='IBITSadmin@gmail.com' && password==='IBITSadmin13'){navigate("/IBITS");}
-      if(email==='IIEEadmin@gmail.com' && password==='IIEEadmin12'){navigate("/IIEE");}
-      if(email==='JMEadmin@gmail.com' && password==='JMEadmin14'){navigate("/JME");}
-      if(email==='JPEAadmin@gmail.com' && password==='JPEAadmin15'){navigate("/JPEA");}
-      if(email==='PADSadmin@gmail.com' && password==='PADSadmin16'){navigate("/PADS");}
-      if(email==='PASOAadmin@gmail.com' && password==='PASOAadmin17'){navigate("/PASOA");}
-      if(email==='PICEadmin@gmail.com' && password==='PICEadmin18'){navigate("/PICE");}
-      if(email==='SYNERTECHadmin@gmail.com' && password==='SYNERTECHadmin19'){navigate("/SYNERTECH");}
-      if(email==='UAPSAadmin@gmail.com' && password==='UAPSAadmin20'){navigate("/UAPSA");}
-      if(email==='YESadmin@gmail.com' && password==='YESadmin21'){navigate("/YES");}
-      else{alert("Please Login your admin account")}
+      if(email==='STUDENTadmin@gmail.com' && password==='STUDENTadmin16'){navigate("/Notice");}
+      else{
+          alert("Please Login your admin account")
+      }
+   
     } catch (err) {
       setError(err.message);
     }
@@ -87,4 +79,4 @@ sendPasswordResetEmail(auth, email)
   );
 };
 
-export default Admin;
+export default Announce_admin;

@@ -7,14 +7,17 @@
 }
 Navbar.Brand{
   margin-right: 100px;
-  margin-top: 30px;
 }
 .con {
   position: relative;
 }
 
 .IMG{
-  margin-top: 20px;
+  margin-top: 10px;
+}
+#dropdown-basic{
+  
+  margin-right: 20px;
 }
 
 @media screen and (max-width: 600px){

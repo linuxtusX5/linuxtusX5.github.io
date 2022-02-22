@@ -6,6 +6,12 @@ form > * {
   border-radius: 5px;
 }
 
+a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 form input {
   padding: 1rem;
   color: #000;

@@ -3,6 +3,7 @@ import "firebase/compat/storage";
 
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyD19Bryc4YrYuu7JtsKCGutxu_wm3cQJKs",
