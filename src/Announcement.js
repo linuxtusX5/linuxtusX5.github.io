@@ -67,18 +67,16 @@ const [input, setInput] = useState("")
           and then there are those who turn one into the other.</b>
           </p>
         </div>
-         <h1 style={{color: '#ff0', marginLeft: '40px', fontWeight: 'bold',fontSize: 'revert', marginBottom: '-50px'}}>Announcement</h1>
-
-       <input className='announce'
+         <h1 style={{color: '#ff0', marginLeft: '40px', fontWeight: 'bold',fontSize: 'revert', marginBottom: '180px'}}>Announcement</h1>
+        <div className='annIn'>
+       <input className='announce0'
               type="text" name="Announce" 
               placeholder="Announcement"
               value={input}
               onChange={e => setInput(e.target.value)}
               />
-      <Button className='announce' variant="primary" onClick={handleClick}>Done</Button>
-      <div className="featuresPic" data-aos="fade-left">
-            <img src={Pup} alt="Pup" />
-          </div>
+      <Button className='announce0' variant="primary" onClick={handleClick}>Done</Button>
+      </div>
       <div className='box5'>
           <div className="w-full ">  
               {lists.map(list => (
