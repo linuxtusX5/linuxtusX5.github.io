@@ -29,7 +29,6 @@ const Admin = () => {
       if(email==='SYNERTECHadmin@gmail.com' && password==='SYNERTECHadmin19'){navigate("/SYNERTECH");}
       if(email==='UAPSAadmin@gmail.com' && password==='UAPSAadmin20'){navigate("/UAPSA");}
       if(email==='YESadmin@gmail.com' && password==='YESadmin21'){navigate("/YES");}
-      else{alert("Please Login your admin account")}
     } catch (err) {
       setError(err.message);
     }
