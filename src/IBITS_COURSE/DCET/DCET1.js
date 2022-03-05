@@ -27,22 +27,11 @@ export default class DCET1 extends React.Component {
         this.setState({ dcet1: data });
       });
   }
-  viewClick(name) {
-    name = this.state.Names;
+  onChange = (e) => {
+    e.preventDefault();
 
-    fetch(variables.API_URL + "dict1/" + name, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ dict1: data });
-        console.log({ studentName: this.state.Names });
-      });
-  }
+    this.setState({ Names: e.target.value });
+  };
   componentDidMount() {
     this.refreshList();
   }
