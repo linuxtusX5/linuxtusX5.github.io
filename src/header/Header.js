@@ -1,6 +1,6 @@
 import React, { useEffect} from "react";
 import "./Header.css";
-import design from "../Photos/PUP.jpg";
+import design from "../Photos/p4.png";
 import logo from "../Photos/PUPLogo.png"
 import { BsMouse } from "react-icons/bs";
 import {Button} from 'react-bootstrap';

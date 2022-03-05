@@ -6,7 +6,6 @@ import Navs from './header/Header';
 import ABS from './organization/ABS';
 import HMS from './organization/HMS';
 import IIEE from './organization/IIEE';
-import IBITS from './organization/IBITS';
 import JME from './organization/JME';
 import JPEA  from './organization/JPEA';
 import PADS from './organization/PADS';
@@ -17,8 +16,9 @@ import UAPSA from './organization/UAPSA';
 import YES from './organization/YES';
 import ADMIN from './features/login/Admin';
 import Notice from './Announcement';
+import IBITSTABS from './organization/IBITSTABS';
 
-import { Navbar, Container, Nav, Badge, Dropdown, Button, Modal, NavDropdown} from 'react-bootstrap';
+import { Navbar, Container, Nav, Badge, Dropdown, Button, Modal} from 'react-bootstrap';
 import {
   BrowserRouter as Router,
   Routes,
@@ -33,7 +33,7 @@ import Signup from './features/login/Signup';
 import LogUser from './features/login/LoginUser';
 import NoticeAdmin from './features/login/Announce_admin';
 
-import {doc, collection, onSnapshot, addDoc, query, orderBy, deleteDoc} from "firebase/firestore";
+import {collection, onSnapshot, query, orderBy} from "firebase/firestore";
 import apps from '../src/firebase/index';
 import 'firebase/compat/firestore';
 import 'firebase/compat/firestore';
@@ -43,7 +43,7 @@ const db = apps.firestore();
 
 const App = () => {
 
-const [input, setInput] = useState("")
+const [setInput] = useState("")
 const [modalShow, setModalShow] = React.useState(false);
   
     const [lists, setLists] = useState([])
@@ -55,7 +55,7 @@ const [modalShow, setModalShow] = React.useState(false);
       setInput("")
     });
       return () => unsubscribe()
- }, []) 
+ }, [setInput]) 
   
 
  function MyVerticallyCenteredModal(props) {
@@ -103,7 +103,7 @@ const [modalShow, setModalShow] = React.useState(false);
   <Navbar collapseOnSelect expand="lg" className='navbar-custom sticky-top' variant='dark'>
   <Container>
   <h1 class="IMG">
-  <Navbar.Brand href="#home"><img width='35px' height='35px' src={logo} alt='Logo'/><b style={{color:'#ff0', marginLeft:'10px', fontWeight:'bold'}}> PUP</b></Navbar.Brand>
+  <Navbar.Brand href="#home"><img width='35px' height='35px' src={logo} alt='Logo'/><b style={{color:'#ff0', marginLeft:'10px', fontWeight:'bold'}}> PUP LOPEZ BRANCH</b></Navbar.Brand>
   </h1>
   <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
   <Navbar.Collapse className="justify-content-end">
@@ -166,7 +166,7 @@ const [modalShow, setModalShow] = React.useState(false);
           <Route path="ABS" element={<ProtectedRoute><ABS /></ProtectedRoute>}/>
           <Route path="HMS" element={<ProtectedRoute><HMS /></ProtectedRoute>}/>
           <Route path="IIEE" element={<ProtectedRoute><IIEE /></ProtectedRoute>}/>
-          <Route path="IBITS" element={<ProtectedRoute><IBITS /></ProtectedRoute>}/>
+          <Route path="IBITS" element={<ProtectedRoute><IBITSTABS /></ProtectedRoute>}/>
           <Route path="JME" element={<ProtectedRoute><JME /></ProtectedRoute>}/>
           <Route path="JPEA" element={<ProtectedRoute><JPEA /></ProtectedRoute>}/>
           <Route path="PADS" element={<ProtectedRoute><PADS /></ProtectedRoute>}/>
