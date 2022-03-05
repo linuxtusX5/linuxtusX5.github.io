@@ -16,17 +16,17 @@ export default function CUSTOMDICT() {
           >
             <Nav.Item>
               <Nav.Link eventKey="1st">
-                <h5 style={{ color: "#ff0" }}>1st Year</h5>
+                <h5 style={{ color: "#fff" }}>1st Year</h5>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="2nd">
-                <h5 style={{ color: "#ff0" }}>2nd Year</h5>
+                <h5 style={{ color: "#fff" }}>2nd Year</h5>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="3rd">
-                <h5 style={{ color: "#ff0" }}>3rd Year</h5>
+                <h5 style={{ color: "#fff" }}>3rd Year</h5>
               </Nav.Link>
             </Nav.Item>
           </Nav>

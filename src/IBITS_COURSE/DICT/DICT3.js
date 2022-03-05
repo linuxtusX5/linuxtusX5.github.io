@@ -2,13 +2,12 @@ import React from "react";
 import { variables } from "../../Variables";
 import Table from "react-bootstrap/Table";
 import "../../organization/org.css";
-import TextField from "@mui/material/TextField";
+import { InputGroup, Button, FormControl } from "react-bootstrap";
 
 export default class DICT3 extends React.Component {
   constructor(props) {
     super(props);
 
-    this.viewClick = this.viewClick.bind(this);
     this.state = {
       dict3: [],
       modalTitle: "",
@@ -18,6 +17,8 @@ export default class DICT3 extends React.Component {
       DateOfJoining: "",
       Names: "",
     };
+
+    this.viewClick = this.viewClick.bind(this);
   }
 
   refreshList() {
@@ -32,6 +33,11 @@ export default class DICT3 extends React.Component {
     this.refreshList();
   }
 
+  onChange = (e) => {
+    e.preventDefault();
+
+    this.setState({ Names: e.target.value });
+  };
   changeStudentId = (e) => {
     this.setState({ studentId: e.target.value });
   };
@@ -141,9 +147,9 @@ export default class DICT3 extends React.Component {
   }
 
   viewClick(name) {
-    name = "joffreyZ";
+    name = this.state.Names;
 
-    fetch(variables.API_URL + "dict3/" + name, {
+    fetch(variables.API_URL + "dict1/" + name, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -152,8 +158,8 @@ export default class DICT3 extends React.Component {
     })
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ dict3: data });
-        console.log({ dict3: data });
+        this.setState({ dict1: data });
+        console.log({ studentName: this.state.Names });
       });
   }
 
@@ -179,27 +185,41 @@ export default class DICT3 extends React.Component {
           Add STUDENT
         </button>
 
-        <TextField
-          id="outlined-basic"
-          onChange={() => this.viewClick()}
-          variant="outlined"
-          label="Search"
-          style={{
-            backgroundColor: "#fff",
-            width: "405px",
-            marginBottom: "20px",
-            borderRadius: "10px",
-          }}
-        />
+        <InputGroup className="mb-3" style={{ width: 400, marginTop: 100 }}>
+          <FormControl
+            placeholder="Student Name"
+            aria-label="Student Name"
+            aria-describedby="basic-addon2"
+            value={this.state.Names}
+            onChange={this.onChange}
+          />
+          <Button
+            variant="outline-primary"
+            id="button-addon2"
+            onClick={() => this.viewClick()}
+          >
+            Search
+          </Button>
+        </InputGroup>
 
         <Table striped bordered hover variant="dark">
           <thead>
             <tr>
-              <th>STUDENT ID</th>
-              <th>STUDENT NAME</th>
-              <th>GMAIL ACCOUNT</th>
-              <th>BIRTHDAY</th>
-              <th>OPTIONS</th>
+              <th>
+                <i class="fa fa-id-card"> STUDENT ID</i>
+              </th>
+              <th>
+                <i class="fa fa-user"> STUDENT NAME</i>
+              </th>
+              <th>
+                <i class="fa fa-id-badge"> GMAIL ACCOUNT</i>
+              </th>
+              <th>
+                <i class="fa fa-cheese"> BIRTHDAY</i>
+              </th>
+              <th>
+                <i class="fa fa-toolbox"> OPTIONS</i>
+              </th>
             </tr>
           </thead>
           <tbody>
