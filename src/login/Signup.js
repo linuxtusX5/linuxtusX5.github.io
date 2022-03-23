@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import { useUserAuth } from "../../context/UserAuthContext";
-import '../../Event.css';
+import { useUserAuth } from "../context/UserAuthContext";
+import '../Event.css';
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -16,8 +16,8 @@ const Signup = () => {
     e.preventDefault();
     setError("");
     try {
-      await signUp(email, password);
-      navigate("/");
+      await signUp(email, password); 
+      navigate(Event);
     } catch (err) {
       setError(err.message);
     }

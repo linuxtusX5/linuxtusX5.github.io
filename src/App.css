@@ -1,3 +1,7 @@
+body {
+    background: url(./Photos/Maintenance.jpg) center / cover no-repeat fixed;
+    min-height: 10vh;
+}
 .navbar-custom {
   background-color: #800;
   height: 60px;
