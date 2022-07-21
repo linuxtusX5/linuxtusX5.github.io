@@ -1,0 +1,49 @@
+.cent {
+  text-align: center;
+  color: #000;
+  width: 100%;
+}
+.p{
+  color: #800;
+  text-shadow:  0 0 3px #ff0;
+}
+
+.pt{
+  border: 0px solid #800;
+}
+
+.logoz{
+  width: 200px;
+  margin-top: 20px;
+}
+ form input{
+    width: 100%;
+  }
+  form {
+    margin-top: 30px;
+  }
+.subscribe h2 {
+  font-size: 3rem;
+  line-height: 1.4;
+  color: #ff0;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #000;
+  text-transform: uppercase;
+  margin: 1.5rem 0;
+  padding-bottom: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+  form input {
+    width: 100%;
+  }
+.subscribe {
+  margin-top: 1690px;
+}
+form > * {
+  width: 100%;
+}
+.pt-5{
+  width: 100%;
+}
+}

@@ -1,0 +1,29 @@
+.feature {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: -10px;
+}
+
+.feature-icon {
+  position: relative;
+  margin-right: 2rem;
+}
+
+.inner-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.feature-text h3 {
+  font-size: 25px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.feature-text {
+  font-size: small;
+  font-weight: 600;
+}

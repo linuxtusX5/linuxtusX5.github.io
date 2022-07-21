@@ -1,0 +1,17 @@
+#back {
+    background: url(../Photos/a.jpg) center center / cover no-repeat fixed;
+    height: 100vh;
+}
+#back2 {
+    background: url(../Photos/a.jpg) center center / cover no-repeat fixed;
+    height: 100vh;
+}
+#back3{
+    background: url(../Photos/a.jpg) center center / cover no-repeat fixed;
+    min-height: 100vh;
+}
+@media screen and (max-width: 600px) {
+    #back3{
+        height: 100vh;
+    }
+}

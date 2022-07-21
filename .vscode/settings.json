@@ -1,5 +1,10 @@
 {
     "cSpell.words": [
         "Datasearch"
-    ]
+    ],
+    "workbench.colorTheme": "Monokai",
+    "workbench.preferredDarkColorTheme": "Default Dark+",
+    "terminal.integrated.tabs.hideCondition": "singleTerminal",
+    "terminal.integrated.tabs.showActions": "singleTerminalOrNarrow",
+    "terminal.integrated.tabs.showActiveTerminal": "singleTerminal"
 }

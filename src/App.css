@@ -1,7 +1,3 @@
-body {
-    background: url(./Photos/Maintenance.jpg) center / cover no-repeat fixed;
-    min-height: 10vh;
-}
 .navbar-custom {
   background-color: #800;
   height: 60px;
@@ -10,14 +6,14 @@ body {
   color: #000;
 }
 Navbar.Brand{
-  margin-right: 100px;
+  margin-right: 100px; 
 }
 .con {
   position: relative;
 }
 
 .IMG{
-  margin-top: 10px;
+  margin-top: -5px;
 }
 #dropdown-basic{
   
