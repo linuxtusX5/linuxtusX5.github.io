@@ -471,20 +471,6 @@ const Add_event = () => {
             }}
             data-aos="fade-up"
           >
-            <ListSubheader>
-              <a href="/Home">
-                <SpeedDial
-                  ariaLabel="SpeedDial basic example"
-                  sx={{
-                    position: "absolute",
-                    bottom: -500,
-                    right: 50,
-                    zIndex: 999,
-                  }}
-                  icon={<ArrowBackIcon />}
-                ></SpeedDial>
-              </a>
-            </ListSubheader>
             <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
               <Box gridColumn="span 3">
                 <ListSubheader style={{ backgroundColor: "#f4f6f9" }}>
