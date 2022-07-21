@@ -48,153 +48,119 @@ const App = () => {
               exact
               path="TermsAdmin"
               element={
-                <ProtectedRoute>
                   <TermsAdmin />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="PrivacyAdmin"
               element={
-                <ProtectedRoute>
                   <PrivacyAdmin />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="Yes"
               element={
-                <ProtectedRoute>
                   <Yes />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="Uapsa"
               element={
-                <ProtectedRoute>
                   <Uapsa />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="Synertech"
               element={
-                <ProtectedRoute>
                   <Synertech />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="Pice"
               element={
-                <ProtectedRoute>
                   <Pice />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="Pasoa"
               element={
-                <ProtectedRoute>
                   <Pasoa />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="Pads"
               element={
-                <ProtectedRoute>
                   <Pads />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="Jme"
               element={
-                <ProtectedRoute>
                   <Jme />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="Jpea"
               element={
-                <ProtectedRoute>
                   <Jpea />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="Ibits"
               element={
-                <ProtectedRoute>
                   <Ibits />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="Iiee"
               element={
-                <ProtectedRoute>
                   <Iiee />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="Hms"
               element={
-                <ProtectedRoute>
                   <Hms />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="Abs"
               element={
-                <ProtectedRoute>
                   <Abs />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="Org"
               element={
-                <ProtectedRoute>
                   <Org />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="Forgot"
               element={
-                <ProtectedRoute>
                   <Forgot />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="History"
               element={
-                <ProtectedRoute>
                   <History />
-                </ProtectedRoute>
               }
             />
             <Route
@@ -228,9 +194,7 @@ const App = () => {
               exact
               path="Admin"
               element={
-                <ProtectedRoute>
                   <Admin />
-                </ProtectedRoute>
               }
             />
             <Route
@@ -244,18 +208,14 @@ const App = () => {
               exact
               path="AddEvent"
               element={
-                <ProtectedRoute>
                   <AddEvent />
-                </ProtectedRoute>
               }
             />
             <Route
               exact
               path="Tab"
               element={
-                <ProtectedRoute>
                   <Tab />
-                </ProtectedRoute>
               }
             />
             <Route
@@ -271,9 +231,7 @@ const App = () => {
               exact
               path="AddAnnounce"
               element={
-                <ProtectedRoute>
                   <AddAnnounce />
-                </ProtectedRoute>
               }
             />
             <Route
