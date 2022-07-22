@@ -11,6 +11,9 @@ import { useUserAuth } from "../../context/UserAuthContext";
 import { InputGroup, FormControl } from "react-bootstrap";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 
+import { pink } from '@mui/material/colors';
+import Checkbox from '@mui/material/Checkbox';
+
 import Swal from "sweetalert2";
 
 function PADS() {
@@ -184,6 +187,12 @@ function PADS() {
 
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
+  
+            const min = 1;
+            const max = 100;
+            const random = min + Math.random() * (max - min);
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
   return (
     <>
       {" "}
@@ -951,7 +960,8 @@ function PADS() {
                 type="text"
                 placeholder="Password"
                 autoFocus
-                value={updatedPassword}
+                disabled
+                value={random}
                 onChange={(e) => setUpdatedPassword(e.target.value)}
               />
             </Form.Group>
@@ -1009,6 +1019,7 @@ function PADS() {
               <th>Email Address</th>
               <th>Student ID</th>
               <th>Password</th>
+              <th>payment Checker</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>
@@ -1028,7 +1039,10 @@ function PADS() {
                 <td>{data.location}</td>
                 <td>{data.email}</td>
                 <td>{data.studentId}</td>
-                <td>{data.password}</td>
+                <td>{random}</td>
+                <td>
+                  <Checkbox {...label} defaultChecked color="success" />
+                </td>
                 <td>
                   <Button
                     variant="primary"

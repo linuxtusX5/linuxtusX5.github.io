@@ -666,7 +666,7 @@ const Register = (props) => {
             <InputGroup className="mb-3">
               <FormControl
                 type="text"
-                placeholder="Course"
+                placeholder="Course/Year"
                 aria-label="Course"
                 aria-describedby="basic-addon1"
                 //autocomplete="off"

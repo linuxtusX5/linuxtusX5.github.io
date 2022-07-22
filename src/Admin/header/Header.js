@@ -96,6 +96,7 @@ import { useNavigate } from "react-router";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
+import MessageIcon from "@mui/icons-material/Message";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -593,7 +594,7 @@ const Header = () => {
           <h3 id="Ann">ANNOUNCEMENT</h3>
           <Paper sx={{ width: "100%" }}>
             <Tooltip
-              title="Click me :)"
+              title="Filter Click me :)"
               arrow
               placement="right"
               TransitionComponent={Fade}
