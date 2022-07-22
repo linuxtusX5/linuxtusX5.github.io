@@ -2,14 +2,9 @@ import React, { useState  } from "react";
 import { Form, InputGroup, FormControl, Modal } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Alert } from "react-bootstrap";
-import { db } from "../firebase/index";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import "./Front.css";
 import "../Admin/Event.css";
-import {
-  doc,
-  getDoc
-} from "firebase/firestore";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useUserAuth } from "../context/UserAuthContext";
 
 
@@ -35,37 +30,12 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-  
-    //const organization = e.target.Selectorg.value;
-    //
-    //const docRef = doc(db, organization, studenti);
     try {
       await logIn(email, passwordInput);
       navigate("/home");
     } catch (err) {
       setError(err.message);
     }
-        console.log("Success");
-     //   try {
-     //     await logIn(email, passwordInput);
-     //      if (docSnap.exists()) {
-     //        if (
-     //          docSnap.data().studentId === studenti &&
-     //          docSnap.data().birthM === birthm &&
-     //          docSnap.data().birthD === birthd &&
-     //          docSnap.data().birthY === birthy &&
-     //          docSnap.data().password === passwordInput
-     //        ) {
-     //          navigate("/home");
-     //        }
-     //      } else {
-     //        // doc.data() will be undefined in this case
-     //        alert("Wrong Value!!!");
-     //      }
-     //   } catch (err) {
-     //     setError(err.message);
-     //   
-     // } 
 
   };
 
@@ -96,6 +66,7 @@ const forgot = () => {
                 type="email"
                 placeholder="name@example.com"
                 autoFocus
+                required
                 autocomplete="off"
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -148,7 +119,7 @@ const forgot = () => {
                   name="SelectMonth"
                   class="form-control select2 text-xs"
                   id="SelectMonth"
-                  required=""
+                  required
                   className="mb-3"
                   onChange={(e) => setbirthm(e.target.value)}
                 >
@@ -174,7 +145,7 @@ const forgot = () => {
                   name="SelectMonth"
                   class="form-control select2 text-xs"
                   id="SelectMonth"
-                  required=""
+                  required
                   className="mb-3"
                   onChange={(e) => setbirthd(e.target.value)}
                 >
@@ -218,7 +189,7 @@ const forgot = () => {
                   name="SelectMonth"
                   class="form-control select2 text-xs"
                   id="SelectMonth"
-                  required=""
+                  required
                   className="mb-3"
                   onChange={(e) => setbirthy(e.target.value)}
                 >
