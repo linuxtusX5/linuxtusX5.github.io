@@ -24,7 +24,7 @@ import Fade from "@mui/material/Fade";
 import logo from "../Photos/PUPLogo.png";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import HomeIcon from "@mui/icons-material/Home";
-import logo2 from "../Photos/council_Logo-modified.png";
+import logo2 from "../Photos/CSC2.png";
 import { Card, Button } from "react-bootstrap";
 
 import { useUserAuth } from "../context/UserAuthContext";

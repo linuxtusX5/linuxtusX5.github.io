@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 import "./Header.css";
 import logo from "../../Photos/PUPLogo.png"
-import logo2 from "../../Photos/council_Logo-modified.png";
+import logo2 from "../../Photos/CSC2.png";
 import President from "../../Photos/pres.jpg";
 import Vice from "../../Photos/vice.jpg";
 import Secretary from "../../Photos/sec.jpg";
