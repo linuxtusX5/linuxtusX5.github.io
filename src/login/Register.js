@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, InputGroup, FormControl} from "react-bootstrap";
+import { Form, InputGroup, FormControl } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Button, Modal, Alert } from "react-bootstrap";
 import "../Admin/Event.css";
@@ -14,7 +14,7 @@ import Swal from "sweetalert2";
 const Register = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const  {signUp}  = useUserAuth();
+  const { signUp } = useUserAuth();
 
   //Password validation
   const [fname, setfname] = useState("");
@@ -32,10 +32,9 @@ const Register = (props) => {
   const [passwordInput, setPassword] = useState("");
   const [error, setError] = useState("");
 
-
-  const handleSubmit =  async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     Swal.fire({
       position: "center",
       icon: "success",
@@ -43,19 +42,37 @@ const Register = (props) => {
       showConfirmButton: false,
       timer: 1000,
     });
-    
+
     setError("");
-       try {
-         await signUp(email, passwordInput);
-         console.log("SignUp done")
-       } catch (err) {
-         setError(err.message);
-       }
+    try {
+      await signUp(email, passwordInput);
+      console.log("SignUp done");
+    } catch (err) {
+      setError(err.message);
+    }
     //createUserWithEmailAndPassword(auth, data.email, data.password);
-   
+
     const username = e.target.StudentID.value;
 
     await db.collection("StudentData").add({
+      firstName: fname,
+      lastName: lname,
+      middle: middle,
+      birthM: birthm,
+      birthD: birthd,
+      birthY: birthy,
+      organization: org,
+      gender: gender,
+      course: course,
+      location: location,
+      email: email,
+      studentId: studenti,
+      password: passwordInput,
+    });
+    setShow(true);
+
+    if (org === "IBITS") {
+      await db.collection("IBITS").doc(username).set({
         firstName: fname,
         lastName: lname,
         middle: middle,
@@ -69,202 +86,184 @@ const Register = (props) => {
         email: email,
         studentId: studenti,
         password: passwordInput,
-      })
-        setShow(true);
-      
-        if (org === "IBITS") {
-          await db.collection("IBITS").doc(username).set({
-            firstName: fname,
-            lastName: lname,
-            middle: middle,
-            birthM: birthm,
-            birthD: birthd,
-            birthY: birthy,
-            organization: org,
-            gender: gender,
-            course: course,
-            location: location,
-            email: email,
-            studentId: studenti,
-            password: passwordInput,
-          });
-        } else if (org === "ABS") {
-          await db.collection("ABS").doc(username).set({
-            firstName: fname,
-            lastName: lname,
-            middle: middle,
-            birthM: birthm,
-            birthD: birthd,
-            birthY: birthy,
-            organization: org,
-            gender: gender,
-            course: course,
-            location: location,
-            email: email,
-            studentId: studenti,
-            password: passwordInput,
-          });
-        } else if (org === "HMS") {
-          await db.collection("HMS").add({
-            firstName: fname,
-            lastName: lname,
-            middle: middle,
-            birthM: birthm,
-            birthD: birthd,
-            birthY: birthy,
-            organization: org,
-            gender: gender,
-            course: course,
-            location: location,
-            email: email,
-            studentId: studenti,
-            password: passwordInput,
-          });
-        } else if (org === "IIEE") {
-          await db.collection("IIEE").doc(username).set({
-            firstName: fname,
-            lastName: lname,
-            middle: middle,
-            birthM: birthm,
-            birthD: birthd,
-            birthY: birthy,
-            organization: org,
-            gender: gender,
-            course: course,
-            location: location,
-            email: email,
-            studentId: studenti,
-            password: passwordInput,
-          });
-        } else if (org === "JME") {
-          await db.collection("JME").doc(username).set({
-            firstName: fname,
-            lastName: lname,
-            middle: middle,
-            birthM: birthm,
-            birthD: birthd,
-            birthY: birthy,
-            organization: org,
-            gender: gender,
-            course: course,
-            location: location,
-            email: email,
-            studentId: studenti,
-            password: passwordInput,
-          });
-        } else if (org === "JPEA") {
-          await db.collection("JPEA").doc(username).set({
-            firstName: fname,
-            lastName: lname,
-            middle: middle,
-            birthM: birthm,
-            birthD: birthd,
-            birthY: birthy,
-            organization: org,
-            gender: gender,
-            course: course,
-            location: location,
-            email: email,
-            studentId: studenti,
-            password: passwordInput,
-          });
-        } else if (org === "PADS") {
-          await db.collection("PADS").doc(username).set({
-            firstName: fname,
-            lastName: lname,
-            middle: middle,
-            birthM: birthm,
-            birthD: birthd,
-            birthY: birthy,
-            organization: org,
-            gender: gender,
-            course: course,
-            location: location,
-            email: email,
-            studentId: studenti,
-            password: passwordInput,
-          });
-        } else if (org === "PASOA") {
-          await db.collection("PASOA").doc(username).set({
-            firstName: fname,
-            lastName: lname,
-            middle: middle,
-            birthM: birthm,
-            birthD: birthd,
-            birthY: birthy,
-            organization: org,
-            gender: gender,
-            course: course,
-            location: location,
-            email: email,
-            studentId: studenti,
-            password: passwordInput,
-          });
-        } else if (org === "PICE") {
-          await db.collection("PICE").doc(username).set({
-            firstName: fname,
-            lastName: lname,
-            middle: middle,
-            birthM: birthm,
-            birthD: birthd,
-            birthY: birthy,
-            organization: org,
-            gender: gender,
-            course: course,
-            location: location,
-            email: email,
-            studentId: studenti,
-            password: passwordInput,
-          });
-        } else if (org === "SYNERTECH") {
-          await db.collection("SYNERTECH").doc(username).set({
-            firstName: fname,
-            lastName: lname,
-            middle: middle,
-            birthM: birthm,
-            birthD: birthd,
-            birthY: birthy,
-            organization: org,
-            gender: gender,
-            course: course,
-            location: location,
-            email: email,
-            studentId: studenti,
-            password: passwordInput,
-          });
-        } else if (org === "UAPSA") {
-          await db.collection("UAPSA").doc(username).set({
-            firstName: fname,
-            lastName: lname,
-            middle: middle,
-            birthM: birthm,
-            birthD: birthd,
-            birthY: birthy,
-            organization: org,
-            gender: gender,
-            course: course,
-            location: location,
-            email: email,
-            studentId: studenti,
-            password: passwordInput,
-          });
-        } else if (org === "YES") {
-          await db.collection("YES").doc(username).set({
-            firstName: fname,
-            lastName: lname,
-            middle: middle,
-            birthM: birthm,
-            birthD: birthd,
-            birthY: birthy,
-            organization: org,
-            gender: gender,
-            course: course,
-            location: location,
-            email: email,
-            studentId: studenti,
-            password: passwordInput,
-          });
-        }
+      });
+    } else if (org === "ABS") {
+      await db.collection("ABS").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        middle: middle,
+        birthM: birthm,
+        birthD: birthd,
+        birthY: birthy,
+        organization: org,
+        gender: gender,
+        course: course,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput,
+      });
+    } else if (org === "HMS") {
+      await db.collection("HMS").add({
+        firstName: fname,
+        lastName: lname,
+        middle: middle,
+        birthM: birthm,
+        birthD: birthd,
+        birthY: birthy,
+        organization: org,
+        gender: gender,
+        course: course,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput,
+      });
+    } else if (org === "IIEE") {
+      await db.collection("IIEE").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        middle: middle,
+        birthM: birthm,
+        birthD: birthd,
+        birthY: birthy,
+        organization: org,
+        gender: gender,
+        course: course,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput,
+      });
+    } else if (org === "JME") {
+      await db.collection("JME").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        middle: middle,
+        birthM: birthm,
+        birthD: birthd,
+        birthY: birthy,
+        organization: org,
+        gender: gender,
+        course: course,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput,
+      });
+    } else if (org === "JPEA") {
+      await db.collection("JPEA").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        middle: middle,
+        birthM: birthm,
+        birthD: birthd,
+        birthY: birthy,
+        organization: org,
+        gender: gender,
+        course: course,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput,
+      });
+    } else if (org === "PADS") {
+      await db.collection("PADS").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        middle: middle,
+        birthM: birthm,
+        birthD: birthd,
+        birthY: birthy,
+        organization: org,
+        gender: gender,
+        course: course,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput,
+      });
+    } else if (org === "PASOA") {
+      await db.collection("PASOA").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        middle: middle,
+        birthM: birthm,
+        birthD: birthd,
+        birthY: birthy,
+        organization: org,
+        gender: gender,
+        course: course,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput,
+      });
+    } else if (org === "PICE") {
+      await db.collection("PICE").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        middle: middle,
+        birthM: birthm,
+        birthD: birthd,
+        birthY: birthy,
+        organization: org,
+        gender: gender,
+        course: course,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput,
+      });
+    } else if (org === "SYNERTECH") {
+      await db.collection("SYNERTECH").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        middle: middle,
+        birthM: birthm,
+        birthD: birthd,
+        birthY: birthy,
+        organization: org,
+        gender: gender,
+        course: course,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput,
+      });
+    } else if (org === "UAPSA") {
+      await db.collection("UAPSA").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        middle: middle,
+        birthM: birthm,
+        birthD: birthd,
+        birthY: birthy,
+        organization: org,
+        gender: gender,
+        course: course,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput,
+      });
+    } else if (org === "YES") {
+      await db.collection("YES").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        middle: middle,
+        birthM: birthm,
+        birthD: birthd,
+        birthY: birthy,
+        organization: org,
+        gender: gender,
+        course: course,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput,
+      });
+    }
 
     console.log("Student ID: ", studenti);
     console.log("Student Password: ", passwordInput);
@@ -282,7 +281,6 @@ const Register = (props) => {
     setEmail("");
     setStudenti("");
     setPassword("");
-
   };
 
   return (
@@ -356,7 +354,7 @@ const Register = (props) => {
                 placeholder="First Name"
                 aria-label="First Name"
                 aria-describedby="basic-addon1"
-                //autocomplete="off"
+                autocomplete="off"
                 required
                 onChange={(e) => setfname(e.target.value)}
               />{" "}
@@ -370,7 +368,7 @@ const Register = (props) => {
                 placeholder="Last Name"
                 aria-label="Last Name"
                 aria-describedby="basic-addon1"
-                //autocomplete="off"
+                autocomplete="off"
                 required
                 onChange={(e) => setlname(e.target.value)}
               />{" "}
@@ -384,7 +382,7 @@ const Register = (props) => {
                 placeholder="Middle"
                 aria-label="Middle"
                 aria-describedby="basic-addon1"
-                //autocomplete="off"
+                autocomplete="off"
                 required
                 onChange={(e) => setmiddle(e.target.value)}
               />{" "}
@@ -669,7 +667,7 @@ const Register = (props) => {
                 placeholder="Course/Year"
                 aria-label="Course"
                 aria-describedby="basic-addon1"
-                //autocomplete="off"
+                autocomplete="off"
                 required
                 onChange={(e) => setcourse(e.target.value)}
               />
@@ -687,7 +685,7 @@ const Register = (props) => {
                 placeholder="Location"
                 aria-label="Location"
                 aria-describedby="basic-addon1"
-                //autocomplete="off"
+                autocomplete="off"
                 required
                 onChange={(e) => setlocation(e.target.value)}
               />
@@ -704,7 +702,7 @@ const Register = (props) => {
                 placeholder="Email"
                 aria-label="Email"
                 aria-describedby="basic-addon1"
-                //autocomplete="off"
+                autocomplete="off"
                 required
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -721,7 +719,7 @@ const Register = (props) => {
                 placeholder="Student ID"
                 aria-label="Student ID"
                 aria-describedby="basic-addon1"
-                //autocomplete="off"
+                autocomplete="off"
                 maxlength="15"
                 size="50"
                 required
@@ -738,7 +736,7 @@ const Register = (props) => {
                 placeholder="password"
                 aria-label="password"
                 aria-describedby="basic-addon1"
-                //autocomplete="off"
+                autocomplete="off"
                 required
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -763,6 +761,6 @@ const Register = (props) => {
       </div>
     </>
   );
-}
+};
 
 export default Register;

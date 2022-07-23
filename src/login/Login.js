@@ -1,4 +1,4 @@
-import React, { useState  } from "react";
+import React, { useState } from "react";
 import { Form, InputGroup, FormControl, Modal } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Alert } from "react-bootstrap";
@@ -7,9 +7,7 @@ import "../Admin/Event.css";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useUserAuth } from "../context/UserAuthContext";
 
-
 function Login() {
-
   const [email, setEmail] = useState("");
   const [studenti, setStudenti] = useState("");
   const [passwordInput, setPassword] = useState("");
@@ -26,7 +24,6 @@ function Login() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -36,21 +33,19 @@ function Login() {
     } catch (err) {
       setError(err.message);
     }
-
   };
 
-const forgot = () => {
-  const auth = getAuth();
-  sendPasswordResetEmail(auth, email)
-    .then(() => {
-      alert("The Link is send to your email.");
+  const forgot = () => {
+    const auth = getAuth();
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("The Link is send to your email.");
         console.log("Success");
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
-};
-
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   return (
     <>
@@ -361,7 +356,7 @@ const forgot = () => {
                 placeholder="password"
                 aria-label="password"
                 aria-describedby="basic-addon1"
-                //autocomplete="off"
+                autocomplete="off"
                 required
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -393,6 +388,6 @@ const forgot = () => {
       </div>
     </>
   );
-};
+}
 
 export default Login;

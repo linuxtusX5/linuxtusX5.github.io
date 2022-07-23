@@ -132,6 +132,9 @@ function LoginAdmin() {
             </div>
           </Form>
           <hr />
+          <div className=" box mt-1 text-center">
+            Back to Login option? <Link to="/">{""}Yes </Link>
+          </div>
         </div>
       </div>
     </>

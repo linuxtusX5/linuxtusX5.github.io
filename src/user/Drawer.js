@@ -25,9 +25,11 @@ import logo from "../Photos/PUPLogo.png";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import HomeIcon from "@mui/icons-material/Home";
 import logo2 from "../Photos/council_Logo-modified.png";
-import {
-  Card,
-} from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
+
+import { useUserAuth } from "../context/UserAuthContext";
+import { useNavigate } from "react-router";
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -106,6 +108,18 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  
+    const { logOut } = useUserAuth();
+    const navigate = useNavigate();
+    const handleLogout = async () => {
+      try {
+        await logOut();
+        navigate("/");
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -296,6 +310,12 @@ export default function MiniDrawer() {
             <h1>
               <span className="design2">PUP LOPEZ CENTRAL STUDENT COUNCIL</span>
             </h1>
+            <div style={{display: 'flex', justifyContent: 'center', alignItem: 'center', marginBottom: '20px'}}>
+              <Button variant="primary" onClick={handleLogout} style={{padding: '15px'}}>
+                {" "}
+                LOG OUT{" "}
+              </Button>
+            </div>
           </div>
         </Card>
         <Card
