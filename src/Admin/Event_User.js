@@ -47,7 +47,7 @@ import {
 
 import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
-import Profile from "../Photos/wp5063265.webp";
+import Profile from "../Photos/Advance care (6).png";
 
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
@@ -55,6 +55,7 @@ import Tabs from "react-bootstrap/Tabs";
 import { useUserAuth } from "../context/UserAuthContext";
 import { useNavigate } from "react-router";
 
+import Grid from "@mui/material/Grid";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import Backdrop from "@mui/material/Backdrop";
@@ -410,11 +411,7 @@ function Event_User() {
                     TransitionComponent={Fade}
                     TransitionProps={{ timeout: 600 }}
                   >
-                    <Avatar
-                      alt="Remy Sharp"
-                      src={Profile}
-                      onClick={handleShow}
-                    />
+                    <Avatar alt="Profile" src={Profile} onClick={handleShow} />
                   </Tooltip>
                 </StyledBadge>
               </Nav.Link>
@@ -449,8 +446,8 @@ function Event_User() {
           }}
           data-aos="fade-up"
         >
-          <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
-            <Box gridColumn="span 3" className="item1">
+          <Grid container spacing={2}>
+            <Grid item xs={3}>
               <ListSubheader style={{ backgroundColor: "#f4f6f9" }}>
                 <CardActionArea>
                   <CardContent
@@ -484,8 +481,8 @@ function Event_User() {
                   </CardContent>
                 </CardActionArea>
               </ListSubheader>
-            </Box>
-            <Box gridColumn="span 9">
+            </Grid>
+            <Grid item xs={7}>
               {users.map((user, name) => {
                 return (
                   <CardActionArea
@@ -527,8 +524,10 @@ function Event_User() {
                   </CardActionArea>
                 );
               })}
-            </Box>
-          </Box>
+            </Grid>
+            <Grid item xs={1}>
+            </Grid>
+          </Grid>
         </Card>
       </div>{" "}
       <Card

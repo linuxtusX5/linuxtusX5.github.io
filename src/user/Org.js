@@ -37,18 +37,24 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import HomeIcon from "@mui/icons-material/Home";
 import Ta from "./organization/Table";
 import Swal from "sweetalert2";
-import ABS from "./organization/Abs";
-import HMS from "./organization/Hms";
-import IIEE from "./organization/Iiee";
-import IBITS from "./organization/Ibits";
-import JME from "./organization/Jme";
-import JPEA from "./organization/Jpea";
-import PADS from "./organization/Pads";
-import PASOA from "./organization/Pasoa";
-import PICE from "./organization/Pice";
-import SYNERTECH from "./organization/Synertech";
-import UAPSA from "./organization/Uapsa";
-import YES from "./organization/Yes";
+import ABS from "./organization/ABS/Abs";
+import HMS from "./organization/HMS/Hms";
+import IIEE from "./organization/IIEE/Iiee";
+import IBITS from "./organization/IBITS/Ibits";
+import JME from "./organization/JME/Jme";
+import JPEA from "./organization/JPIA/Jpea";
+import PADS from "./organization/PAdS/Pads";
+import PASOA from "./organization/PASOA/Pasoa";
+import PICE from "./organization/PICE/Pice";
+import SYNERTECH from "./organization/SYNERTECH/Synertech";
+import UAPSA from "./organization/UAPSA/Uapsa";
+import YES from "./organization/YES/Yes";
+import BSND from "./organization/BSND/Tab2";
+import BSBIO from "./organization/BSBIO/Tab";
+import "./organization/org.css";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PeopleIcon from "@mui/icons-material/People";
+import PaymentIcon from "@mui/icons-material/Payment";
 
 const drawerWidth = 240;
 
@@ -257,6 +263,63 @@ export default function Org() {
                 </ListItemButton>
               </Tooltip>
               <br />
+              <Tooltip
+                title="Payment Checker"
+                arrow
+                placement="right"
+                TransitionComponent={Fade}
+                TransitionProps={{ timeout: 600 }}
+              >
+                <ListItemButton component="a" href="/Checker">
+                  <ListItemIcon>
+                    <PaymentIcon
+                      style={{
+                        color: "#4C0001",
+                      }}
+                    />
+                  </ListItemIcon>{" "}
+                  Payment Checker
+                </ListItemButton>
+              </Tooltip>
+              <br />
+              <Tooltip
+                title="CSC OFFICER"
+                arrow
+                placement="right"
+                TransitionComponent={Fade}
+                TransitionProps={{ timeout: 600 }}
+              >
+                <ListItemButton component="a" href="/Officer">
+                  <ListItemIcon>
+                    <PeopleIcon
+                      style={{
+                        color: "#4C0001",
+                      }}
+                    />
+                  </ListItemIcon>{" "}
+                  CSC OFFICER
+                </ListItemButton>
+              </Tooltip>
+              <br />
+              <Tooltip
+                title="Logout"
+                arrow
+                placement="right"
+                TransitionComponent={Fade}
+                TransitionProps={{ timeout: 600 }}
+              >
+                <ListItemButton component="a" href="/">
+                  <ListItemIcon>
+                    <LogoutIcon
+                      style={{
+                        color: "#4C0001",
+                      }}
+                    />
+                  </ListItemIcon>{" "}
+                  Logout
+                </ListItemButton>
+              </Tooltip>
+              <br />
             </ListItem>
           </List>
           <Divider />
@@ -301,12 +364,12 @@ export default function Org() {
             </Tooltip>
           </List>
         </Drawer>
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }} className="rows">
           <DrawerHeader />
           <Tabs
             defaultActiveKey="All Student"
             id="fill-tab-example"
-            className="mb-3"
+            className="mb-3 BG"
             fill
           >
             <Tab eventKey="All Student" title="All Student">
@@ -327,7 +390,7 @@ export default function Org() {
             <Tab eventKey="JME" title="JME">
               <JME />
             </Tab>
-            <Tab eventKey="JPEA" title="JPEA">
+            <Tab eventKey="JPEA" title="JPIA">
               <JPEA />
             </Tab>
             <Tab eventKey="PADS" title="PADS">
@@ -347,6 +410,12 @@ export default function Org() {
             </Tab>
             <Tab eventKey="YES" title="YES">
               <YES />
+            </Tab>
+            <Tab eventKey="BSND" title="BSND">
+              <BSND />
+            </Tab>
+            <Tab eventKey="BSBIO" title="BSBIO">
+              <BSBIO />
             </Tab>
           </Tabs>
         </Box>

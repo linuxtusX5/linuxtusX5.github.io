@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {  FloatingLabel, Form, Card } from "react-bootstrap";
+import { FloatingLabel, Form, Card, Button, Modal } from "react-bootstrap";
 import {
   doc,
   collection,
@@ -49,14 +49,24 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import InfoTwoToneIcon from "@mui/icons-material/InfoTwoTone";
 import AnnouncementTwoToneIcon from "@mui/icons-material/AnnouncementTwoTone";
-import FilterListIcon from "@mui/icons-material/FilterList";
+import LogoutIcon from "@mui/icons-material/Logout";
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 
+import PaymentIcon from "@mui/icons-material/Payment";
 import HomeIcon from "@mui/icons-material/Home";
 import Paper from "@mui/material/Paper";
 
+// import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import PeopleIcon from "@mui/icons-material/People";
+import Swal from "sweetalert2";
 
 const columns = [
   { id: "Date", label: "Date", minWidth: 160 },
@@ -139,7 +149,9 @@ const Drawer = styled(MuiDrawer, {
 
 const Add_announcement = () => {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  
+  const [open2, setOpen2] = useState(false);
   const [desc, setDesc] = useState("");
   const [date, setDate] = useState(null);
   
@@ -148,10 +160,54 @@ const Add_announcement = () => {
   const [lists, setLists] = useState([]);
   const [input, setInput] = useState("");
 
-    async function deletedocs(name) {
-      let request = await deleteDoc(doc(db, "Announcement", name));
-      console.log(request);
-    }
+  const [updatedInput, setUpdatedInput] = useState("");
+  const [updatedDesc, setUpdatedDesc] = useState("");
+  const [updatedDate, setUpdatedDate] = useState(null);
+  const [dataIdToBeUpdated, setDataIdToBeUpdated] = useState("");
+ const [show, setShow] = useState(false);
+
+ const handleClose2 = () => setShow(false);
+ const handleShow = () => setShow(true);
+   const updateData = async (e) => {
+    e.preventDefault();
+    handleClose();
+
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Success",
+      showConfirmButton: false,
+      timer: 2000,
+    });
+        await db.collection("Announcement").doc(dataIdToBeUpdated).update({
+          Name: updatedInput,
+          Description: updatedDesc,
+          Date: updatedDate,
+          timestamp: new Date(),
+        });
+        setUpdatedInput("")
+        setUpdatedDesc("")
+        setUpdatedDate("")
+  }
+    const handleClickOpen = () => {
+      setOpen2(true);
+    };
+
+    const handleClose = () => {
+      setOpen2(false);
+    };
+
+   const deleteData = (dataIdToBeUpdated) => {
+     db.collection("Announcement").doc(dataIdToBeUpdated).delete();
+     Swal.fire({
+       position: "center",
+       icon: "success",
+       title: "Success",
+       showConfirmButton: false,
+       timer: 2000,
+     });
+     handleClose2();
+   };
     
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -165,6 +221,13 @@ const Add_announcement = () => {
   const handleClick = async (e) => {
     e.preventDefault();
 
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Success",
+      showConfirmButton: false,
+      timer: 1000,
+    });
     const name = e.target.Announce.value;
     if (!name) {
       return;
@@ -175,6 +238,10 @@ const Add_announcement = () => {
       Date: date,
       timestamp: new Date(),
     });
+    
+    setInput("");
+    setDate("");
+    setDesc("");
   };
 
   useEffect(() => {
@@ -193,10 +260,10 @@ const Add_announcement = () => {
     return () => unsubscribe();
   }, []);
 
-  async function deletedocs(name) {
-    let request = await deleteDoc(doc(db, "Announcement", name));
-    console.log(request);
-  }
+  // async function deletedocs(name) {
+  //   let request = await deleteDoc(doc(db, "Announcement", name));
+  //   console.log(request);
+  // }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -208,6 +275,74 @@ const Add_announcement = () => {
 
   return (
     <>
+      <Modal
+        show={show}
+        onHide={handleClose2}
+        backdrop="static"
+        keyboard={false}
+        style={{ marginTop: "100px" }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title style={{ color: "#4c0001" }}>ARE YOU SURE?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>You won't be able to revert this?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClose2}>
+            Cancel
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => deleteData(dataIdToBeUpdated)}
+          >
+            Yes, Delete it!
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Dialog open={open2} onClose={handleClose}>
+        <DialogTitle style={{ color: "#4C0001" }}>
+          <AnnouncementTwoToneIcon /> ANNOUNCEMENT
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            POLYTECHNIC UNIVERSITY OF THE PHILIPPINES LOPEZ QUEZON BRANCH
+          </DialogContentText>
+          <TextField
+            margin="dense"
+            label="Date"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={updatedDate}
+            onChange={(e) => setUpdatedDate(e.target.value)}
+          />
+          <TextField
+            margin="dense"
+            label="Announcement"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={updatedInput}
+            onChange={(e) => setUpdatedInput(e.target.value)}
+          />
+          <TextField
+            margin="dense"
+            label="Description"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={updatedDesc}
+            onChange={(e) => setUpdatedDesc(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} variant="danger">
+            Cancel
+          </Button>
+          <Button onClick={updateData} variant="success">
+            Update
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar
@@ -330,6 +465,63 @@ const Add_announcement = () => {
                     />
                   </ListItemIcon>{" "}
                   Organization
+                </ListItemButton>
+              </Tooltip>
+              <br />
+              <Tooltip
+                title="Payment Checker"
+                arrow
+                placement="right"
+                TransitionComponent={Fade}
+                TransitionProps={{ timeout: 600 }}
+              >
+                <ListItemButton component="a" href="/Checker">
+                  <ListItemIcon>
+                    <PaymentIcon
+                      style={{
+                        color: "#4C0001",
+                      }}
+                    />
+                  </ListItemIcon>{" "}
+                  Payment Checker
+                </ListItemButton>
+              </Tooltip>
+              <br/>
+              <Tooltip
+                title="CSC OFFICER"
+                arrow
+                placement="right"
+                TransitionComponent={Fade}
+                TransitionProps={{ timeout: 600 }}
+              >
+                <ListItemButton component="a" href="/Officer">
+                  <ListItemIcon>
+                    <PeopleIcon
+                      style={{
+                        color: "#4C0001",
+                      }}
+                    />
+                  </ListItemIcon>{" "}
+                  CSC OFFICER
+                </ListItemButton>
+              </Tooltip>
+              <br />
+              <Tooltip
+                title="Logout"
+                arrow
+                placement="right"
+                TransitionComponent={Fade}
+                TransitionProps={{ timeout: 600 }}
+              >
+                <ListItemButton component="a" href="/">
+                  <ListItemIcon>
+                    <LogoutIcon
+                      style={{
+                        color: "#4C0001",
+                      }}
+                    />
+                  </ListItemIcon>{" "}
+                  Logout
                 </ListItemButton>
               </Tooltip>
               <br />
@@ -513,18 +705,35 @@ const Add_announcement = () => {
                                   {column.format && typeof value === "number"
                                     ? column.format(value)
                                     : value}
-                                  <i
-                                    class="fa fa-times-circle"
-                                    aria-hidden="true"
-                                    style={{
-                                      color: "#4C0001",
-                                      marginLeft: "30px",
-                                    }}
-                                    onClick={() => deletedocs(list.id)}
-                                  ></i>
                                 </TableCell>
                               );
                             })}
+                            <TableCell>
+                              <Button
+                                variant="success"
+                                onClick={() => {
+                                  handleClickOpen();
+                                  setDataIdToBeUpdated(list.id);
+                                  setUpdatedDate(list.Date);
+                                  setUpdatedInput(list.Name);
+                                  setUpdatedDesc(list.Description);
+                                }}
+                              >
+                                Edit
+                              </Button>
+                              <Button
+                                variant="danger"
+                                style={{
+                                  marginTop: "10px",
+                                }}
+                                onClick={() => {
+                                  handleShow();
+                                  setDataIdToBeUpdated(list.id);
+                                }}
+                              >
+                                Delete
+                              </Button>
+                            </TableCell>
                           </TableRow>
                         );
                       })}

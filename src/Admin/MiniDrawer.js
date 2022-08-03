@@ -33,7 +33,7 @@ import "./MiniDrawer.css";
 import s from "../Photos/s.jpg";
 import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
-import Profile from "../Photos/wp5063265.webp";
+import ArrowDropDownCircleIcon from "@mui/icons-material/ArrowDropDownCircle";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
@@ -301,37 +301,6 @@ const MiniDrawer = () => {
                     <i class="fa-solid fa-square-caret-down"></i> <b>About</b>
                   </Nav.Link>
                 </Nav>
-                <Nav>
-                  <Nav.Link
-                    href="#deets"
-                    style={{
-                      color: "#4C0001",
-                    }}
-                  >
-                    {" "}
-                    <StyledBadge
-                      overlap="circular"
-                      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                      variant="dot"
-                    >
-                      {" "}
-                      <Tooltip
-                        title="Profile :)"
-                        fontWeight="bold"
-                        arrow
-                        placement="bottom"
-                        TransitionComponent={Fade}
-                        TransitionProps={{ timeout: 600 }}
-                      >
-                        <Avatar
-                          alt="Remy Sharp"
-                          src={Profile}
-                          onClick={handleShow}
-                        />
-                      </Tooltip>
-                    </StyledBadge>
-                  </Nav.Link>
-                </Nav>
               </Navbar.Collapse>
             </Container>
           </Navbar>
@@ -443,129 +412,119 @@ const MiniDrawer = () => {
                 POLYTECHNIC UNIVERSITY OF THE PHILIPPINES LOPEZ, QUEZON BRANCH
               </strong>
             </h1>
-            <h2 className="pup">
+            <h3 className="pup">
               <b>Vision and Mission</b>
-            </h2>
+            </h3>
             <br />
             <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
               <Box gridColumn="span 9">
-                <b style={{ color: "#4C0001" }}>
-                  <Typography paragraph>
-                    <h1 className="pup">
-                      <b>Vision (Bisyon)</b>
-                    </h1>
-                    <br />
-                    <h2>PUP: The National Polytechnic University</h2>
-                  </Typography>
-                </b>
-
+                <h3 className="pup">
+                  <b>Vision (Bisyon)</b>
+                </h3>
                 <br />
                 <Typography paragraph>
-                  <h1 className="pup">
-                    <b>Mission (Misyon)</b>
-                  </h1>
-                  <br />
-                  <h2>
-                    <ol>
-                      <li>
-                        Provide democratized access to educational opportunities
-                        for the holistic development of individuals with global
-                        perspective.
-                      </li>
-                      <li>
-                        Offer industry-oriented curricula that produce
-                        highly-skilled professionals with managerial and
-                        technical capabilities and a strong sense of public
-                        service for nation building.
-                      </li>
-                      <li>Embed a culture of research and innovation.</li>
-                      <li>
-                        Continuously develop faculty and employees with the
-                        highest level of professionalism.
-                      </li>
-                      <li>
-                        Engage public and private institutions and other
-                        stakeholders for the attainment of social development
-                        goal.
-                      </li>
-                      <li>
-                        Establish a strong presence and impact in the
-                        international academic community.
-                      </li>
-                    </ol>
-                  </h2>
+                  PUP: The National Polytechnic Universit
                 </Typography>
                 <br />
+                <h3 className="pup">
+                  <b>Mission (Misyon)</b>
+                </h3>
+                <br />
                 <Typography paragraph>
-                  <h1 className="pup">
-                    <b>Goals (Mga Tunguhin)</b>
-                  </h1>
+                  <ol>
+                    <li>
+                      Provide democratized access to educational opportunities
+                      for the holistic development of individuals with global
+                      perspective.
+                    </li>
+                    <li>
+                      Offer industry-oriented curricula that produce
+                      highly-skilled professionals with managerial and technical
+                      capabilities and a strong sense of public service for
+                      nation building.
+                    </li>
+                    <li>Embed a culture of research and innovation.</li>
+                    <li>
+                      Continuously develop faculty and employees with the
+                      highest level of professionalism.
+                    </li>
+                    <li>
+                      Engage public and private institutions and other
+                      stakeholders for the attainment of social development
+                      goal.
+                    </li>
+                    <li>
+                      Establish a strong presence and impact in the
+                      international academic community.
+                    </li>
+                  </ol>
+                </Typography>
+                <br />
+                <h3 className="pup">
+                  <b>Goals (Mga Tunguhin)</b>
+                </h3>
+                <br />
+                <Typography paragraph>
+                  In consonance with the Vision and Mission of the University,
+                  PUP Lopez Branch affirms and avows itself to:
                   <br />
-                  <h2>
-                    In consonance with the Vision and Mission of the University,
-                    PUP Lopez Branch affirms and avows itself to:
-                    <br />
-                    <ol>
-                      <li>
-                        Develop globally competitive and socially through
-                        quality and responsive academic programs and services.
-                      </li>
-                      <li>
-                        Generate and disseminate knowledge through productive
-                        researches and continuing education relevant to the
-                        needs of instruction and viable development.
-                      </li>
-                      <li>
-                        Strengthen linkage, partnership and collaboration with
-                        other institutions for constant program relevance,
-                        resources generation, and sustainable extension programs
-                        and services.
-                      </li>
-                      <li>
-                        Continual review of educational programs to ensure their
-                        quality, relevance and effectiveness.
-                      </li>
-                      <li>
-                        Provide adequate and conducive school facilities to
-                        ensure optimum student learning.
-                      </li>
-                    </ol>
-                  </h2>
+                  <ol>
+                    <li>
+                      Develop globally competitive and socially through quality
+                      and responsive academic programs and services.
+                    </li>
+                    <li>
+                      Generate and disseminate knowledge through productive
+                      researches and continuing education relevant to the needs
+                      of instruction and viable development.
+                    </li>
+                    <li>
+                      Strengthen linkage, partnership and collaboration with
+                      other institutions for constant program relevance,
+                      resources generation, and sustainable extension programs
+                      and services.
+                    </li>
+                    <li>
+                      Continual review of educational programs to ensure their
+                      quality, relevance and effectiveness.
+                    </li>
+                    <li>
+                      Provide adequate and conducive school facilities to ensure
+                      optimum student learning.
+                    </li>
+                  </ol>
                   <br />
-                  <h2>
-                    Bilang pagtalima sa Bisyon at Misyon ng Pamantasan, ang PUP
-                    Sangay ng Lopez ay nagpapatunay at sumumpa na:
-                    <br />
-                    <ol>
-                      <li>
-                        Humubog ng mga propesyonal na may kakayahang
-                        makipagsabayan sa daigdig at may pagpapahalagang
-                        panlipunan sa pamamagitan ng pagbibigay ng dekalidad at
-                        tumutugong pang-akademikong programa at paglilingkod.
-                      </li>
-                      <li>
-                        Lumikha at makapagbahagi ng mga kaalaman sa pamamagitan
-                        ng mabungang pananaliksik at patuloy na pag-aaral na
-                        tutugon upang higit na mapagbuti ang pagtuturo para sa
-                        kapakinapakinabang na pag-unlad.
-                      </li>
-                      <li>
-                        Palakasin ang ugnayan, pakikipagtulungan at kolaborasyon
-                        sa ibang institusyon para sa patuloy na pagkakatulad ng
-                        prograama, makalikha ng mapagkukunan at makabuo ng mga
-                        pang matagalang proyekto at serbisyo sa ugnayang
-                        panlabas.
-                      </li>
-                      <li>
-                        Patuloy na pagsusuri sa mga pang-akademikong programa
-                        upang masiguro ang kahusayan at kalidad ng edukasyon.
-                      </li>
-                      <li>
-                        Magbigay ng sapat at akmang mga pasilidad sa paaralan
-                        para sa lubos na pagkatuto ng mga mag aaral.
-                      </li>
-                    </ol>
-                  </h2>
+                  Bilang pagtalima sa Bisyon at Misyon ng Pamantasan, ang PUP
+                  Sangay ng Lopez ay nagpapatunay at sumumpa na:
+                  <br />
+                  <ol>
+                    <li>
+                      Humubog ng mga propesyonal na may kakayahang
+                      makipagsabayan sa daigdig at may pagpapahalagang
+                      panlipunan sa pamamagitan ng pagbibigay ng dekalidad at
+                      tumutugong pang-akademikong programa at paglilingkod.
+                    </li>
+                    <li>
+                      Lumikha at makapagbahagi ng mga kaalaman sa pamamagitan ng
+                      mabungang pananaliksik at patuloy na pag-aaral na tutugon
+                      upang higit na mapagbuti ang pagtuturo para sa
+                      kapakinapakinabang na pag-unlad.
+                    </li>
+                    <li>
+                      Palakasin ang ugnayan, pakikipagtulungan at kolaborasyon
+                      sa ibang institusyon para sa patuloy na pagkakatulad ng
+                      prograama, makalikha ng mapagkukunan at makabuo ng mga
+                      pang matagalang proyekto at serbisyo sa ugnayang panlabas.
+                    </li>
+                    <li>
+                      Patuloy na pagsusuri sa mga pang-akademikong programa
+                      upang masiguro ang kahusayan at kalidad ng edukasyon.
+                    </li>
+                    <li>
+                      Magbigay ng sapat at akmang mga pasilidad sa paaralan para
+                      sa lubos na pagkatuto ng mga mag aaral.
+                    </li>
+                  </ol>
                 </Typography>
               </Box>
             </Box>

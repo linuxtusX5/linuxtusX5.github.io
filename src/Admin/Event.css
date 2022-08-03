@@ -143,6 +143,15 @@
   padding-left: 30px;
 }
 @media screen and (max-width: 600px) {
+    .scrollable-div {
+            background-color: #f1f1f1;
+            overflow: auto;
+            text-align: justify;
+            padding: 20px;
+        }
+    #B{
+        position: relative;
+    }
     .con22{
         padding-top: 20px;
         padding-left: 220px;

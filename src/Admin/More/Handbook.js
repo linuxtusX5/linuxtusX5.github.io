@@ -35,7 +35,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import '../../Footer.css';
 import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
-import Profile from "../../Photos/wp5063265.webp";
+import Profile from "../../Photos/Advance care (6).png";
 import InfoIcon from "@mui/icons-material/Info";
 import { useUserAuth } from "../../context/UserAuthContext";
 import { useNavigate } from "react-router";
@@ -348,36 +348,6 @@ const Handbook = () => {
                     <i class="fa-solid fa-square-caret-down"></i> <b>About</b>
                   </Nav.Link>
                 </Nav>
-                <Nav>
-                  <Nav.Link
-                    href="#deets"
-                    style={{
-                      color: "#4C0001",
-                    }}
-                  >
-                    <StyledBadge
-                      overlap="circular"
-                      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                      variant="dot"
-                    >
-                      {" "}
-                      <Tooltip
-                        title="Profile :)"
-                        fontWeight="bold"
-                        arrow
-                        placement="bottom"
-                        TransitionComponent={Fade}
-                        TransitionProps={{ timeout: 600 }}
-                      >
-                        <Avatar
-                          alt="Remy Sharp"
-                          src={Profile}
-                          onClick={handleShow}
-                        />
-                      </Tooltip>
-                    </StyledBadge>
-                  </Nav.Link>
-                </Nav>
               </Navbar.Collapse>
             </Container>
           </Navbar>
@@ -474,28 +444,9 @@ const Handbook = () => {
           <Divider />
         </Drawer>
       </Box>
-      <div>
-        <div style={{ height: "100vh", marginLeft: "50px" }} ref={viewer}></div>
+      <div className="left">
+        <div className="viewers" ref={viewer}></div>
       </div>
-      <Card
-        className="footer"
-        style={{
-          borderTop: "4px solid #800",
-          boxShadow: "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
-        }}
-      >
-        <div
-          className="footer-box"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItem: "center",
-          }}
-        >
-          <b>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES</b>
-          <p className="u-text-small">&copy; Copyright 2021.</p>
-        </div>
-      </Card>
     </>
   );
 };

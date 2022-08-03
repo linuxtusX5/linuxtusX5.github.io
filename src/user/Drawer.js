@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -26,10 +26,14 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import HomeIcon from "@mui/icons-material/Home";
 import logo2 from "../Photos/CSC2.png";
 import { Card, Button } from "react-bootstrap";
-
+import LogoutIcon from "@mui/icons-material/Logout";
 import { useUserAuth } from "../context/UserAuthContext";
 import { useNavigate } from "react-router";
-
+import PersonIcon from "@mui/icons-material/Person";
+import { db } from "../firebase/index";
+import "firebase/compat/firestore";
+import PaymentIcon from "@mui/icons-material/Payment";
+import PeopleIcon from "@mui/icons-material/People";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -109,17 +113,29 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
-  
-    const { logOut } = useUserAuth();
-    const navigate = useNavigate();
-    const handleLogout = async () => {
-      try {
-        await logOut();
-        navigate("/");
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
+  const { logOut } = useUserAuth();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      navigate("/");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const [Student, setStudent] = useState([]);
+
+  useEffect(() => {
+    db.collection("StudentData").onSnapshot((snapshot) => {
+      setStudent(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      );
+    });
+  }, []);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -247,6 +263,63 @@ export default function MiniDrawer() {
               </ListItemButton>
             </Tooltip>
             <br />
+            <Tooltip
+              title="Payment Checker"
+              arrow
+              placement="right"
+              TransitionComponent={Fade}
+              TransitionProps={{ timeout: 600 }}
+            >
+              <ListItemButton component="a" href="/Checker">
+                <ListItemIcon>
+                  <PaymentIcon
+                    style={{
+                      color: "#4C0001",
+                    }}
+                  />
+                </ListItemIcon>{" "}
+                Payment Checker
+              </ListItemButton>
+            </Tooltip>
+            <br />
+            <Tooltip
+              title="CSC OFFICER"
+              arrow
+              placement="right"
+              TransitionComponent={Fade}
+              TransitionProps={{ timeout: 600 }}
+            >
+              <ListItemButton component="a" href="/Officer">
+                <ListItemIcon>
+                  <PeopleIcon
+                    style={{
+                      color: "#4C0001",
+                    }}
+                  />
+                </ListItemIcon>{" "}
+                CSC OFFICER
+              </ListItemButton>
+            </Tooltip>
+            <br />
+            <Tooltip
+              title="Logout"
+              arrow
+              placement="right"
+              TransitionComponent={Fade}
+              TransitionProps={{ timeout: 600 }}
+            >
+              <ListItemButton component="a" onClick={handleLogout}>
+                <ListItemIcon>
+                  <LogoutIcon
+                    style={{
+                      color: "#4C0001",
+                    }}
+                  />
+                </ListItemIcon>{" "}
+                Logout
+              </ListItemButton>
+            </Tooltip>
+            <br />
           </ListItem>
         </List>
         <Divider />
@@ -294,7 +367,7 @@ export default function MiniDrawer() {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />{" "}
         <Card
-          className="m-3 "
+          className="m-3"
           style={{
             backgroundColor: "#fff ",
             borderTop: "4px solid #800",
@@ -303,19 +376,13 @@ export default function MiniDrawer() {
         >
           <div className="container header2">
             <h1>
-              <span className="design2">
+              <span className="design2 pup">
                 Polytechnic University of the Philippines Lopez, Quezon Branch
               </span>
             </h1>
             <h1>
-              <span className="design2">PUP LOPEZ CENTRAL STUDENT COUNCIL</span>
+              <span className="design2 pup">PUP LOPEZ CENTRAL STUDENT COUNCIL</span>
             </h1>
-            <div style={{display: 'flex', justifyContent: 'center', alignItem: 'center', marginBottom: '20px'}}>
-              <Button variant="primary" onClick={handleLogout} style={{padding: '15px'}}>
-                {" "}
-                LOG OUT{" "}
-              </Button>
-            </div>
           </div>
         </Card>
         <Card

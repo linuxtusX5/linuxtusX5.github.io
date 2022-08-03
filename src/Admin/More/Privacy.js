@@ -23,7 +23,7 @@ import CorporateFareOutlinedIcon from "@mui/icons-material/CorporateFareOutlined
 
 import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
-import Profile from "../../Photos/wp5063265.webp";
+import Profile from "../../Photos/Advance care (6).png";
 
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
@@ -291,26 +291,6 @@ const Privacy = () => {
                     <i class="fa-solid fa-square-caret-down"></i> <b>About</b>
                   </Nav.Link>
                 </Nav>
-                <Nav>
-                  <Nav.Link
-                    href="#deets"
-                    style={{
-                      color: "#4C0001",
-                    }}
-                  >
-                    <StyledBadge
-                      overlap="circular"
-                      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                      variant="dot"
-                    >
-                      <Avatar
-                        alt="Remy Sharp"
-                        src={Profile}
-                        onClick={handleShow}
-                      />
-                    </StyledBadge>
-                  </Nav.Link>
-                </Nav>
               </Navbar.Collapse>
             </Container>
           </Navbar>
@@ -487,6 +467,7 @@ const Privacy = () => {
               </ul>
             </Typography>
           </Card>
+          <br/><br/>
           <Card
             className="footer"
             style={{

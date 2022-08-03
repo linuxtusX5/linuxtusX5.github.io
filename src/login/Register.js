@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, InputGroup, FormControl } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Button, Modal, Alert } from "react-bootstrap";
+import { Modal, Alert, Button } from "react-bootstrap";
 import "../Admin/Event.css";
 import { db } from "../firebase/index";
 import "firebase/compat/firestore";
@@ -9,7 +9,16 @@ import logo from "../Photos/PUPLogo.png";
 import "./Front.css";
 import { useUserAuth } from "../context/UserAuthContext";
 
+import Checkbox from "@mui/material/Checkbox";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import TextField from "@mui/material/TextField";
 import Swal from "sweetalert2";
+import PasswordInputField from "./PasswordInputField";
+import ConfirmPasswordInputField from "./ConfirmPasswordInputField";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import MenuItem from "@mui/material/MenuItem";
+
 
 const Register = (props) => {
   const [show, setShow] = useState(false);
@@ -19,18 +28,20 @@ const Register = (props) => {
   //Password validation
   const [fname, setfname] = useState("");
   const [lname, setlname] = useState("");
-  const [middle, setmiddle] = useState("");
-  const [birthm, setbirthm] = useState("");
-  const [birthd, setbirthd] = useState("");
-  const [birthy, setbirthy] = useState("");
   const [org, setorg] = useState("");
   const [gender, setgender] = useState("");
   const [course, setcourse] = useState("");
+  const [year, setYear] = useState("");
   const [location, setlocation] = useState("");
   const [email, setEmail] = useState("");
   const [studenti, setStudenti] = useState("");
   const [passwordInput, setPassword] = useState("");
+  const [Date2, setDate] = useState("");
   const [error, setError] = useState("");
+
+  const [status, setStatus] = useState("");
+  
+const DateString = Date2.toString();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,7 +56,7 @@ const Register = (props) => {
 
     setError("");
     try {
-      await signUp(email, passwordInput);
+      await signUp(email, passwordInput2.confirmPassword);
       console.log("SignUp done");
     } catch (err) {
       setError(err.message);
@@ -54,20 +65,19 @@ const Register = (props) => {
 
     const username = e.target.StudentID.value;
 
-    await db.collection("StudentData").add({
+    await db.collection("StudentData").doc(username).set({
       firstName: fname,
       lastName: lname,
-      middle: middle,
-      birthM: birthm,
-      birthD: birthd,
-      birthY: birthy,
+      Birth: DateString,
       organization: org,
       gender: gender,
       course: course,
+      Year: year,
       location: location,
       email: email,
+      Status: status,
       studentId: studenti,
-      password: passwordInput,
+      password: passwordInput2.confirmPassword,
     });
     setShow(true);
 
@@ -75,214 +85,1359 @@ const Register = (props) => {
       await db.collection("IBITS").doc(username).set({
         firstName: fname,
         lastName: lname,
-        middle: middle,
-        birthM: birthm,
-        birthD: birthd,
-        birthY: birthy,
+        Birth: DateString,
         organization: org,
         gender: gender,
         course: course,
+        Year: year,
         location: location,
         email: email,
+        Status: status,
         studentId: studenti,
-        password: passwordInput,
+        password: passwordInput2.confirmPassword,
       });
     } else if (org === "ABS") {
       await db.collection("ABS").doc(username).set({
         firstName: fname,
         lastName: lname,
-        middle: middle,
-        birthM: birthm,
-        birthD: birthd,
-        birthY: birthy,
+        Birth: DateString,
         organization: org,
         gender: gender,
         course: course,
+        Year: year,
         location: location,
         email: email,
+        Status: status,
         studentId: studenti,
-        password: passwordInput,
+        password: passwordInput2.confirmPassword,
       });
     } else if (org === "HMS") {
-      await db.collection("HMS").add({
+      await db.collection("HMS").doc(username).set({
         firstName: fname,
         lastName: lname,
-        middle: middle,
-        birthM: birthm,
-        birthD: birthd,
-        birthY: birthy,
+        Birth: DateString,
         organization: org,
         gender: gender,
         course: course,
+        Year: year,
         location: location,
         email: email,
+        Status: status,
         studentId: studenti,
-        password: passwordInput,
+        password: passwordInput2.confirmPassword,
       });
     } else if (org === "IIEE") {
       await db.collection("IIEE").doc(username).set({
         firstName: fname,
         lastName: lname,
-        middle: middle,
-        birthM: birthm,
-        birthD: birthd,
-        birthY: birthy,
+        Birth: DateString,
         organization: org,
         gender: gender,
         course: course,
+        Year: year,
         location: location,
         email: email,
+        Status: status,
         studentId: studenti,
-        password: passwordInput,
+        password: passwordInput2.confirmPassword,
       });
     } else if (org === "JME") {
       await db.collection("JME").doc(username).set({
         firstName: fname,
         lastName: lname,
-        middle: middle,
-        birthM: birthm,
-        birthD: birthd,
-        birthY: birthy,
+        Birth: DateString,
         organization: org,
         gender: gender,
         course: course,
+        Year: year,
         location: location,
         email: email,
+        Status: status,
         studentId: studenti,
-        password: passwordInput,
+        password: passwordInput2.confirmPassword,
       });
-    } else if (org === "JPEA") {
-      await db.collection("JPEA").doc(username).set({
+    } else if (org === "JPIA") {
+      await db.collection("JPIA").doc(username).set({
         firstName: fname,
         lastName: lname,
-        middle: middle,
-        birthM: birthm,
-        birthD: birthd,
-        birthY: birthy,
+        Birth: DateString,
         organization: org,
         gender: gender,
         course: course,
+        Year: year,
         location: location,
         email: email,
+        Status: status,
         studentId: studenti,
-        password: passwordInput,
+        password: passwordInput2.confirmPassword,
       });
-    } else if (org === "PADS") {
-      await db.collection("PADS").doc(username).set({
+    } else if (org === "PAdS") {
+      await db.collection("PAdS").doc(username).set({
         firstName: fname,
         lastName: lname,
-        middle: middle,
-        birthM: birthm,
-        birthD: birthd,
-        birthY: birthy,
+        Birth: DateString,
         organization: org,
         gender: gender,
         course: course,
+        Year: year,
         location: location,
         email: email,
+        Status: status,
         studentId: studenti,
-        password: passwordInput,
+        password: passwordInput2.confirmPassword,
       });
     } else if (org === "PASOA") {
       await db.collection("PASOA").doc(username).set({
         firstName: fname,
         lastName: lname,
-        middle: middle,
-        birthM: birthm,
-        birthD: birthd,
-        birthY: birthy,
+        Birth: DateString,
         organization: org,
         gender: gender,
         course: course,
+        Year: year,
         location: location,
         email: email,
+        Status: status,
         studentId: studenti,
-        password: passwordInput,
+        password: passwordInput2.confirmPassword,
       });
     } else if (org === "PICE") {
       await db.collection("PICE").doc(username).set({
         firstName: fname,
         lastName: lname,
-        middle: middle,
-        birthM: birthm,
-        birthD: birthd,
-        birthY: birthy,
+        Birth: DateString,
         organization: org,
         gender: gender,
         course: course,
+        Year: year,
         location: location,
         email: email,
+        Status: status,
         studentId: studenti,
-        password: passwordInput,
+        password: passwordInput2.confirmPassword,
       });
     } else if (org === "SYNERTECH") {
       await db.collection("SYNERTECH").doc(username).set({
         firstName: fname,
         lastName: lname,
-        middle: middle,
-        birthM: birthm,
-        birthD: birthd,
-        birthY: birthy,
+        Birth: DateString,
         organization: org,
         gender: gender,
         course: course,
+        Year: year,
         location: location,
         email: email,
+        Status: status,
         studentId: studenti,
-        password: passwordInput,
+        password: passwordInput2.confirmPassword,
       });
     } else if (org === "UAPSA") {
       await db.collection("UAPSA").doc(username).set({
         firstName: fname,
         lastName: lname,
-        middle: middle,
-        birthM: birthm,
-        birthD: birthd,
-        birthY: birthy,
+        Birth: DateString,
         organization: org,
         gender: gender,
         course: course,
+        Year: year,
         location: location,
         email: email,
+        Status: status,
         studentId: studenti,
-        password: passwordInput,
+        password: passwordInput2.confirmPassword,
       });
     } else if (org === "YES") {
       await db.collection("YES").doc(username).set({
         firstName: fname,
         lastName: lname,
-        middle: middle,
-        birthM: birthm,
-        birthD: birthd,
-        birthY: birthy,
+        Birth: DateString,
         organization: org,
         gender: gender,
         course: course,
+        Year: year,
+        location: location,
+        email: email,
+        Status: status,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (org === "BSBIO") {
+      await db.collection("BSBIO").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        Status: status,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (org === "BSND") {
+      await db.collection("BSND").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        Status: status,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    }
+    //For years
+    if (year === "DICT1") {
+      await db.collection("DICT1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
         location: location,
         email: email,
         studentId: studenti,
-        password: passwordInput,
+        password: passwordInput2.confirmPassword,
       });
-    }
+    } else if (year === "DICT2") {
+      await db.collection("DICT2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DICT3") {
+      await db.collection("DICT3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSIT1") {
+      await db.collection("BSIT1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSIT2") {
+      await db.collection("BSIT2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSIT3") {
+      await db.collection("BSIT3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSIT4") {
+      await db.collection("BSIT4").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DCETech1") {
+      await db.collection("DCETech1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DCETech2") {
+      await db.collection("DCETech2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DCETech3") {
+      await db.collection("DCETech3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSAME1") {
+      await db.collection("BSAME1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSAME2") {
+      await db.collection("BSAME2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSAME3") {
+      await db.collection("BSAME3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSAME4") {
+      await db.collection("BSAME4").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSHM1") {
+      await db.collection("BSHM1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSHM2") {
+      await db.collection("BSHM2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSHM3") {
+      await db.collection("BSHM3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSHM4") {
+      await db.collection("BSHM4").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSEE1") {
+      await db.collection("BSEE1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSEE2") {
+      await db.collection("BSEE2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSEE3") {
+      await db.collection("BSEE3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSEE4") {
+      await db.collection("BSEE4").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSEE5") {
+      await db.collection("BSEE5").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DEET1") {
+      await db.collection("DEET1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DEET2") {
+      await db.collection("DEET2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DEET3") {
+      await db.collection("DEET3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DEET4") {
+      await db.collection("DEET4").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSBA1") {
+      await db.collection("BSBA1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSBA2") {
+      await db.collection("BSBA2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSBA3") {
+      await db.collection("BSBA3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSBA4") {
+      await db.collection("BSBA4").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSA1") {
+      await db.collection("BSA1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSA2") {
+      await db.collection("BSA2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSA3") {
+      await db.collection("BSA3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSA4") {
+      await db.collection("BSA4").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BPA1") {
+      await db.collection("BPA1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BPA2") {
+      await db.collection("BPA2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BPA3") {
+      await db.collection("BPA3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BPA4") {
+      await db.collection("BPA4").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSOA1") {
+      await db.collection("BSOA1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSOA2") {
+      await db.collection("BSOA2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSOA3") {
+      await db.collection("BSOA3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSOA4") {
+      await db.collection("BSOA4").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSCE1") {
+      await db.collection("BSCE1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSCE2") {
+      await db.collection("BSCE2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSCE3") {
+      await db.collection("BSCE3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSCE4") {
+      await db.collection("BSCE4").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DCET1") {
+      await db.collection("DCET1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DCET2") {
+      await db.collection("DCET2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DCET3") {
+      await db.collection("DCET3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DOMT-LOM1") {
+      await db.collection("DOMT-LOM1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DOMT-LOM2") {
+      await db.collection("DOMT-LOM2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DOMT-LOM3") {
+      await db.collection("DOMT-LOM3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DOMT-MOM1") {
+      await db.collection("DOMT-MOM1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DOMT-MOM2") {
+      await db.collection("DOMT-MOM2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "DOMT-MOM3") {
+      await db.collection("DOMT-MOM3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSARCH1") {
+      await db.collection("BSARCH1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSARCH2") {
+      await db.collection("BSARCH2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSARCH3") {
+      await db.collection("BSARCH3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSARCH4") {
+      await db.collection("BSARCH4").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSED1") {
+      await db.collection("BSED1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSED2") {
+      await db.collection("BSED2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSED3") {
+      await db.collection("BSED3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSED4") {
+      await db.collection("BSED4").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BEED1") {
+      await db.collection("BEED1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BEED2") {
+      await db.collection("BEED2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BEED3") {
+      await db.collection("BEED3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BEED4") {
+      await db.collection("BEED4").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSND1") {
+      await db.collection("BSND1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSND2") {
+      await db.collection("BSND2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSND3") {
+      await db.collection("BSND3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSND4") {
+      await db.collection("BSND4").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSBIO1") {
+      await db.collection("BSBIO1").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSBIO2") {
+      await db.collection("BSBIO2").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSBIO3") {
+      await db.collection("BSBIO3").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } else if (year === "BSBIO4") {
+      await db.collection("BSBIO4").doc(username).set({
+        firstName: fname,
+        lastName: lname,
+        Birth: DateString,
+        organization: org,
+        gender: gender,
+        course: course,
+        Year: year,
+        location: location,
+        email: email,
+        studentId: studenti,
+        password: passwordInput2.confirmPassword,
+      });
+    } 
 
-    console.log("Student ID: ", studenti);
-    console.log("Student Password: ", passwordInput);
 
+
+    setStatus("");
     setfname("");
     setlname("");
-    setmiddle("");
-    setbirthm("");
-    setbirthd("");
-    setbirthy("");
+    setDate("")
     setorg("");
     setgender("");
     setcourse("");
+    setYear("");
     setlocation("");
     setEmail("");
     setStudenti("");
-    setPassword("");
+    setPasswordInput2("");
   };
 
+  const [passwordError, setPasswordErr] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [passwordInput2, setPasswordInput2] = useState({
+    password: "",
+  });
+  const handlePasswordChange = (evnt) => {
+    const passwordInputValue = evnt.target.value.trim();
+    const passwordInputFieldName = evnt.target.name;
+    const passwordInput = {
+      ...passwordInput2,
+      [passwordInputFieldName]: passwordInputValue,
+    };
+    setPasswordInput2(passwordInput);
+  };
+  const handleValidation = (evnt) => {
+    const passwordInputValue = evnt.target.value.trim();
+    const passwordInputFieldName = evnt.target.name;
+    //for password
+    if (passwordInputFieldName === "password") {
+      const uppercaseRegExp = /(?=.*?[A-Z])/;
+      const lowercaseRegExp = /(?=.*?[a-z])/;
+      const digitsRegExp = /(?=.*?[0-9])/;
+      const specialCharRegExp = /(?=.*?[#?!@$%^&*-])/;
+      const minLengthRegExp = /.{8,}/;
+      const passwordLength = passwordInputValue.length;
+      const uppercasePassword = uppercaseRegExp.test(passwordInputValue);
+      const lowercasePassword = lowercaseRegExp.test(passwordInputValue);
+      const digitsPassword = digitsRegExp.test(passwordInputValue);
+      const specialCharPassword = specialCharRegExp.test(passwordInputValue);
+      const minLengthPassword = minLengthRegExp.test(passwordInputValue);
+      let errMsg = "";
+      if (passwordLength === 0) {
+        errMsg = "Password is empty";
+      } else if (!uppercasePassword) {
+        errMsg = "At least one Uppercase";
+      } else if (!lowercasePassword) {
+        errMsg = "At least one Lowercase";
+      } else if (!digitsPassword) {
+        errMsg = "At least one digit";
+      } else if (!specialCharPassword) {
+        errMsg = "At least one Special Characters";
+      } else if (!minLengthPassword) {
+        errMsg = "At least minumum 8 characters";
+      } else {
+        errMsg = "";
+      }
+      setPasswordErr(errMsg);
+    }
+    // for confirm password
+    if (
+      passwordInputFieldName === "confirmPassword" ||
+      (passwordInputFieldName === "password" &&
+        passwordInput.confirmPassword.length > 0)
+    ) {
+      if (passwordInput2.confirmPassword !== passwordInput2.password) {
+        setConfirmPasswordError("Confirm password is not matched");
+      } else {
+        setConfirmPasswordError("");
+      }
+    }
+  };
+
+                
   return (
     <>
       <div id="back3">
@@ -322,6 +1477,9 @@ const Register = (props) => {
                 terms become part of your agreement with the University if you
                 use those online services.
               </p>
+              <h6>
+                <Checkbox color="success" /> I Agree
+              </h6>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
@@ -346,407 +1504,578 @@ const Register = (props) => {
           </h2>
           <h5 className="mt-3 but">Register to start your session</h5>
 
-          {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
-            <InputGroup className="mb-3">
-              <FormControl
-                type="text"
-                placeholder="First Name"
-                aria-label="First Name"
-                aria-describedby="basic-addon1"
-                autocomplete="off"
+            <TextField
+              required
+              id="outlined-required"
+              style={{ width: "100%" }}
+              label="First Name"
+              autocomplete="off"
+              onChange={(e) => setfname(e.target.value)}
+              className="mb-3 "
+            />
+            <TextField
+              required
+              id="outlined-required"
+              style={{ width: "100%" }}
+              label="Last Name"
+              autocomplete="off"
+              onChange={(e) => setlname(e.target.value)}
+              className="mb-3"
+            />
+            <div
+              className="row mb-3"
+              style={{ width: "100%", marginLeft: "4px" }}
+            >
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  openTo="year"
+                  views={["year", "month", "day"]}
+                  label="Year, month and date"
+                  value={Date2}
+                  onChange={(newValue) => {
+                    setDate(newValue);
+                  }}
+                  renderInput={(params) => (
+                    <TextField {...params} helperText={null} />
+                  )}
+                />
+              </LocalizationProvider>
+            </div>
+            <TextField
+              required
+              id="outlined-required"
+              style={{ width: "100%" }}
+              label="Student ID"
+              max_length="15"
+              value={studenti}
+              name="StudentID"
+              autocomplete="off"
+              onChange={(e) => setStudenti(e.target.value)}
+              className="mb-3"
+            />
+            <div
+              className="row mb-3"
+              style={{ width: "100%", marginLeft: "4px" }}
+            >
+              <TextField
+                select
+                label="Organization"
                 required
-                onChange={(e) => setfname(e.target.value)}
-              />{" "}
-              <InputGroup.Text id="basic-addon1">
-                <span className="fas fa-user" aria-hidden="true"></span>
-              </InputGroup.Text>
-            </InputGroup>
-            <InputGroup className="mb-3">
-              <FormControl
-                type="text"
-                placeholder="Last Name"
-                aria-label="Last Name"
-                aria-describedby="basic-addon1"
-                autocomplete="off"
+                onChange={(e) => setorg(e.target.value)}
+                helperText="Please select your Organization"
+                className="mb-3"
+              >
+                <MenuItem value="ABS" className="scrollable-div">
+                  Agri Business Society (ABS)
+                </MenuItem>
+                <MenuItem value="HMS" className="scrollable-div">
+                  Hospitality Management Society (HMS)
+                </MenuItem>
+                <MenuItem value="IIEE" className="scrollable-div">
+                  Institute of Integrated Electrical Engineers (IIEE)
+                </MenuItem>
+                <MenuItem value="IBITS" className="scrollable-div">
+                  Institute of Brilliant Information Technology Students (IBITS)
+                </MenuItem>
+                <MenuItem value="JME" className="scrollable-div">
+                  Junior Marketing Executive (JME)
+                </MenuItem>
+                <MenuItem value="JPIA" className="scrollable-div">
+                  Junior Philippine Institute of Acceptants (JPIA)
+                </MenuItem>
+                <MenuItem value="PAdS" className="scrollable-div">
+                  Public Administrators Society (PAdS)
+                </MenuItem>
+                <MenuItem value="PASOA" className="scrollable-div">
+                  Philippine Association of Students in Office Administration
+                  (PASOA)
+                </MenuItem>
+                <MenuItem value="PICE" className="scrollable-div">
+                  Philippine Institute of Civil Engineers (PICE)
+                </MenuItem>
+                <MenuItem value="SYNERTECH" className="scrollable-div">
+                  Synergism of Student in Technology (SYNERTECH)
+                </MenuItem>
+                <MenuItem value="UAPSA" className="scrollable-div">
+                  United Architects of the Philippines Student Auxiliary (UAPSA)
+                </MenuItem>
+                <MenuItem value="YES">Young Educators Society (YES)</MenuItem>
+                <MenuItem value="BSBIO" className="scrollable-div">
+                  Bachelor of Science Biology (BSBIO)
+                </MenuItem>
+                <MenuItem value="BSND" className="scrollable-div">
+                  Bachelor of Science Nutrition and Dietetics (BSND)
+                </MenuItem>
+              </TextField>
+
+              <TextField
+                select
+                label="Gender"
                 required
-                onChange={(e) => setlname(e.target.value)}
-              />{" "}
-              <InputGroup.Text id="basic-addon1">
-                <span className="fas fa-user" aria-hidden="true"></span>
-              </InputGroup.Text>
-            </InputGroup>
-            <InputGroup className="mb-3">
-              <FormControl
-                type="text"
-                placeholder="Middle"
-                aria-label="Middle"
-                aria-describedby="basic-addon1"
-                autocomplete="off"
-                required
-                onChange={(e) => setmiddle(e.target.value)}
-              />{" "}
-              <InputGroup.Text id="basic-addon1">
-                <span className="fas fa-user" aria-hidden="true"></span>
-              </InputGroup.Text>
-            </InputGroup>
+                onChange={(e) => setgender(e.target.value)}
+                helperText="Please select your Gender"
+              >
+                <MenuItem value="Male">Male</MenuItem>
+                <MenuItem value="Female">Female</MenuItem>
+              </TextField>
+            </div>
+            <TextField
+              id="outlined-select-currency"
+              select
+              label="Course"
+              required
+              onChange={(e) => setcourse(e.target.value)}
+              helperText="Please select your Course"
+              className="mb-3"
+              value={course}
+              style={{ width: "100%", marginLeft: "4px", position: "relative" }}
+            >
+              {org === "IBITS"
+                ? [
+                    <MenuItem value="BSIT" className="scrollable-div">
+                      Bachelor of Science in Information Technology (BSIT)
+                    </MenuItem>,
+                    <MenuItem value="DICT" className="scrollable-div">
+                      Diploma in Information and Communication Technology (DICT)
+                    </MenuItem>,
+                    <MenuItem value="DCETech" className="scrollable-div">
+                      Diploma in Computer Engineering Technology (DCET)
+                    </MenuItem>,
+                  ]
+                : org === "ABS"
+                ? [
+                    <MenuItem value="BSAME" className="scrollable-div">
+                      Bachelor of Science in Business Administration Major
+                      inMarketing Management (BSAME)
+                    </MenuItem>,
+                  ]
+                : org === "PADS"
+                ? [
+                    <MenuItem value="BPA" className="scrollable-div">
+                      Bachelor in Public Administration (BPA)
+                    </MenuItem>,
+                  ]
+                : org === "JPIA"
+                ? [
+                    <MenuItem value="BSA" className="scrollable-div">
+                      Bachelor of Science in Accountancy (BSA)
+                    </MenuItem>,
+                  ]
+                : org === "JME"
+                ? [
+                    <MenuItem value="BSBA" className="scrollable-div">
+                      Bachelor of Science in Business Administration Major in
+                      Marketing Management (BSBA)
+                    </MenuItem>,
+                  ]
+                : org === "SYNERTECH"
+                ? [
+                    <MenuItem value="DOMT-LOM" className="scrollable-div">
+                      Diploma in Office Management Technology with
+                      Spelicialization in Legal Office Management (DOMT LOM)
+                    </MenuItem>,
+                    <MenuItem value="DOMT-MOM" className="scrollable-div">
+                      Diploma in Office Management Technology with
+                      Spelicialization in Medical Office Management (DOMT MOM)
+                    </MenuItem>,
+                  ]
+                : org === "HMS"
+                ? [
+                    <MenuItem value="BSHM" className="scrollable-div">
+                      Bachelor of Science in Hospitality Management (BSHM)
+                    </MenuItem>,
+                  ]
+                : org === "IIEE"
+                ? [
+                    <MenuItem value="BSEE" className="scrollable-div">
+                      Bachelor of Science in Electrical Engineering (BSEE)
+                    </MenuItem>,
+                    <MenuItem value="DEET" className="scrollable-div">
+                      Diploma in Electrical Engineering Technology (DEET)
+                    </MenuItem>,
+                  ]
+                : org === "PICE"
+                ? [
+                    <MenuItem value="BSCE" className="scrollable-div">
+                      Bachelor of Science in Civil Engineering (BSCE)
+                    </MenuItem>,
+                    <MenuItem value="DCET" className="scrollable-div">
+                      Diploma in Civil Engineering Technology (DCET)
+                    </MenuItem>,
+                  ]
+                : org === "UAPSA"
+                ? [
+                    <MenuItem value="BSARCH" className="scrollable-div">
+                      Bachelor of Science in Architecture (BSARCH)
+                    </MenuItem>,
+                  ]
+                : org === "YES"
+                ? [
+                    <MenuItem value="BSED" className="scrollable-div">
+                      Bachelor of Secondary Education Major in Mathematics
+                      (BSED)
+                    </MenuItem>,
+                    <MenuItem value="BEED" className="scrollable-div">
+                      Bachelor in Elementary Education (BEED)
+                    </MenuItem>,
+                  ]
+                : org === "PASOA"
+                ? [
+                    <MenuItem value="BSOA" className="scrollable-div">
+                      Bachelor of Science in office Administration (BSOA)
+                    </MenuItem>,
+                  ]
+                : org === "BSND"
+                ? [
+                    <MenuItem value="BSND" className="scrollable-div">
+                      Bachelor of Science Nutrition and Dietetics (BSND)
+                    </MenuItem>,
+                  ]
+                : org === "BSBIO"
+                ? [
+                    <MenuItem value="BSBIO" className="scrollable-div">
+                      Bachelor of Science Biology (BSBIO)
+                    </MenuItem>,
+                  ]
+                : []}
+            </TextField>
+            <TextField
+              select
+              label="Year"
+              required
+              onChange={(e) => setYear(e.target.value)}
+              helperText="Please select your Year"
+              className="mb-3"
+              value={year}
+              style={{ width: "100%", marginLeft: "4px", position: "relative" }}
+            >
+              {course === "DICT"
+                ? [
+                    <MenuItem value="DICT1" className="scrollable-div">
+                      DICT-1
+                    </MenuItem>,
+                    <MenuItem value="DICT2" className="scrollable-div">
+                      DICT-2
+                    </MenuItem>,
+                    <MenuItem value="DICT3" className="scrollable-div">
+                      DICT-3
+                    </MenuItem>,
+                  ]
+                : course === "BSIT"
+                ? [
+                    <MenuItem value="BSIT1" className="scrollable-div">
+                      BSIT-1
+                    </MenuItem>,
+                    <MenuItem value="BSIT2" className="scrollable-div">
+                      BSIT-2
+                    </MenuItem>,
+                    <MenuItem value="BSIT3" className="scrollable-div">
+                      BSIT-3
+                    </MenuItem>,
+                    <MenuItem value="BSIT4" className="scrollable-div">
+                      BSIT-4
+                    </MenuItem>,
+                  ]
+                : course === "DCETech"
+                ? [
+                    <MenuItem value="DCETech1" className="scrollable-div">
+                      DCET-1
+                    </MenuItem>,
+                    <MenuItem value="DCETech2" className="scrollable-div">
+                      DCET-2
+                    </MenuItem>,
+                    <MenuItem value="DCETech3" className="scrollable-div">
+                      DCET-3
+                    </MenuItem>,
+                  ]
+                : course === "BSAME"
+                ? [
+                    <MenuItem value="BSAME1" className="scrollable-div">
+                      BSAME-1
+                    </MenuItem>,
+                    <MenuItem value="BSAME2" className="scrollable-div">
+                      BSAME-2
+                    </MenuItem>,
+                    <MenuItem value="BSAME3" className="scrollable-div">
+                      BSAME-3
+                    </MenuItem>,
+                    <MenuItem value="BSAME4" className="scrollable-div">
+                      BSAME-4
+                    </MenuItem>,
+                  ]
+                : course === "BSHM"
+                ? [
+                    <MenuItem value="BSHM1" className="scrollable-div">
+                      BSHM-1
+                    </MenuItem>,
+                    <MenuItem value="BSHM2" className="scrollable-div">
+                      BSHM-2
+                    </MenuItem>,
+                    <MenuItem value="BSHM3" className="scrollable-div">
+                      BSHM-3
+                    </MenuItem>,
+                    <MenuItem value="BSHM4" className="scrollable-div">
+                      BSHM-4
+                    </MenuItem>,
+                  ]
+                : course === "BSEE"
+                ? [
+                    <MenuItem value="BSEE1" className="scrollable-div">
+                      BSEE-1
+                    </MenuItem>,
+                    <MenuItem value="BSEE2" className="scrollable-div">
+                      BSEE-2
+                    </MenuItem>,
+                    <MenuItem value="BSEE3" className="scrollable-div">
+                      BSEE-3
+                    </MenuItem>,
+                    <MenuItem value="BSEE4" className="scrollable-div">
+                      BSEE-4
+                    </MenuItem>,
+                    <MenuItem value="BSEE5" className="scrollable-div">
+                      BSEE-5
+                    </MenuItem>,
+                  ]
+                : course === "DEET"
+                ? [
+                    <MenuItem value="DEET1" className="scrollable-div">
+                      DEET-1
+                    </MenuItem>,
+                    <MenuItem value="DEET2" className="scrollable-div">
+                      DEET-2
+                    </MenuItem>,
+                    <MenuItem value="DEET3" className="scrollable-div">
+                      DEET-3
+                    </MenuItem>,
+                    <MenuItem value="DEET4" className="scrollable-div">
+                      DEET-4
+                    </MenuItem>,
+                  ]
+                : course === "BSBA"
+                ? [
+                    <MenuItem value="BSBA1" className="scrollable-div">
+                      BSBA-1
+                    </MenuItem>,
+                    <MenuItem value="BSBA2" className="scrollable-div">
+                      BSBA-2
+                    </MenuItem>,
+                    <MenuItem value="BSBA3" className="scrollable-div">
+                      BSBA-3
+                    </MenuItem>,
+                    <MenuItem value="BSBA4" className="scrollable-div">
+                      BSBA-4
+                    </MenuItem>,
+                  ]
+                : course === "BSA"
+                ? [
+                    <MenuItem value="BSA1" className="scrollable-div">
+                      BSA-1
+                    </MenuItem>,
+                    <MenuItem value="BSA2" className="scrollable-div">
+                      BSA-2
+                    </MenuItem>,
+                    <MenuItem value="BSA3" className="scrollable-div">
+                      BSA-3
+                    </MenuItem>,
+                    <MenuItem value="BSA4" className="scrollable-div">
+                      BSA-4
+                    </MenuItem>,
+                  ]
+                : course === "BPA"
+                ? [
+                    <MenuItem value="BPA1" className="scrollable-div">
+                      BPA-1
+                    </MenuItem>,
+                    <MenuItem value="BPA2" className="scrollable-div">
+                      BPA-2
+                    </MenuItem>,
+                    <MenuItem value="BPA3" className="scrollable-div">
+                      BPA-3
+                    </MenuItem>,
+                    <MenuItem value="BPA4" className="scrollable-div">
+                      BPA-4
+                    </MenuItem>,
+                  ]
+                : course === "BSOA"
+                ? [
+                    <MenuItem value="BSOA1" className="scrollable-div">
+                      BSOA-1
+                    </MenuItem>,
+                    <MenuItem value="BSOA2" className="scrollable-div">
+                      BSOA-2
+                    </MenuItem>,
+                    <MenuItem value="BSOA3" className="scrollable-div">
+                      BSOA-3
+                    </MenuItem>,
+                    <MenuItem value="BSOA4" className="scrollable-div">
+                      BSOA-4
+                    </MenuItem>,
+                  ]
+                : course === "BSCE"
+                ? [
+                    <MenuItem value="BSCE1" className="scrollable-div">
+                      BSCE-1
+                    </MenuItem>,
+                    <MenuItem value="BSCE2" className="scrollable-div">
+                      BSCE-2
+                    </MenuItem>,
+                    <MenuItem value="BSCE3" className="scrollable-div">
+                      BSCE-3
+                    </MenuItem>,
+                    <MenuItem value="BSCE4" className="scrollable-div">
+                      BSCE-4
+                    </MenuItem>,
+                  ]
+                : course === "DCET"
+                ? [
+                    <MenuItem value="DCET1" className="scrollable-div">
+                      DCET-1
+                    </MenuItem>,
+                    <MenuItem value="DCET2" className="scrollable-div">
+                      DCET-2
+                    </MenuItem>,
+                    <MenuItem value="DCET3" className="scrollable-div">
+                      DCET-3
+                    </MenuItem>,
+                  ]
+                : course === "DOMT-LOM"
+                ? [
+                    <MenuItem value="DOMT-LOM1" className="scrollable-div">
+                      DOMTLOM-1
+                    </MenuItem>,
+                    <MenuItem value="DOMT-LOM2" className="scrollable-div">
+                      DOMTLOM-2
+                    </MenuItem>,
+                    <MenuItem value="DOMT-LOM3" className="scrollable-div">
+                      DOMTLOM-3
+                    </MenuItem>,
+                  ]
+                : course === "DOMT-MOM"
+                ? [
+                    <MenuItem value="DOMT-MOM1" className="scrollable-div">
+                      DOMTMOM-1
+                    </MenuItem>,
+                    <MenuItem value="DOMT-MOM2" className="scrollable-div">
+                      DOMTMOM-2
+                    </MenuItem>,
+                    <MenuItem value="DOMT-MOM3" className="scrollable-div">
+                      DOMTMOM-3
+                    </MenuItem>,
+                  ]
+                : course === "BSARCH"
+                ? [
+                    <MenuItem value="BSARCH1" className="scrollable-div">
+                      BSARCH-1
+                    </MenuItem>,
+                    <MenuItem value="BSARCH2" className="scrollable-div">
+                      BSARCH-2
+                    </MenuItem>,
+                    <MenuItem value="BSARCH3" className="scrollable-div">
+                      BSARCH-3
+                    </MenuItem>,
+                    <MenuItem value="BSARCH4" className="scrollable-div">
+                      BSARCH-4
+                    </MenuItem>,
+                  ]
+                : course === "BSED"
+                ? [
+                    <MenuItem value="BSED1" className="scrollable-div">
+                      BSED-1
+                    </MenuItem>,
+                    <MenuItem value="BSED2" className="scrollable-div">
+                      BSED-2
+                    </MenuItem>,
+                    <MenuItem value="BSED3" className="scrollable-div">
+                      BSED-3
+                    </MenuItem>,
+                    <MenuItem value="BSED4" className="scrollable-div">
+                      BSED-4
+                    </MenuItem>,
+                  ]
+                : course === "BEED"
+                ? [
+                    <MenuItem value="BEED1" className="scrollable-div">
+                      BEED-1
+                    </MenuItem>,
+                    <MenuItem value="BEED2" className="scrollable-div">
+                      BEED-2
+                    </MenuItem>,
+                    <MenuItem value="BEED3" className="scrollable-div">
+                      BEED-3
+                    </MenuItem>,
+                    <MenuItem value="BEED4" className="scrollable-div">
+                      BEED-4
+                    </MenuItem>,
+                  ]
+                : course === "BSND"
+                ? [
+                    <MenuItem value="BSND1" className="scrollable-div">
+                      BSND-1
+                    </MenuItem>,
+                    <MenuItem value="BSND2" className="scrollable-div">
+                      BSND-2
+                    </MenuItem>,
+                    <MenuItem value="BSND3" className="scrollable-div">
+                      BSND-3
+                    </MenuItem>,
+                    <MenuItem value="BSND4" className="scrollable-div">
+                      BSND-4
+                    </MenuItem>,
+                  ]
+                : course === "BSBIO"
+                ? [
+                    <MenuItem value="BSBIO1" className="scrollable-div">
+                      BSBIO-1
+                    </MenuItem>,
+                    <MenuItem value="BSBIO2" className="scrollable-div">
+                      BSBIO-2
+                    </MenuItem>,
+                    <MenuItem value="BSBIO3" className="scrollable-div">
+                      BSBIO-3
+                    </MenuItem>,
+                    <MenuItem value="BSBIO4" className="scrollable-div">
+                      BSBIO-4
+                    </MenuItem>,
+                  ]
+                : []}
+            </TextField>
+
+            <TextField
+              required
+              id="outlined-required"
+              style={{ width: "100%" }}
+              label="Address"
+              autocomplete="off"
+              onChange={(e) => setlocation(e.target.value)}
+              className="mb-3"
+            />
+            <TextField
+              required
+              type="email"
+              id="outlined-required"
+              style={{ width: "100%" }}
+              label="Email"
+              autocomplete="off"
+              onChange={(e) => setEmail(e.target.value)}
+              className="mb-3"
+            />
 
             <div className="row">
-              <div className="col-4">
-                <InputGroup className="mb-3">
-                  <InputGroup.Text id="basic-addon1">
-                    <span
-                      className="fa-solid fa-cake-candles"
-                      aria-hidden="true"
-                    ></span>
-                  </InputGroup.Text>
-                  <Form.Select
-                    aria-label="Default select example"
-                    name="SelectMonth"
-                    className="form-control select2 text-xs"
-                    id="SelectMonth"
-                    required
-                    onChange={(e) => setbirthm(e.target.value)}
-                  >
-                    <option value="">Birth Month</option>
-                    <option value="January">January</option>
-                    <option value="February">February</option>
-                    <option value="March">March</option>
-                    <option value="April">April</option>
-                    <option value="May">May</option>
-                    <option value="June">June</option>
-                    <option value="July">July</option>
-                    <option value="August">August</option>
-                    <option value="September">September</option>
-                    <option value="October">October</option>
-                    <option value="November">November</option>
-                    <option value="December">December</option>
-                  </Form.Select>
-                </InputGroup>
-              </div>
-
-              <div className="col-4">
-                <InputGroup className="mb-3">
-                  <InputGroup.Text id="basic-addon1">
-                    <span
-                      className="fa-solid fa-calendar-day"
-                      aria-hidden="true"
-                    ></span>
-                  </InputGroup.Text>
-                  <Form.Select
-                    aria-label="Default select example"
-                    name="SelectMonth"
-                    className="form-control select2 text-xs"
-                    id="SelectMonth"
-                    required
-                    onChange={(e) => setbirthd(e.target.value)}
-                  >
-                    <option value="">Birth Day</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                    <option value="25">25</option>
-                    <option value="26">26</option>
-                    <option value="27">27</option>
-                    <option value="28">28</option>
-                    <option value="29">29</option>
-                    <option value="30">30</option>
-                    <option value="31">31</option>
-                  </Form.Select>
-                </InputGroup>
-              </div>
-              <div className="col-4 mb-3">
-                <InputGroup className="mb-3">
-                  <InputGroup.Text id="basic-addon1">
-                    <span
-                      className="fa-solid fa-calendar"
-                      aria-hidden="true"
-                    ></span>
-                  </InputGroup.Text>
-                  <Form.Select
-                    aria-label="Default select example"
-                    name="SelectMonth"
-                    className="form-control select2 text-xs"
-                    id="SelectMonth"
-                    required
-                    onChange={(e) => setbirthy(e.target.value)}
-                  >
-                    <option value="">Birth Year</option>
-                    <option value="2012">2012</option>
-                    <option value="2011">2011</option>
-                    <option value="2010">2010</option>
-                    <option value="2009">2009</option>
-                    <option value="2008">2008</option>
-                    <option value="2007">2007</option>
-                    <option value="2006">2006</option>
-                    <option value="2005">2005</option>
-                    <option value="2004">2004</option>
-                    <option value="2003">2003</option>
-                    <option value="2002">2002</option>
-                    <option value="2001">2001</option>
-                    <option value="2000">2000</option>
-                    <option value="1999">1999</option>
-                    <option value="1998">1998</option>
-                    <option value="1997">1997</option>
-                    <option value="1996">1996</option>
-                    <option value="1995">1995</option>
-                    <option value="1994">1994</option>
-                    <option value="1993">1993</option>
-                    <option value="1992">1992</option>
-                    <option value="1991">1991</option>
-                    <option value="1990">1990</option>
-                    <option value="1989">1989</option>
-                    <option value="1988">1988</option>
-                    <option value="1987">1987</option>
-                    <option value="1986">1986</option>
-                    <option value="1985">1985</option>
-                    <option value="1984">1984</option>
-                    <option value="1983">1983</option>
-                    <option value="1982">1982</option>
-                    <option value="1981">1981</option>
-                    <option value="1980">1980</option>
-                    <option value="1979">1979</option>
-                    <option value="1978">1978</option>
-                    <option value="1977">1977</option>
-                    <option value="1976">1976</option>
-                    <option value="1975">1975</option>
-                    <option value="1974">1974</option>
-                    <option value="1973">1973</option>
-                    <option value="1972">1972</option>
-                    <option value="1971">1971</option>
-                    <option value="1970">1970</option>
-                    <option value="1969">1969</option>
-                    <option value="1968">1968</option>
-                    <option value="1967">1967</option>
-                    <option value="1966">1966</option>
-                    <option value="1965">1965</option>
-                    <option value="1964">1964</option>
-                    <option value="1963">1963</option>
-                    <option value="1962">1962</option>
-                    <option value="1961">1961</option>
-                    <option value="1960">1960</option>
-                    <option value="1959">1959</option>
-                    <option value="1958">1958</option>
-                    <option value="1957">1957</option>
-                    <option value="1956">1956</option>
-                    <option value="1955">1955</option>
-                    <option value="1954">1954</option>
-                    <option value="1953">1953</option>
-                    <option value="1952">1952</option>
-                    <option value="1951">1951</option>
-                    <option value="1950">1950</option>
-                    <option value="1949">1949</option>
-                    <option value="1948">1948</option>
-                    <option value="1947">1947</option>
-                    <option value="1946">1946</option>
-                    <option value="1945">1945</option>
-                    <option value="1944">1944</option>
-                    <option value="1943">1943</option>
-                    <option value="1942">1942</option>
-                    <option value="1941">1941</option>
-                    <option value="1940">1940</option>
-                    <option value="1939">1939</option>
-                    <option value="1938">1938</option>
-                    <option value="1937">1937</option>
-                    <option value="1936">1936</option>
-                    <option value="1935">1935</option>
-                    <option value="1934">1934</option>
-                    <option value="1933">1933</option>
-                    <option value="1932">1932</option>
-                    <option value="1931">1931</option>
-                    <option value="1930">1930</option>
-                    <option value="1929">1929</option>
-                    <option value="1928">1928</option>
-                    <option value="1927">1927</option>
-                    <option value="1926">1926</option>
-                    <option value="1925">1925</option>
-                    <option value="1924">1924</option>
-                    <option value="1923">1923</option>
-                    <option value="1922">1922</option>
-                    <option value="1921">1921</option>
-                    <option value="1920">1920</option>
-                    <option value="1919">1919</option>
-                    <option value="1918">1918</option>
-                    <option value="1917">1917</option>
-                    <option value="1916">1916</option>
-                    <option value="1915">1915</option>
-                    <option value="1914">1914</option>
-                    <option value="1913">1913</option>
-                    <option value="1912">1912</option>
-                    <option value="1911">1911</option>
-                    <option value="1910">1910</option>
-                    <option value="1909">1909</option>
-                    <option value="1908">1908</option>
-                    <option value="1907">1907</option>
-                    <option value="1906">1906</option>
-                    <option value="1905">1905</option>
-                    <option value="1904">1904</option>
-                    <option value="1903">1903</option>
-                    <option value="1902">1902</option>
-                    <option value="1901">1901</option>
-                    <option value="1900">1900</option>
-                  </Form.Select>
-                </InputGroup>
-              </div>
+              <PasswordInputField
+                handlePasswordChange={handlePasswordChange}
+                handleValidation={handleValidation}
+                passwordError={passwordError}
+              />
+              <ConfirmPasswordInputField
+                handlePasswordChange={handlePasswordChange}
+                handleValidation={handleValidation}
+                confirmPasswordError={confirmPasswordError}
+                onChange={(e) => passwordInput(e.target.value)}
+              />
             </div>
-            <div className="row">
-              <div className="col-6">
-                <InputGroup className="mb-3">
-                  <InputGroup.Text id="basic-addon1">
-                    <span className="fa fa-sitemap" aria-hidden="true"></span>
-                  </InputGroup.Text>
-                  <Form.Select
-                    aria-label="Default select example"
-                    name="Selectorg"
-                    className="form-control select2 text-xs"
-                    id="Selectorg"
-                    required
-                    onChange={(e) => setorg(e.target.value)}
-                  >
-                    <option value="">Organization</option>
-                    <option value="ABS">ABS</option>
-                    <option value="HMS">HMS</option>
-                    <option value="IIEE">IIEE</option>
-                    <option value="IBITS">IBITS</option>
-                    <option value="JME">JME</option>
-                    <option value="JPEA">JPEA</option>
-                    <option value="PADS">PADS</option>
-                    <option value="PASOA">PASOA</option>
-                    <option value="PICE">PICE</option>
-                    <option value="SYNERTECH">SYNERTECH</option>
-                    <option value="UAPSA">UAPSA</option>
-                    <option value="YES">YES</option>
-                  </Form.Select>
-                </InputGroup>
-              </div>
-              <div className="col-6">
-                <InputGroup className="mb-3">
-                  <InputGroup.Text id="basic-addon1">
-                    <span className="fa fa-sitemap" aria-hidden="true"></span>
-                  </InputGroup.Text>
-                  <Form.Select
-                    aria-label="Default select example"
-                    name="Selectorg"
-                    className="form-control select2 text-xs"
-                    id="Selectorg"
-                    required
-                    onChange={(e) => setgender(e.target.value)}
-                  >
-                    <option value="">Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Unknown">Unknown</option>
-                  </Form.Select>
-                </InputGroup>
-              </div>
-            </div>
-            <InputGroup className="mb-3">
-              <FormControl
-                type="text"
-                placeholder="Course/Year"
-                aria-label="Course"
-                aria-describedby="basic-addon1"
-                autocomplete="off"
-                required
-                onChange={(e) => setcourse(e.target.value)}
-              />
-              <InputGroup.Text id="basic-addon1">
-                <span
-                  className="fa-solid fa-bars-progress"
-                  aria-hidden="true"
-                ></span>
-              </InputGroup.Text>
-            </InputGroup>
-
-            <InputGroup className="mb-3">
-              <FormControl
-                type="text"
-                placeholder="Location"
-                aria-label="Location"
-                aria-describedby="basic-addon1"
-                autocomplete="off"
-                required
-                onChange={(e) => setlocation(e.target.value)}
-              />
-              <InputGroup.Text id="basic-addon1">
-                <span
-                  className="fa-solid fa-location-dot"
-                  aria-hidden="true"
-                ></span>
-              </InputGroup.Text>
-            </InputGroup>
-            <InputGroup className="mb-3">
-              <FormControl
-                type="email"
-                placeholder="Email"
-                aria-label="Email"
-                aria-describedby="basic-addon1"
-                autocomplete="off"
-                required
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <InputGroup.Text id="basic-addon1">
-                <span
-                  className="fa-solid fa-envelope"
-                  aria-hidden="true"
-                ></span>
-              </InputGroup.Text>
-            </InputGroup>
-            <InputGroup className="mb-3">
-              <FormControl
-                type="text"
-                placeholder="Student ID"
-                aria-label="Student ID"
-                aria-describedby="basic-addon1"
-                autocomplete="off"
-                maxlength="15"
-                size="50"
-                required
-                name="StudentID"
-                onChange={(e) => setStudenti(e.target.value)}
-              />
-              <InputGroup.Text id="basic-addon1">
-                <span className="fas fa-user" aria-hidden="true"></span>
-              </InputGroup.Text>
-            </InputGroup>
-            <InputGroup className="mb-3">
-              <FormControl
-                type="password"
-                placeholder="password"
-                aria-label="password"
-                aria-describedby="basic-addon1"
-                autocomplete="off"
-                required
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <InputGroup.Text id="basic-addon1">
-                <span className="fas fa-lock" aria-hidden="true"></span>
-              </InputGroup.Text>
-            </InputGroup>
-
             <div className="d-grid gap-2">
-              <Button variant="primary" type="Submit">
+              <Button variant="outline-primary" type="Submit">
                 Register
               </Button>
             </div>

@@ -1,0 +1,19 @@
+.BG{
+    background: #4c0001;
+}
+.C {
+color: pink;
+}
+.rows{
+    background: #f4f6f9;
+    padding-top: 20px;
+}
+.Modals{
+    margin-top: 50px;
+}
+@media screen and (max-width: 600px) {
+    .Modals{
+        margin-left: 20px;
+        /* margin-right: 35px; */
+    }
+}

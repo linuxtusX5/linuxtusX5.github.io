@@ -26,6 +26,9 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import HomeIcon from "@mui/icons-material/Home";
 import logo2 from "../Photos/council_Logo-modified.png";
 import { Card } from "react-bootstrap";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PeopleIcon from "@mui/icons-material/People";
+import PaymentIcon from "@mui/icons-material/Payment";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -228,6 +231,62 @@ export default function PrivacyAdmin() {
                   />
                 </ListItemIcon>{" "}
                 Organization
+              </ListItemButton>
+            </Tooltip>
+            <br />
+            <Tooltip
+              title="Payment Checker"
+              arrow
+              placement="right"
+              TransitionComponent={Fade}
+              TransitionProps={{ timeout: 600 }}
+            >
+              <ListItemButton component="a" href="/Checker">
+                <ListItemIcon>
+                  <PaymentIcon
+                    style={{
+                      color: "#4C0001",
+                    }}
+                  />
+                </ListItemIcon>{" "}
+                Payment Checker
+              </ListItemButton>
+            </Tooltip>
+            <br />
+            <Tooltip
+              title="CSC OFFICER"
+              arrow
+              placement="right"
+              TransitionComponent={Fade}
+              TransitionProps={{ timeout: 600 }}
+            >
+              <ListItemButton component="a" href="/Officer">
+                <ListItemIcon>
+                  <PeopleIcon
+                    style={{
+                      color: "#4C0001",
+                    }}
+                  />
+                </ListItemIcon>{" "}
+                CSC OFFICER
+              </ListItemButton>
+            </Tooltip><br/>
+            <Tooltip
+              title="Logout"
+              arrow
+              placement="right"
+              TransitionComponent={Fade}
+              TransitionProps={{ timeout: 600 }}
+            >
+              <ListItemButton component="a" href="/">
+                <ListItemIcon>
+                  <LogoutIcon
+                    style={{
+                      color: "#4C0001",
+                    }}
+                  />
+                </ListItemIcon>{" "}
+                Logout
               </ListItemButton>
             </Tooltip>
             <br />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FloatingLabel, Form, Card } from "react-bootstrap";
+import { FloatingLabel, Form, Card, Button, Modal } from "react-bootstrap";
 import {
   doc,
   collection,
@@ -41,7 +41,7 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import FilterListIcon from "@mui/icons-material/FilterList";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ListSubheader from "@mui/material/ListSubheader";
@@ -51,10 +51,18 @@ import Paper from "@mui/material/Paper";
 import { CardActionArea } from "@mui/material";
 import SpeedDial from "@mui/material/SpeedDial";
 import apps from "../firebase/index";
-
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import HomeIcon from "@mui/icons-material/Home";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import PeopleIcon from "@mui/icons-material/People";
+import PaymentIcon from "@mui/icons-material/Payment";
+import Swal from "sweetalert2";
 
 const db = apps.firestore();
 const columns = [
@@ -156,6 +164,15 @@ const Add_event = () => {
   const [expanded, setExpanded] = React.useState(false);
   const [expanded2, setExpanded2] = React.useState(false);
   const [fileUrl, setFileUrl] = useState(null);
+  
+  const [open2, setOpen2] = useState(false);
+  const [updatedInput, setUpdatedInput] = useState("");
+  const [updatedDesc, setUpdatedDesc] = useState("");
+ const [show, setShow] = useState(false);
+
+ const handleClose2 = () => setShow(false);
+ const handleShow = () => setShow(true);
+  const [dataIdToBeUpdated, setDataIdToBeUpdated] = useState("");
 
   const onFileChange = async (e) => {
     const file = e.target.files[0];
@@ -165,6 +182,32 @@ const Add_event = () => {
     setFileUrl(await fileRef.getDownloadURL());
   };
 
+   const updateData = async (e) => {
+     e.preventDefault();
+     handleClose();
+
+     Swal.fire({
+       position: "center",
+       icon: "success",
+       title: "Success",
+       showConfirmButton: false,
+       timer: 2000,
+     });
+     await db.collection("Event").doc(dataIdToBeUpdated).update({
+       name: updatedInput,
+       Description: updatedDesc,
+       timestamp: new Date(),
+     });
+     setUpdatedInput("");
+     setUpdatedDesc("");
+   };
+      const handleClickOpen = () => {
+        setOpen2(true);
+      };
+
+      const handleClose = () => {
+        setOpen2(false);
+      };
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -204,13 +247,101 @@ const Add_event = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  const deletedocs = async (user) => {
-    await deleteDoc(doc(db, "Event", user.name));
-  };
+ const deletedocs = (dataIdToBeUpdated) => {
+   db.collection("Event").doc(dataIdToBeUpdated).delete();
+   Swal.fire({
+     position: "center",
+     icon: "success",
+     title: "Success",
+     showConfirmButton: false,
+     timer: 2000,
+   });
+   handleClose2();
+ };
 
   return (
     <>
+      <Modal
+        show={show}
+        onHide={handleClose2}
+        backdrop="static"
+        keyboard={false}
+        style={{ marginTop: "100px" }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title style={{ color: "#4c0001" }}>ARE YOU SURE?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>You won't be able to revert this?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClose2}>
+            Cancel
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => deletedocs(dataIdToBeUpdated)}
+          >
+            Yes, Delete it!
+          </Button>
+        </Modal.Footer>
+      </Modal>{" "}
+      {/* <Dialog
+        open={show}
+        onClose={handleClose2}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle style={{ color: "#4c0001" }}>ARE YOU SURE?</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            You won't be able to revert this?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="danger" onClick={handleClose2}>
+            Cancel
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => deletedocs(dataIdToBeUpdated)}
+          >
+            Yes, Delete it!
+          </Button>
+        </DialogActions>
+      </Dialog> */}
+      <Dialog open={open2} onClose={handleClose}>
+        <DialogTitle style={{ color: "#4C0001" }}>Event</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            POLYTECHNIC UNIVERSITY OF THE PHILIPPINES LOPEZ QUEZON BRANCH
+          </DialogContentText>
+          <TextField
+            margin="dense"
+            label="Name"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={updatedInput}
+            onChange={(e) => setUpdatedInput(e.target.value)}
+          />
+          <TextField
+            margin="dense"
+            label="Description"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={updatedDesc}
+            onChange={(e) => setUpdatedDesc(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} variant="danger">
+            Cancel
+          </Button>
+          <Button onClick={updateData} variant="success">
+            Update
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar
@@ -333,6 +464,64 @@ const Add_event = () => {
                     />
                   </ListItemIcon>{" "}
                   Organization
+                </ListItemButton>
+              </Tooltip>
+
+              <br />
+              <Tooltip
+                title="Payment Checker"
+                arrow
+                placement="right"
+                TransitionComponent={Fade}
+                TransitionProps={{ timeout: 600 }}
+              >
+                <ListItemButton component="a" href="/Checker">
+                  <ListItemIcon>
+                    <PaymentIcon
+                      style={{
+                        color: "#4C0001",
+                      }}
+                    />
+                  </ListItemIcon>{" "}
+                  Payment Checker
+                </ListItemButton>
+              </Tooltip>
+              <br />
+              <Tooltip
+                title="CSC OFFICER"
+                arrow
+                placement="right"
+                TransitionComponent={Fade}
+                TransitionProps={{ timeout: 600 }}
+              >
+                <ListItemButton component="a" href="/Officer">
+                  <ListItemIcon>
+                    <PeopleIcon
+                      style={{
+                        color: "#4C0001",
+                      }}
+                    />
+                  </ListItemIcon>{" "}
+                  CSC OFFICER
+                </ListItemButton>
+              </Tooltip>
+              <br />
+              <Tooltip
+                title="Logout"
+                arrow
+                placement="right"
+                TransitionComponent={Fade}
+                TransitionProps={{ timeout: 600 }}
+              >
+                <ListItemButton component="a" href="/">
+                  <ListItemIcon>
+                    <LogoutIcon
+                      style={{
+                        color: "#4C0001",
+                      }}
+                    />
+                  </ListItemIcon>{" "}
+                  Logout
                 </ListItemButton>
               </Tooltip>
               <br />
@@ -524,14 +713,27 @@ const Add_event = () => {
                           {user.Description}
                         </Typography>
                       </CardContent>
-                      <i
-                        className="fa fa-trash"
-                        onClick={() => deletedocs(user)}
-                        style={{ color: "#4C0001" }}
+                      <Button
+                        variant="success"
+                        style={{ margin: "10px" }}
+                        onClick={() => {
+                          handleClickOpen();
+                          setDataIdToBeUpdated(user.id);
+                          setUpdatedInput(user.name);
+                          setUpdatedDesc(user.Description);
+                        }}
                       >
-                        {" "}
+                        Edit
+                      </Button>
+                      <Button
+                        variant="danger"
+                        onClick={() => {
+                          handleShow();
+                          setDataIdToBeUpdated(user.id);
+                        }}
+                      >
                         Delete
-                      </i>
+                      </Button>
                     </CardActionArea>
                   );
                 })}

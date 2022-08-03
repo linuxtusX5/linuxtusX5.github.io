@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, InputGroup, FormControl } from "react-bootstrap";
+import { Form, InputGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { db } from "../firebase/index";
@@ -15,12 +15,24 @@ import {
   getDoc,
 } from "firebase/firestore";
 
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import { useUserAuth } from "../context/UserAuthContext";
+
 function LoginAdmin() {
   const [email, setEmail] = useState("");
   const [studenti, setStudenti] = useState("");
   const [passwordInput, setPassword] = useState("");
+  const { logIn } = useUserAuth();
   const navigate = useNavigate();
 
+  const [error, setError] = useState("");
   const [setLists] = useState([]);
   useEffect(() => {
     const q = query(collection(db, "StudentData"));
@@ -34,17 +46,16 @@ function LoginAdmin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      email === "admin21@gmail.com" &&
-      studenti === "2019-00735-LQ-0" &&
-      passwordInput === "password") 
-    {
-        navigate("/Admin");
-    } else {
-      // doc.data() will be undefined in this case 
-      alert("invalid Account");
-      console.log("No such document!");
-    }
+     if (
+       email === "2019-00735-lq-0admin21@gmail.com" &&
+       passwordInput === "Passw0rd"
+     ) {
+       navigate("/Admin");
+     } else {
+       // doc.data() will be undefined in this case
+       alert("invalid Account");
+       console.log("No such document!");
+     }
     //lists.map((list) => list.password)
   };
 
@@ -58,7 +69,20 @@ function LoginAdmin() {
         console.log(error.message);
       });
   };
+  const [data, setData] = useState({
+    showPassword: false,
+  });
 
+  const handleClickShowPassword = () => {
+    setData({
+      ...data,
+      showPassword: !data.showPassword,
+    });
+  };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+ 
   return (
     <>
       <div id="back2">
@@ -76,58 +100,54 @@ function LoginAdmin() {
           </h2>
           <h5 className="mt-3 but">Admin</h5>
           <Form onSubmit={handleSubmit}>
-            <InputGroup className="mb-3">
-              <FormControl
-                type="email"
-                placeholder="Email"
-                aria-label="Email"
-                aria-describedby="basic"
-                autocomplete="off"
+            <TextField
+              required
+              type="email"
+              id="outlined-required"
+              style={{ width: "100%" }}
+              label="Email"
+              autocomplete="off"
+              onChange={(e) => setEmail(e.target.value)}
+              className="mb-3"
+            />
+            <FormControl
+              variant="outlined"
+              style={{
+                m: 1,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <InputLabel htmlFor="outlined-adornment-password">
+                Password
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                fullWidth
+                type={data.showPassword ? "text" : "password"}
                 required
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <InputGroup.Text id="basic">
-                <span
-                  className="fa-solid fa-envelope"
-                  aria-hidden="true"
-                ></span>
-              </InputGroup.Text>
-            </InputGroup>
-
-            <InputGroup className="mb-3">
-              <FormControl
-                type="text"
-                placeholder="Student Number"
-                aria-label="Student Number"
-                aria-describedby="basic-addon1"
-                autocomplete="off"
-                maxlength="15"
-                size="50"
-                onChange={(e) => setStudenti(e.target.value)}
-              />{" "}
-              <InputGroup.Text id="basic-addon1">
-                <span class="fas fa-user" aria-hidden="true"></span>
-              </InputGroup.Text>
-            </InputGroup>
-
-            <InputGroup className="mb-3">
-              <FormControl
-                type="password"
-                placeholder="password"
-                aria-label="password"
-                aria-describedby="basic-addon1"
-                //autocomplete="off"
-                required
+                className="mb-3"
                 onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {data.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
               />
-              <InputGroup.Text id="basic-addon1">
-                <span className="fas fa-lock" aria-hidden="true"></span>
-              </InputGroup.Text>
-            </InputGroup>
+            </FormControl>
 
             <div className="d-grid gap-2">
-              <Button variant="primary" type="Submit">
-                Sign in
+              <Button variant="outline-primary" type="Submit">
+                Sign In
               </Button>
             </div>
           </Form>

@@ -79,7 +79,7 @@ import AnnouncementTwoToneIcon from "@mui/icons-material/AnnouncementTwoTone";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
-import Profile from "../../Photos/wp5063265.webp";
+import Profile from "../../Photos/Advance care (6).png";
 
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
@@ -160,7 +160,38 @@ const columns = [
   },
 ];
 
+function stringToColor(string) {
+  let hash = 0;
+  let i;
+
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = "#";
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.slice(-2);
+  }
+  /* eslint-enable no-bitwise */
+
+  return color;
+}
+
+function stringAvatar(name) {
+  return {
+    sx: {
+      bgcolor: stringToColor(name),
+    },
+    children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+  };
+}
+
 const Header = () => {
+
+    
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [lists, setLists] = useState([]);
@@ -263,6 +294,124 @@ const Header = () => {
   const [expanded10, setExpanded10] = React.useState(false);
   const [expanded11, setExpanded11] = React.useState(false);
   const [expanded12, setExpanded12] = React.useState(false);
+
+  const [President, setPresident] = React.useState([]);
+  const [VicePresident, setVicePresident] = React.useState([]);
+  const [Secretary, setSecretary] = React.useState([]);
+  const [Treasurer, setTreasurer] = React.useState([]);
+  const [Auditor, setAuditor] = React.useState([]);
+  const [Councilor1, setCouncilor1] = React.useState([]);
+  const [Councilor2, setCouncilor2] = React.useState([]);
+  const [Councilor3, setCouncilor3] = React.useState([]);
+  const [Councilor4, setCouncilor4] = React.useState([]);
+  const [Councilor5, setCouncilor5] = React.useState([]);
+  const [Councilor6, setCouncilor6] = React.useState([]);
+  const [Councilor7, setCouncilor7] = React.useState([]);
+  
+  
+    useEffect(() => {
+      const q = query(
+        collection(db, "President"),
+        orderBy("timestamp", "desc")
+      );
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        setPresident(
+          snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+      });
+      return () => unsubscribe();
+    }, []);
+    
+    useEffect(() => {
+      const q = query(
+        collection(db, "Vice-President"),
+        orderBy("timestamp", "desc")
+      );
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        setVicePresident(
+          snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+      });
+      return () => unsubscribe();
+    }, []);
+ useEffect(() => {
+   const q = query(collection(db, "Secretary"), orderBy("timestamp", "desc"));
+   const unsubscribe = onSnapshot(q, (snapshot) => {
+     setSecretary(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+   });
+   return () => unsubscribe();
+ }, []);
+ 
+    useEffect(() => {
+      const q = query(
+        collection(db, "Treasurer"),
+        orderBy("timestamp", "desc")
+      );
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        setTreasurer(
+          snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+      });
+      return () => unsubscribe();
+    }, []);
+    
+ useEffect(() => {
+   const q = query(collection(db, "Auditor"), orderBy("timestamp", "desc"));
+   const unsubscribe = onSnapshot(q, (snapshot) => {
+     setAuditor(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+   });
+   return () => unsubscribe();
+ }, []);
+ useEffect(() => {
+   const q = query(collection(db, "Councilor1"), orderBy("timestamp", "desc"));
+   const unsubscribe = onSnapshot(q, (snapshot) => {
+     setCouncilor1(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+   });
+   return () => unsubscribe();
+ }, []);
+
+ useEffect(() => {
+   const q = query(collection(db, "Councilor2"), orderBy("timestamp", "desc"));
+   const unsubscribe = onSnapshot(q, (snapshot) => {
+     setCouncilor2(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+   });
+   return () => unsubscribe();
+ }, []);
+ useEffect(() => {
+   const q = query(collection(db, "Councilor3"), orderBy("timestamp", "desc"));
+   const unsubscribe = onSnapshot(q, (snapshot) => {
+     setCouncilor3(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+   });
+   return () => unsubscribe();
+ }, []);
+ useEffect(() => {
+   const q = query(collection(db, "Councilor4"), orderBy("timestamp", "desc"));
+   const unsubscribe = onSnapshot(q, (snapshot) => {
+     setCouncilor4(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+   });
+   return () => unsubscribe();
+ }, []);
+ useEffect(() => {
+   const q = query(collection(db, "Councilor5"), orderBy("timestamp", "desc"));
+   const unsubscribe = onSnapshot(q, (snapshot) => {
+     setCouncilor5(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+   });
+   return () => unsubscribe();
+ }, []);
+ useEffect(() => {
+   const q = query(collection(db, "Councilor6"), orderBy("timestamp", "desc"));
+   const unsubscribe = onSnapshot(q, (snapshot) => {
+     setCouncilor6(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+   });
+   return () => unsubscribe();
+ }, []);
+ useEffect(() => {
+   const q = query(collection(db, "Councilor7"), orderBy("timestamp", "desc"));
+   const unsubscribe = onSnapshot(q, (snapshot) => {
+     setCouncilor7(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+   });
+   return () => unsubscribe();
+ }, []);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -550,7 +699,6 @@ const Header = () => {
             </Nav>
             <Nav>
               <Nav.Link
-                href="#deets"
                 style={{
                   color: "#4C0001",
                 }}
@@ -570,11 +718,7 @@ const Header = () => {
                     TransitionComponent={Fade}
                     TransitionProps={{ timeout: 600 }}
                   >
-                    <Avatar
-                      alt="Remy Sharp"
-                      src={Profile}
-                      onClick={handleShow}
-                    />
+                    <Avatar alt="Profile" src={Profile} onClick={handleShow} />
                   </Tooltip>
                 </StyledBadge>
               </Nav.Link>
@@ -591,7 +735,11 @@ const Header = () => {
             boxShadow: "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
           }}
         >
-          <h3 id="Ann">ANNOUNCEMENT</h3>
+          <Typography paragraph id="Ann">
+            <h1 style={{ color: "#4c0001", fontWeight: "bolder" }}>
+              ANNOUNCEMENT
+            </h1>
+          </Typography>
           <Paper sx={{ width: "100%" }}>
             <Tooltip
               title="Filter Click me :)"
@@ -687,7 +835,7 @@ const Header = () => {
           </Paper>
         </Card>
         <Card
-          className="m-3 item3"
+          className=" item3"
           style={{
             backgroundColor: "#fff ",
             borderTop: "4px solid #4C0001",
@@ -747,48 +895,52 @@ const Header = () => {
             {" "}
             <Grid item xs></Grid>
             <Grid item xs={8}>
-              <CardActionArea
-                onClick={handleExpandClick}
-                style={{
-                  color: "#4C0001",
-                  backgroundColor: "#4C0001",
-                  borderTop: "4px solid #4C0001",
-                  boxShadow:
-                    "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
-                }}
-              >
-                <ExpandMore
-                  expand={expanded}
-                  aria-expanded={expanded}
-                  aria-label="show more"
-                  style={{ color: "#f4f6f9" }}
-                >
-                  <ExpandMoreIcon />
-                </ExpandMore>
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
-                  <CardMedia
-                    component="img"
-                    height="100%"
-                    image={President}
-                    alt="President"
-                  />
-                </Collapse>
-                <CardContent style={{ backgroundColor: "#f4f6f9" }}>
-                  <Typography gutterBottom variant="h5" component="div">
-                    <strong>President</strong>
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    <strong>
-                      <h3 style={{ color: "#000" }}>
-                        Ms. Trisha Mae Jalmanzar
-                      </h3>
-                    </strong>
-                    <strong style={{ color: "#4C0001" }}>
-                      Pup Lopez Central Student Council AY: 2021-2022
-                    </strong>
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
+              {President.map((president, name) => {
+                return (
+                  <CardActionArea
+                    className="mb-4"
+                    key={name}
+                    onClick={handleExpandClick}
+                    style={{
+                      color: "#4C0001",
+                      backgroundColor: "#4C0001",
+                      borderTop: "4px solid #4C0001",
+                      boxShadow:
+                        "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
+                    }}
+                  >
+                    <ExpandMore
+                      expand={expanded}
+                      aria-expanded={expanded}
+                      aria-label="show more"
+                      style={{ color: "#fff" }}
+                    >
+                      <ExpandMoreIcon />
+                    </ExpandMore>
+                    <Collapse in={expanded} timeout="auto" unmountOnExit>
+                      <CardMedia
+                        component="img"
+                        height="100%"
+                        image={president.EventPic}
+                        alt={president.name}
+                      />
+                    </Collapse>
+                    <CardContent style={{ backgroundColor: "#f4f6f9" }}>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <strong>President</strong>
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <h3 style={{ color: "#000" }}>{president.name}</h3>
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        <strong style={{ color: "#4C0001" }}>
+                          {president.Description}
+                        </strong>
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                );
+              })}
             </Grid>
             <Grid item xs></Grid>
           </Grid>
@@ -796,105 +948,52 @@ const Header = () => {
           <Grid container spacing={3}>
             <Grid item xs></Grid>
             <Grid item xs={8}>
-              <CardActionArea
-                onClick={handleExpandClick2}
-                style={{
-                  color: "#4C0001",
-                  backgroundColor: "#4C0001",
-                  borderTop: "4px solid #4C0001",
-                  boxShadow:
-                    "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
-                }}
-              >
-                <ExpandMore
-                  expand={expanded2}
-                  aria-expanded={expanded2}
-                  aria-label="show more"
-                  style={{ color: "#f4f6f9" }}
-                >
-                  <ExpandMoreIcon />
-                </ExpandMore>
-                <Collapse in={expanded2} timeout="auto" unmountOnExit>
-                  <CardMedia
-                    component="img"
-                    height="100%"
-                    image={Vice}
-                    alt="Vice President"
-                  />
-                </Collapse>
-                <CardContent style={{ backgroundColor: "#f4f6f9" }}>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    style={{ color: "#4C0001" }}
+              {VicePresident.map((vice_president, name) => {
+                return (
+                  <CardActionArea
+                    className="mb-4"
+                    key={name}
+                    onClick={handleExpandClick2}
+                    style={{
+                      color: "#4C0001",
+                      backgroundColor: "#4C0001",
+                      borderTop: "4px solid #4C0001",
+                      boxShadow:
+                        "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
+                    }}
                   >
-                    <strong>Vice President</strong>
-                  </Typography>
-
-                  <Typography variant="body2" color="text.secondary">
-                    <strong>
-                      <h3 style={{ color: "#000" }}>Mr. Ralph Earl Escleto</h3>
-                    </strong>
-                    <strong style={{ color: "#4C0001" }}>
-                      Pup Lopez Central Student Council AY: 2021-2022
-                    </strong>
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Grid>
-            <Grid item xs></Grid>
-          </Grid>
-
-          <br />
-          <Grid container spacing={3}>
-            <Grid item xs></Grid>
-            <Grid item xs={8}>
-              <CardActionArea
-                onClick={handleExpandClick3}
-                style={{
-                  color: "#4C0001",
-                  backgroundColor: "#4C0001",
-                  borderTop: "4px solid #4C0001",
-                  boxShadow:
-                    "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
-                }}
-              >
-                <ExpandMore
-                  expand={expanded3}
-                  aria-expanded={expanded3}
-                  aria-label="show more"
-                  style={{ color: "#f4f6f9" }}
-                >
-                  <ExpandMoreIcon />
-                </ExpandMore>
-                <Collapse in={expanded3} timeout="auto" unmountOnExit>
-                  <CardMedia
-                    component="img"
-                    height="100%"
-                    image={Secretary}
-                    alt="Secretary"
-                  />
-                </Collapse>
-                <CardContent style={{ backgroundColor: "#f4f6f9" }}>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    style={{ color: "#4C0001" }}
-                  >
-                    <strong>Secretary</strong>
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    <strong>
-                      <h3 style={{ color: "#000" }}>Ms. Lyka Andrea Vedad</h3>
-                    </strong>
-                    <strong style={{ color: "#4C0001" }}>
-                      Pup Lopez Central Student Council AY: 2021-2022
-                    </strong>
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
+                    <ExpandMore
+                      expand={expanded2}
+                      aria-expanded={expanded2}
+                      aria-label="show more"
+                      style={{ color: "#fff" }}
+                    >
+                      <ExpandMoreIcon />
+                    </ExpandMore>
+                    <Collapse in={expanded2} timeout="auto" unmountOnExit>
+                      <CardMedia
+                        component="img"
+                        height="100%"
+                        image={vice_president.EventPic}
+                        alt={vice_president.name}
+                      />
+                    </Collapse>
+                    <CardContent style={{ backgroundColor: "#f4f6f9" }}>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <strong>Vice President</strong>
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <h3 style={{ color: "#000" }}>{vice_president.name}</h3>
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        <strong style={{ color: "#4C0001" }}>
+                          {vice_president.Description}
+                        </strong>
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                );
+              })}
             </Grid>
             <Grid item xs></Grid>
           </Grid>
@@ -903,51 +1002,52 @@ const Header = () => {
           <Grid container spacing={3}>
             <Grid item xs></Grid>
             <Grid item xs={8}>
-              <CardActionArea
-                onClick={handleExpandClick4}
-                style={{
-                  color: "#4C0001",
-                  backgroundColor: "#4C0001",
-                  borderTop: "4px solid #4C0001",
-                  boxShadow:
-                    "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
-                }}
-              >
-                <ExpandMore
-                  expand={expanded4}
-                  aria-expanded={expanded4}
-                  aria-label="show more"
-                  style={{ color: "#f4f6f9" }}
-                >
-                  <ExpandMoreIcon />
-                </ExpandMore>
-                <Collapse in={expanded4} timeout="auto" unmountOnExit>
-                  <CardMedia
-                    component="img"
-                    height="100%"
-                    image={Treasurer}
-                    alt="Treasurer"
-                  />
-                </Collapse>
-                <CardContent style={{ backgroundColor: "#f4f6f9" }}>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    style={{ color: "#4C0001" }}
+              {Secretary.map((salas, name) => {
+                return (
+                  <CardActionArea
+                    className="mb-4"
+                    key={name}
+                    onClick={handleExpandClick3}
+                    style={{
+                      color: "#4C0001",
+                      backgroundColor: "#4C0001",
+                      borderTop: "4px solid #4C0001",
+                      boxShadow:
+                        "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
+                    }}
                   >
-                    <strong>Treasurer</strong>
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    <strong>
-                      <h3 style={{ color: "#000" }}>Ms. Justine Mae Flavier</h3>
-                    </strong>
-                    <strong style={{ color: "#4C0001" }}>
-                      Pup Lopez Central Student Council AY: 2021-2022
-                    </strong>
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
+                    <ExpandMore
+                      expand={expanded3}
+                      aria-expanded={expanded3}
+                      aria-label="show more"
+                      style={{ color: "#fff" }}
+                    >
+                      <ExpandMoreIcon />
+                    </ExpandMore>
+                    <Collapse in={expanded3} timeout="auto" unmountOnExit>
+                      <CardMedia
+                        component="img"
+                        height="100%"
+                        image={salas.EventPic}
+                        alt={salas.name}
+                      />
+                    </Collapse>
+                    <CardContent style={{ backgroundColor: "#f4f6f9" }}>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <strong>Secretary</strong>
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <h3 style={{ color: "#000" }}>{salas.name}</h3>
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        <strong style={{ color: "#4C0001" }}>
+                          {salas.Description}
+                        </strong>
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                );
+              })}
             </Grid>
             <Grid item xs></Grid>
           </Grid>
@@ -956,51 +1056,52 @@ const Header = () => {
           <Grid container spacing={3}>
             <Grid item xs></Grid>
             <Grid item xs={8}>
-              <CardActionArea
-                onClick={handleExpandClick5}
-                style={{
-                  color: "#4C0001",
-                  backgroundColor: "#4C0001",
-                  borderTop: "4px solid #4C0001",
-                  boxShadow:
-                    "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
-                }}
-              >
-                <ExpandMore
-                  expand={expanded5}
-                  aria-expanded={expanded5}
-                  aria-label="show more"
-                  style={{ color: "#f4f6f9" }}
-                >
-                  <ExpandMoreIcon />
-                </ExpandMore>
-                <Collapse in={expanded5} timeout="auto" unmountOnExit>
-                  <CardMedia
-                    component="img"
-                    height="100%"
-                    image={Auditor}
-                    alt="Auditor"
-                  />
-                </Collapse>
-                <CardContent style={{ backgroundColor: "#f4f6f9" }}>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    style={{ color: "#800" }}
+              {Treasurer.map((Tre, name) => {
+                return (
+                  <CardActionArea
+                    className="mb-4"
+                    key={name}
+                    onClick={handleExpandClick4}
+                    style={{
+                      color: "#4C0001",
+                      backgroundColor: "#4C0001",
+                      borderTop: "4px solid #4C0001",
+                      boxShadow:
+                        "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
+                    }}
                   >
-                    <strong>Auditor</strong>
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    <strong>
-                      <h3 style={{ color: "#000" }}>Mr. John Renmark Argudo</h3>
-                    </strong>
-                    <strong style={{ color: "#4C0001" }}>
-                      Pup Lopez Central Student Council AY: 2021-2022
-                    </strong>
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
+                    <ExpandMore
+                      expand={expanded4}
+                      aria-expanded={expanded4}
+                      aria-label="show more"
+                      style={{ color: "#fff" }}
+                    >
+                      <ExpandMoreIcon />
+                    </ExpandMore>
+                    <Collapse in={expanded4} timeout="auto" unmountOnExit>
+                      <CardMedia
+                        component="img"
+                        height="100%"
+                        image={Tre.EventPic}
+                        alt={Tre.name}
+                      />
+                    </Collapse>
+                    <CardContent style={{ backgroundColor: "#f4f6f9" }}>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <strong>Treasurer</strong>
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <h3 style={{ color: "#000" }}>{Tre.name}</h3>
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        <strong style={{ color: "#4C0001" }}>
+                          {Tre.Description}
+                        </strong>
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                );
+              })}
             </Grid>
             <Grid item xs></Grid>
           </Grid>
@@ -1009,51 +1110,52 @@ const Header = () => {
           <Grid container spacing={3}>
             <Grid item xs></Grid>
             <Grid item xs={8}>
-              <CardActionArea
-                onClick={handleExpandClick6}
-                style={{
-                  color: "#4C0001",
-                  backgroundColor: "#4C0001",
-                  borderTop: "4px solid #4C0001",
-                  boxShadow:
-                    "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
-                }}
-              >
-                <ExpandMore
-                  expand={expanded6}
-                  aria-expanded={expanded6}
-                  aria-label="show more"
-                  style={{ color: "#f4f6f9" }}
-                >
-                  <ExpandMoreIcon />
-                </ExpandMore>
-                <Collapse in={expanded6} timeout="auto" unmountOnExit>
-                  <CardMedia
-                    component="img"
-                    height="100%"
-                    image={Councilor1}
-                    alt="Councilor1"
-                  />
-                </Collapse>
-                <CardContent style={{ backgroundColor: "#f4f6f9" }}>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    style={{ color: "#800" }}
+              {Auditor.map((Aud, name) => {
+                return (
+                  <CardActionArea
+                    className="mb-4"
+                    key={name}
+                    onClick={handleExpandClick5}
+                    style={{
+                      color: "#4C0001",
+                      backgroundColor: "#4C0001",
+                      borderTop: "4px solid #4C0001",
+                      boxShadow:
+                        "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
+                    }}
                   >
-                    <strong>Councilor</strong>
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    <strong>
-                      <h3 style={{ color: "#000" }}>Mr. Jayson Nota</h3>
-                    </strong>
-                    <strong style={{ color: "#4C0001" }}>
-                      Pup Lopez Central Student Council AY: 2021-2022
-                    </strong>
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
+                    <ExpandMore
+                      expand={expanded5}
+                      aria-expanded={expanded5}
+                      aria-label="show more"
+                      style={{ color: "#fff" }}
+                    >
+                      <ExpandMoreIcon />
+                    </ExpandMore>
+                    <Collapse in={expanded5} timeout="auto" unmountOnExit>
+                      <CardMedia
+                        component="img"
+                        height="100%"
+                        image={Aud.EventPic}
+                        alt={Aud.name}
+                      />
+                    </Collapse>
+                    <CardContent style={{ backgroundColor: "#f4f6f9" }}>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <strong>Auditor</strong>
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <h3 style={{ color: "#000" }}>{Aud.name}</h3>
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        <strong style={{ color: "#4C0001" }}>
+                          {Aud.Description}
+                        </strong>
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                );
+              })}
             </Grid>
             <Grid item xs></Grid>
           </Grid>
@@ -1062,51 +1164,52 @@ const Header = () => {
           <Grid container spacing={3}>
             <Grid item xs></Grid>
             <Grid item xs={8}>
-              <CardActionArea
-                onClick={handleExpandClick7}
-                style={{
-                  color: "#4C0001",
-                  backgroundColor: "#4C0001",
-                  borderTop: "4px solid #4C0001",
-                  boxShadow:
-                    "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
-                }}
-              >
-                <ExpandMore
-                  expand={expanded7}
-                  aria-expanded={expanded7}
-                  aria-label="show more"
-                  style={{ color: "#f4f6f9" }}
-                >
-                  <ExpandMoreIcon />
-                </ExpandMore>
-                <Collapse in={expanded7} timeout="auto" unmountOnExit>
-                  <CardMedia
-                    component="img"
-                    height="100%"
-                    image={Councilor2}
-                    alt="Councilor2"
-                  />
-                </Collapse>
-                <CardContent style={{ backgroundColor: "#f4f6f9" }}>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    style={{ color: "#800" }}
+              {Councilor1.map((Cou1, name) => {
+                return (
+                  <CardActionArea
+                    className="mb-4"
+                    key={name}
+                    onClick={handleExpandClick6}
+                    style={{
+                      color: "#4C0001",
+                      backgroundColor: "#4C0001",
+                      borderTop: "4px solid #4C0001",
+                      boxShadow:
+                        "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
+                    }}
                   >
-                    <strong>Councilor</strong>
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    <strong>
-                      <h3 style={{ color: "#000" }}>Mr. Paul Andrie Flores</h3>
-                    </strong>
-                    <strong style={{ color: "#4C0001" }}>
-                      Pup Lopez Central Student Council AY: 2021-2022
-                    </strong>
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
+                    <ExpandMore
+                      expand={expanded6}
+                      aria-expanded={expanded6}
+                      aria-label="show more"
+                      style={{ color: "#fff" }}
+                    >
+                      <ExpandMoreIcon />
+                    </ExpandMore>
+                    <Collapse in={expanded6} timeout="auto" unmountOnExit>
+                      <CardMedia
+                        component="img"
+                        height="100%"
+                        image={Cou1.EventPic}
+                        alt={Cou1.name}
+                      />
+                    </Collapse>
+                    <CardContent style={{ backgroundColor: "#f4f6f9" }}>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <strong>Councilor</strong>
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <h3 style={{ color: "#000" }}>{Cou1.name}</h3>
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        <strong style={{ color: "#4C0001" }}>
+                          {Cou1.Description}
+                        </strong>
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                );
+              })}
             </Grid>
             <Grid item xs></Grid>
           </Grid>
@@ -1115,51 +1218,52 @@ const Header = () => {
           <Grid container spacing={3}>
             <Grid item xs></Grid>
             <Grid item xs={8}>
-              <CardActionArea
-                onClick={handleExpandClick8}
-                style={{
-                  color: "#4C0001",
-                  backgroundColor: "#4C0001",
-                  borderTop: "4px solid #4C0001",
-                  boxShadow:
-                    "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
-                }}
-              >
-                <ExpandMore
-                  expand={expanded8}
-                  aria-expanded={expanded8}
-                  aria-label="show more"
-                  style={{ color: "#f4f6f9" }}
-                >
-                  <ExpandMoreIcon />
-                </ExpandMore>
-                <Collapse in={expanded8} timeout="auto" unmountOnExit>
-                  <CardMedia
-                    component="img"
-                    height="100%"
-                    image={Councilor3}
-                    alt="Councilor3"
-                  />
-                </Collapse>
-                <CardContent style={{ backgroundColor: "#f4f6f9" }}>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    style={{ color: "#800" }}
+              {Councilor2.map((Cou2, name) => {
+                return (
+                  <CardActionArea
+                    className="mb-4"
+                    key={name}
+                    onClick={handleExpandClick7}
+                    style={{
+                      color: "#4C0001",
+                      backgroundColor: "#4C0001",
+                      borderTop: "4px solid #4C0001",
+                      boxShadow:
+                        "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
+                    }}
                   >
-                    <strong>Councilor</strong>
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    <strong>
-                      <h3 style={{ color: "#000" }}>Ms. Yo Aoki</h3>
-                    </strong>
-                    <strong style={{ color: "#4C0001" }}>
-                      Pup Lopez Central Student Council AY: 2021-2022
-                    </strong>
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
+                    <ExpandMore
+                      expand={expanded7}
+                      aria-expanded={expanded7}
+                      aria-label="show more"
+                      style={{ color: "#fff" }}
+                    >
+                      <ExpandMoreIcon />
+                    </ExpandMore>
+                    <Collapse in={expanded7} timeout="auto" unmountOnExit>
+                      <CardMedia
+                        component="img"
+                        height="100%"
+                        image={Cou2.EventPic}
+                        alt={Cou2.name}
+                      />
+                    </Collapse>
+                    <CardContent style={{ backgroundColor: "#f4f6f9" }}>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <strong>Councilor</strong>
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <h3 style={{ color: "#000" }}>{Cou2.name}</h3>
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        <strong style={{ color: "#4C0001" }}>
+                          {Cou2.Description}
+                        </strong>
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                );
+              })}
             </Grid>
             <Grid item xs></Grid>
           </Grid>
@@ -1168,53 +1272,52 @@ const Header = () => {
           <Grid container spacing={3}>
             <Grid item xs></Grid>
             <Grid item xs={8}>
-              <CardActionArea
-                onClick={handleExpandClick9}
-                style={{
-                  color: "#4C0001",
-                  backgroundColor: "#4C0001",
-                  borderTop: "4px solid #4C0001",
-                  boxShadow:
-                    "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
-                }}
-              >
-                <ExpandMore
-                  expand={expanded9}
-                  aria-expanded={expanded9}
-                  aria-label="show more"
-                  style={{ color: "#f4f6f9" }}
-                >
-                  <ExpandMoreIcon />
-                </ExpandMore>
-                <Collapse in={expanded9} timeout="auto" unmountOnExit>
-                  <CardMedia
-                    component="img"
-                    height="100%"
-                    image={Councilor4}
-                    alt="Councilor4"
-                  />
-                </Collapse>
-                <CardContent style={{ backgroundColor: "#f4f6f9" }}>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    style={{ color: "#800" }}
+              {Councilor3.map((Cou3, name) => {
+                return (
+                  <CardActionArea
+                    className="mb-4"
+                    key={name}
+                    onClick={handleExpandClick8}
+                    style={{
+                      color: "#4C0001",
+                      backgroundColor: "#4C0001",
+                      borderTop: "4px solid #4C0001",
+                      boxShadow:
+                        "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
+                    }}
                   >
-                    <strong>Councilor</strong>
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    <strong>
-                      <h3 style={{ color: "#000" }}>
-                        Mr. Ruel Antonio Austria
-                      </h3>
-                    </strong>
-                    <strong style={{ color: "#4C0001" }}>
-                      Pup Lopez Central Student Council AY: 2021-2022
-                    </strong>
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
+                    <ExpandMore
+                      expand={expanded8}
+                      aria-expanded={expanded8}
+                      aria-label="show more"
+                      style={{ color: "#fff" }}
+                    >
+                      <ExpandMoreIcon />
+                    </ExpandMore>
+                    <Collapse in={expanded8} timeout="auto" unmountOnExit>
+                      <CardMedia
+                        component="img"
+                        height="100%"
+                        image={Cou3.EventPic}
+                        alt={Cou3.name}
+                      />
+                    </Collapse>
+                    <CardContent style={{ backgroundColor: "#f4f6f9" }}>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <strong>Councilor</strong>
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <h3 style={{ color: "#000" }}>{Cou3.name}</h3>
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        <strong style={{ color: "#4C0001" }}>
+                          {Cou3.Description}
+                        </strong>
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                );
+              })}
             </Grid>
             <Grid item xs></Grid>
           </Grid>
@@ -1223,51 +1326,52 @@ const Header = () => {
           <Grid container spacing={3}>
             <Grid item xs></Grid>
             <Grid item xs={8}>
-              <CardActionArea
-                onClick={handleExpandClick10}
-                style={{
-                  color: "#4C0001",
-                  backgroundColor: "#4C0001",
-                  borderTop: "4px solid #4C0001",
-                  boxShadow:
-                    "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
-                }}
-              >
-                <ExpandMore
-                  expand={expanded10}
-                  aria-expanded={expanded10}
-                  aria-label="show more"
-                  style={{ color: "#f4f6f9" }}
-                >
-                  <ExpandMoreIcon />
-                </ExpandMore>
-                <Collapse in={expanded10} timeout="auto" unmountOnExit>
-                  <CardMedia
-                    component="img"
-                    height="100%"
-                    image={Councilor5}
-                    alt="Councilor5"
-                  />
-                </Collapse>
-                <CardContent style={{ backgroundColor: "#f4f6f9" }}>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    style={{ color: "#800" }}
+              {Councilor4.map((Cou4, name) => {
+                return (
+                  <CardActionArea
+                    className="mb-4"
+                    key={name}
+                    onClick={handleExpandClick9}
+                    style={{
+                      color: "#4C0001",
+                      backgroundColor: "#4C0001",
+                      borderTop: "4px solid #4C0001",
+                      boxShadow:
+                        "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
+                    }}
                   >
-                    <strong>Councilor</strong>
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    <strong>
-                      <h3 style={{ color: "#000" }}>Ms. Alaeiczan Lumiares</h3>
-                    </strong>
-                    <strong style={{ color: "#4C0001" }}>
-                      Pup Lopez Central Student Council AY: 2021-2022
-                    </strong>
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
+                    <ExpandMore
+                      expand={expanded9}
+                      aria-expanded={expanded9}
+                      aria-label="show more"
+                      style={{ color: "#fff" }}
+                    >
+                      <ExpandMoreIcon />
+                    </ExpandMore>
+                    <Collapse in={expanded9} timeout="auto" unmountOnExit>
+                      <CardMedia
+                        component="img"
+                        height="100%"
+                        image={Cou4.EventPic}
+                        alt={Cou4.name}
+                      />
+                    </Collapse>
+                    <CardContent style={{ backgroundColor: "#f4f6f9" }}>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <strong>Councilor</strong>
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <h3 style={{ color: "#000" }}>{Cou4.name}</h3>
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        <strong style={{ color: "#4C0001" }}>
+                          {Cou4.Description}
+                        </strong>
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                );
+              })}
             </Grid>
             <Grid item xs></Grid>
           </Grid>
@@ -1276,51 +1380,52 @@ const Header = () => {
           <Grid container spacing={3}>
             <Grid item xs></Grid>
             <Grid item xs={8}>
-              <CardActionArea
-                onClick={handleExpandClick11}
-                style={{
-                  color: "#4C0001",
-                  backgroundColor: "#4C0001",
-                  borderTop: "4px solid #4C0001",
-                  boxShadow:
-                    "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
-                }}
-              >
-                <ExpandMore
-                  expand={expanded11}
-                  aria-expanded={expanded11}
-                  aria-label="show more"
-                  style={{ color: "#f4f6f9" }}
-                >
-                  <ExpandMoreIcon />
-                </ExpandMore>
-                <Collapse in={expanded11} timeout="auto" unmountOnExit>
-                  <CardMedia
-                    component="img"
-                    height="100%"
-                    image={Councilor6}
-                    alt="Councilor6"
-                  />
-                </Collapse>
-                <CardContent style={{ backgroundColor: "#f4f6f9" }}>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    style={{ color: "#800" }}
+              {Councilor5.map((Cou5, name) => {
+                return (
+                  <CardActionArea
+                    className="mb-4"
+                    key={name}
+                    onClick={handleExpandClick10}
+                    style={{
+                      color: "#4C0001",
+                      backgroundColor: "#4C0001",
+                      borderTop: "4px solid #4C0001",
+                      boxShadow:
+                        "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
+                    }}
                   >
-                    <strong>Councilor</strong>
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    <strong>
-                      <h3 style={{ color: "#000" }}>Mr. Marc Jude Deseo</h3>
-                    </strong>
-                    <strong style={{ color: "#4C0001" }}>
-                      Pup Lopez Central Student Council AY: 2021-2022
-                    </strong>
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
+                    <ExpandMore
+                      expand={expanded10}
+                      aria-expanded={expanded10}
+                      aria-label="show more"
+                      style={{ color: "#fff" }}
+                    >
+                      <ExpandMoreIcon />
+                    </ExpandMore>
+                    <Collapse in={expanded10} timeout="auto" unmountOnExit>
+                      <CardMedia
+                        component="img"
+                        height="100%"
+                        image={Cou5.EventPic}
+                        alt={Cou5.name}
+                      />
+                    </Collapse>
+                    <CardContent style={{ backgroundColor: "#f4f6f9" }}>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <strong>Councilor</strong>
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <h3 style={{ color: "#000" }}>{Cou5.name}</h3>
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        <strong style={{ color: "#4C0001" }}>
+                          {Cou5.Description}
+                        </strong>
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                );
+              })}
             </Grid>
             <Grid item xs></Grid>
           </Grid>
@@ -1329,51 +1434,106 @@ const Header = () => {
           <Grid container spacing={3}>
             <Grid item xs></Grid>
             <Grid item xs={8}>
-              <CardActionArea
-                onClick={handleExpandClick12}
-                style={{
-                  color: "#4C0001",
-                  backgroundColor: "#4C0001",
-                  borderTop: "4px solid #4C0001",
-                  boxShadow:
-                    "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
-                }}
-              >
-                <ExpandMore
-                  expand={expanded12}
-                  aria-expanded={expanded12}
-                  aria-label="show more"
-                  style={{ color: "#f4f6f9" }}
-                >
-                  <ExpandMoreIcon />
-                </ExpandMore>
-                <Collapse in={expanded12} timeout="auto" unmountOnExit>
-                  <CardMedia
-                    component="img"
-                    height="100%"
-                    image={Councilor7}
-                    alt="Councilor7"
-                  />
-                </Collapse>
-                <CardContent style={{ backgroundColor: "#f4f6f9" }}>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    style={{ color: "#800" }}
+              {Councilor6.map((Cou6, name) => {
+                return (
+                  <CardActionArea
+                    className="mb-4"
+                    key={name}
+                    onClick={handleExpandClick11}
+                    style={{
+                      color: "#4C0001",
+                      backgroundColor: "#4C0001",
+                      borderTop: "4px solid #4C0001",
+                      boxShadow:
+                        "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
+                    }}
                   >
-                    <strong>Councilor</strong>
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    <strong>
-                      <h3 style={{ color: "#000" }}>Ms. Janarie Alegre</h3>
-                    </strong>
-                    <strong style={{ color: "#4C0001" }}>
-                      Pup Lopez Central Student Council AY: 2021-2022
-                    </strong>
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
+                    <ExpandMore
+                      expand={expanded11}
+                      aria-expanded={expanded11}
+                      aria-label="show more"
+                      style={{ color: "#fff" }}
+                    >
+                      <ExpandMoreIcon />
+                    </ExpandMore>
+                    <Collapse in={expanded11} timeout="auto" unmountOnExit>
+                      <CardMedia
+                        component="img"
+                        height="100%"
+                        image={Cou6.EventPic}
+                        alt={Cou6.name}
+                      />
+                    </Collapse>
+                    <CardContent style={{ backgroundColor: "#f4f6f9" }}>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <strong>Councilor</strong>
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <h3 style={{ color: "#000" }}>{Cou6.name}</h3>
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        <strong style={{ color: "#4C0001" }}>
+                          {Cou6.Description}
+                        </strong>
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                );
+              })}
+            </Grid>
+            <Grid item xs></Grid>
+          </Grid>
+
+          <br />
+          <Grid container spacing={3}>
+            <Grid item xs></Grid>
+            <Grid item xs={8}>
+              {Councilor7.map((Cou7, name) => {
+                return (
+                  <CardActionArea
+                    className="mb-4"
+                    key={name}
+                    onClick={handleExpandClick12}
+                    style={{
+                      color: "#4C0001",
+                      backgroundColor: "#4C0001",
+                      borderTop: "4px solid #4C0001",
+                      boxShadow:
+                        "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
+                    }}
+                  >
+                    <ExpandMore
+                      expand={expanded12}
+                      aria-expanded={expanded12}
+                      aria-label="show more"
+                      style={{ color: "#fff" }}
+                    >
+                      <ExpandMoreIcon />
+                    </ExpandMore>
+                    <Collapse in={expanded12} timeout="auto" unmountOnExit>
+                      <CardMedia
+                        component="img"
+                        height="100%"
+                        image={Cou7.EventPic}
+                        alt={Cou7.name}
+                      />
+                    </Collapse>
+                    <CardContent style={{ backgroundColor: "#f4f6f9" }}>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <strong>Councilor</strong>
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="div">
+                        <h3 style={{ color: "#000" }}>{Cou7.name}</h3>
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        <strong style={{ color: "#4C0001" }}>
+                          {Cou7.Description}
+                        </strong>
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                );
+              })}
             </Grid>
             <Grid item xs></Grid>
           </Grid>

@@ -8,6 +8,15 @@
   z-index: 999;
 }
 
+.left {
+  margin-top: 90px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.viewers {
+  height: 100vh;
+  margin-left: 50px;
+}
 .footer h4 {
   font-size: 1.6rem;
   font-weight: 500;
@@ -34,5 +43,8 @@
 @media screen and (max-width: 600px) {
   .footer{
     height: 150px;
+  }.left {
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }

@@ -6,7 +6,10 @@
     background: url(../Photos/a.jpg) center center / cover no-repeat fixed;
     min-height: 100vh;
 }
-#back3{
-    background: url(../Photos/a.jpg) center center / cover no-repeat fixed;
+#back3{background: url(../Photos/a.jpg) center center / cover no-repeat fixed;
+    min-height: 100vh;
+}
+#Under {
+    background: url(../Photos/Under\ construction.png) center center / cover no-repeat fixed;
     min-height: 100vh;
 }
