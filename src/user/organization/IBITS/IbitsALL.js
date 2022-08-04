@@ -461,8 +461,8 @@ function IbitsALL() {
                 helperText="Please select your Organization"
                 className="mb-3"
               >
-                <MenuItem value="HMS" className="scrollable-div">
-                  Hospitality Management Society (HMS)
+                <MenuItem value="IBITS" className="scrollable-div">
+                  Institute of Brilliant Information Technology Students (IBITS)
                 </MenuItem>
               </TextField>
 
@@ -489,10 +489,16 @@ function IbitsALL() {
               value={updatedCourse}
               style={{ width: "100%", marginLeft: "4px", position: "relative" }}
             >
-              {updatedOrg === "HMS"
+              {updatedOrg === "IBITS"
                 ? [
-                    <MenuItem value="BSHM" className="scrollable-div">
-                      Bachelor of Science in Hospitality Management (BSHM)
+                    <MenuItem value="BSIT" className="scrollable-div">
+                      Bachelor of Science in Information Technology (BSIT)
+                    </MenuItem>,
+                    <MenuItem value="DICT" className="scrollable-div">
+                      Diploma in Information and Communication Technology (DICT)
+                    </MenuItem>,
+                    <MenuItem value="DCETech" className="scrollable-div">
+                      Diploma in Computer Engineering Technology (DCET)
                     </MenuItem>,
                   ]
                 : []}
@@ -507,19 +513,43 @@ function IbitsALL() {
               value={updatedYear}
               style={{ width: "100%", marginLeft: "4px", position: "relative" }}
             >
-              {updatedCourse === "BSHM"
+              {updatedCourse === "DICT"
                 ? [
-                    <MenuItem value="BSHM1" className="scrollable-div">
-                      BSHM-1
+                    <MenuItem value="DICT1" className="scrollable-div">
+                      DICT-1
                     </MenuItem>,
-                    <MenuItem value="BSHM2" className="scrollable-div">
-                      BSHM-2
+                    <MenuItem value="DICT2" className="scrollable-div">
+                      DICT-2
                     </MenuItem>,
-                    <MenuItem value="BSHM3" className="scrollable-div">
-                      BSHM-3
+                    <MenuItem value="DICT3" className="scrollable-div">
+                      DICT-3
                     </MenuItem>,
-                    <MenuItem value="BSHM4" className="scrollable-div">
-                      BSHM-4
+                  ]
+                : updatedCourse === "BSIT"
+                ? [
+                    <MenuItem value="BSIT1" className="scrollable-div">
+                      BSIT-1
+                    </MenuItem>,
+                    <MenuItem value="BSIT2" className="scrollable-div">
+                      BSIT-2
+                    </MenuItem>,
+                    <MenuItem value="BSIT3" className="scrollable-div">
+                      BSIT-3
+                    </MenuItem>,
+                    <MenuItem value="BSIT4" className="scrollable-div">
+                      BSIT-4
+                    </MenuItem>,
+                  ]
+                : updatedCourse === "DCETech"
+                ? [
+                    <MenuItem value="DCETech1" className="scrollable-div">
+                      DCET-1
+                    </MenuItem>,
+                    <MenuItem value="DCETech2" className="scrollable-div">
+                      DCET-2
+                    </MenuItem>,
+                    <MenuItem value="DCETech3" className="scrollable-div">
+                      DCET-3
                     </MenuItem>,
                   ]
                 : []}
